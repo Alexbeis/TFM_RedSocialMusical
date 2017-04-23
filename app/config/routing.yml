@@ -1,0 +1,12 @@
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation
+#
+
+homepage:
+  path: /
+  defaults: { _controller:UserBundle:User:login}
+
+loggin_success:
+  path: /success/
+  defaults: { _controller:UserBundle:User:logged}
