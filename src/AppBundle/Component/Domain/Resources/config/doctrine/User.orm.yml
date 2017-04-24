@@ -1,0 +1,33 @@
+AppBundle\Component\Domain\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: AppBundle\WebBundle\UserBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: '100'
+            unique: true
+        join_date:
+            type: datetime
+            column: join_date
+        birth_date:
+            type: datetime
+            column: birth_date
+        email:
+            type: string
+            length: 255
+            unique: true
+    oneToOne:
+        user_profile:
+          targetEntity: AppBundle\Component\Domain\Entity\UserProfile
+          joinColumn:
+            name: userprofile_id
+            referencedColumnName: id
+
+    lifecycleCallbacks: {  }
