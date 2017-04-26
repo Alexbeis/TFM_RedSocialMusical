@@ -21,17 +21,15 @@ class UserController extends Controller
         $client->setApplicationName("Melomaniacs");
         $client->setClientId('721970566997-72emhffh5962uvddmr4s0lp3duq4rl4o.apps.googleusercontent.com');
         $client->setClientSecret('s43KLQ1Wilx23Ae2aXqTqTvO');
-        $client->setRedirectUri('http://melomaniacs.com');
+        $client->setRedirectUri('http://melomaniacs.com/app_dev.php');
         $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
         //$client->setDeveloperKey('**************');
         $service = new Google_Service_Oauth2($client);
         $session = $request->getSession();
         $authUrl = null;
 
-
         if ($request->get('logout')){
             $session->remove('access_token');
-            header('Location: http://melomaniacs.com');
         }
 
         if ($request->get('code')) {
@@ -47,8 +45,8 @@ class UserController extends Controller
         if ($client->getAccessToken())
         {
             $userinfo = $service->userinfo->get();
-            var_dump($userinfo->getFamilyName());
-
+            $session->set('familyName',$userinfo->getFamilyName());
+            $session->set('email',$userinfo->getEmail());
 
         } else
         {
@@ -62,7 +60,7 @@ class UserController extends Controller
     public function loggedAction (Request $request)
     {
         $code = $request->get('code');
-        var_dump($code);
+        $session = $request->getSession();
         return new Response("redirected",200);
     }
 
