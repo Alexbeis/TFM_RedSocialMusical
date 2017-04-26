@@ -13,10 +13,10 @@ AppBundle\Component\Domain\Entity\User:
             type: string
             length: '100'
             unique: true
-        join_date:
+        joinDate:
             type: datetime
             column: join_date
-        birth_date:
+        birthDate:
             type: datetime
             column: birth_date
         email:

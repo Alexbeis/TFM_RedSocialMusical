@@ -1,0 +1,29 @@
+AppBundle\Component\Domain\Entity\UserProfile:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\WebBundle\UserBundle\Repository\UserProfileRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        aboutMe:
+            type: string
+            length: 255
+            nullable: false
+            column: about_me
+        image:
+            type: string
+            length: 255
+            nullable: false
+        musicalTastes:
+            type: string
+            length: 255
+            column: musical_tastes
+        favouriteArtists:
+            type: string
+            length: 255
+            column: favourite_artists
+    lifecycleCallbacks: {  }
