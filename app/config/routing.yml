@@ -3,10 +3,19 @@
 #    type:     annotation
 #
 
-homepage:
+login:
   path: /
-  defaults: { _controller:UserBundle:User:login}
+  defaults: { _controller: UserBundle:UserLogin:login}
 
-loggin_success:
-  path: /success
-  defaults: { _controller:UserBundle:User:logged}
+validate:
+  path: /validate/
+  defaults: { _controller: UserBundle:UserLogin:validate}
+
+home:
+  path: /home
+  defaults: { _controller: UserBundle:User:home }
+
+logout:
+  path: /logout
+  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
+

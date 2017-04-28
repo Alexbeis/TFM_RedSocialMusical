@@ -7,3 +7,24 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+#Use cases
+    app.application.usecases.user.create:
+      class: AppBundle\Component\Application\UseCases\User\CreateUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+        dispatcher: '@event_dispatcher'
+
+
+#repositories
+    app.repository.user:
+      class: AppBundle\WebBundle\UserBundle\Repository\UserRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.user.metadata'
+
+    app.user.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ AppBundle\Component\Domain\Entity\User ]
