@@ -2,7 +2,6 @@
 
 namespace AppBundle\Component\Domain\Entity;
 
-use AppBundle\Component\Domain\Entity\UserProfile;
 
 class User
 {
