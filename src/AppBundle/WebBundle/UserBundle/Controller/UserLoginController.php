@@ -75,10 +75,10 @@ class UserLoginController extends Controller
     private function googleInit()
     {
         $this->client->setApplicationName("Melomaniacs");
-        $this->client->setClientId('721970566997-72emhffh5962uvddmr4s0lp3duq4rl4o.apps.googleusercontent.com');
-        $this->client->setClientSecret('s43KLQ1Wilx23Ae2aXqTqTvO');
-        $this->client->setRedirectUri('http://melomaniacs.com/app_dev.php/validate/');
-        $this->client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
+        $this->client->setClientId($this->getParameter('google_client_id'));
+        $this->client->setClientSecret($this->getParameter('google_secret_id'));
+        $this->client->setRedirectUri($this->getParameter('google_redirect_uri'));
+        $this->client->setScopes(array($this->getParameter('google_email_scope'),$this->getParameter('google_profile_scope')));
         $this->service = new Google_Service_Oauth2($this->client);
 
     }
