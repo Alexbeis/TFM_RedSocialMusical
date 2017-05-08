@@ -16,9 +16,6 @@ AppBundle\Component\Domain\Entity\User:
         joinDate:
             type: datetime
             column: join_date
-        birthDate:
-            type: datetime
-            column: birth_date
         email:
             type: string
             length: 255

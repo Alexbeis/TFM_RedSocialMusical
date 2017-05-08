@@ -9,7 +9,7 @@ services:
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
 #Use cases
     app.application.usecases.user.create:
-      class: AppBundle\Component\Application\UseCases\User\CreateUseCase
+      class: AppBundle\Component\Application\UseCases\User\CreateUserUseCase
       arguments:
         userrepository: '@app.repository.user'
         entityManager: '@doctrine.orm.entity_manager'

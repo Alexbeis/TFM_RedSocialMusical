@@ -62,7 +62,9 @@ class UserLoginController extends Controller
             $this->session->set('email', $this->userinfo->getEmail());
 
         }
-        //TODO: Create / update user on DDBB
+
+        $createUserUseCase = $this->get('app.application.usecases.user.create');
+        $user = $createUserUseCase->execute($this->session->get('familyName'), $this->session->get('email'));
 
         return $this->redirectToRoute('home');
 

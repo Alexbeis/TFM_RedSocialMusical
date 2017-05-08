@@ -21,11 +21,6 @@ class User
     private $joinDate;
 
     /**
-     * @var \DateTime
-     */
-    private $birthDate;
-
-    /**
      * @var string
      */
     private $email;
