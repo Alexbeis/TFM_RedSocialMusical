@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\WebBundle\UserBundle\Repository;
+namespace myMelomanBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

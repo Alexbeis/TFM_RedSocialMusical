@@ -1,7 +1,7 @@
-AppBundle\Component\Domain\Entity\User:
+myDomain\Entity\User:
     type: entity
     table: user
-    repositoryClass: AppBundle\WebBundle\UserBundle\Repository\UserRepository
+    repositoryClass: myMelomanBUndle\Repository\UserRepository
     id:
         id:
             type: integer
@@ -22,7 +22,7 @@ AppBundle\Component\Domain\Entity\User:
             unique: true
     oneToOne:
         user_profile:
-          targetEntity: AppBundle\Component\Domain\Entity\UserProfile
+          targetEntity: myDomain\Entity\UserProfile
           joinColumn:
             name: userprofile_id
             referencedColumnName: id

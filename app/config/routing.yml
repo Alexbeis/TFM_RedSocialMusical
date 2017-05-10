@@ -1,21 +1,25 @@
+my_meloman:
+    resource: "@myMelomanBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #app:
 #    resource: "@AppBundle/Controller/"
 #    type:     annotation
 #
 
-login:
-  path: /
-  defaults: { _controller: UserBundle:UserLogin:login}
-
-validate:
-  path: /validate/
-  defaults: { _controller: UserBundle:UserLogin:validate}
-
-home:
-  path: /home
-  defaults: { _controller: UserBundle:User:home }
-
-logout:
-  path: /logout
-  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
+#login:
+#  path: /
+#  defaults: { _controller: UserBundle:UserLogin:login}
+#
+#validate:
+#  path: /validate/
+#  defaults: { _controller: UserBundle:UserLogin:validate}
+#
+#home:
+#  path: /home
+#  defaults: { _controller: UserBundle:User:home }
+#
+#logout:
+#  path: /logout
+#  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
 

@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@myMelomanBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -68,8 +69,8 @@ doctrine:
           WebBundle:
             type: yml
             is_bundle: false
-            dir: %kernel.root_dir%/../src/AppBundle/Component/Domain/Resources/config/doctrine
-            prefix: AppBundle\Component\Domain\Entity
+            dir: %kernel.root_dir%/../src/myMelomanBundle/Resources/doctrine
+            prefix: myDomain\Entity
 
 
 # Swiftmailer Configuration

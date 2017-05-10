@@ -1,12 +1,8 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/service_container.html
-parameters:
-    #parameter_name: value
-
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+#    my_meloman.example:
+#        class: myMelomanBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
 #Use cases
     app.application.usecases.user.create:
       class: myDomain\UseCases\User\CreateUserUseCase
@@ -18,7 +14,7 @@ services:
 
 #repositories
     app.repository.user:
-      class: AppBundle\WebBundle\UserBundle\Repository\UserRepository
+      class: myMelomanBundle\Repository\UserRepository
       arguments:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.user.metadata'
@@ -27,4 +23,4 @@ services:
         class: Doctrine\ORM\Mapping\ClassMetadata
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
-        arguments: [ AppBundle\Component\Domain\Entity\User ]
+        arguments: [ myDomain\Entity\User ]

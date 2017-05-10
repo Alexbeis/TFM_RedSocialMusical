@@ -1,7 +1,7 @@
-AppBundle\Component\Domain\Entity\UserProfile:
+myDomain\Entity\UserProfile:
     type: entity
     table: null
-    repositoryClass: AppBundle\WebBundle\UserBundle\Repository\UserProfileRepository
+    repositoryClass: MyMelomanBundle\Repository\UserProfileRepository
     id:
         id:
             type: integer

@@ -1,0 +1,18 @@
+#my_meloman_homepage:
+ #   path:     /
+ #   defaults: { _controller: myMelomanBundle:Default:index }
+login:
+  path: /
+  defaults: { _controller: myMelomanBundle:Login:login}
+
+validate:
+  path: /validate/
+  defaults: { _controller: myMelomanBundle:Login:validate}
+
+home:
+  path: /home
+  defaults: { _controller: myMelomanBundle:User:home }
+
+#logout:
+#  path: /logout
+#  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
