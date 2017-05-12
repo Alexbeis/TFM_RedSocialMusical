@@ -28,7 +28,7 @@ class LoginController extends Controller
         $loginUseCase = $this->get('app.application.usecases.login.login');
         $returnLoginDTO = $loginUseCase->execute($loginDTO);
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute($returnLoginDTO->getStatusCode());
 
 
     }

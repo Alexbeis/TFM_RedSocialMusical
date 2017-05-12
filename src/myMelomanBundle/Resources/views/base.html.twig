@@ -7,7 +7,16 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <h1>MELOMANIACS</h1>
+        </header>
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+        <footer>
+            <p>Melomaniacs - Alex Albàs</p>
+        </footer>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

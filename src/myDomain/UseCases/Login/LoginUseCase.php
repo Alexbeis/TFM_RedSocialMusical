@@ -5,6 +5,7 @@ namespace myDomain\UseCases\Login;
 use myDomain\DTO\LoginDTO;
 use Google_Client;
 use myDomain\Provider\OAuthGoogleProvider;
+use myDomain\UseCases\User\CreateUserUseCase;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -15,6 +16,9 @@ class LoginUseCase
     const USER_NOT_FOUND = 404;
 
     private $googleService;
+    /**
+     * @var CreateUserUseCase
+     */
     private $createUser;
     private $userRepository;
     /**
@@ -86,13 +90,12 @@ class LoginUseCase
             {
                 $user =  $this->userRepository->findBy(array('email' => $loginDTO->getEmail()));
                 if ($user) {
-                    $loginDTO->setStatusCode(200);
+                    $loginDTO->setStatusCode('home');
                     return $loginDTO;
                 } else {
-                    $createUserUseCase = $this->get('app.application.usecases.user.create');
-                    $newUser = $createUserUseCase->execute($loginDTO->getUserName(), $loginDTO->getUserName());
+                    $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getUserName());
                     if ($newUser) {
-                        $loginDTO->setStatusCode(301);
+                        $loginDTO->setStatusCode('userProfile');
                         return $loginDTO;
                     }
 
