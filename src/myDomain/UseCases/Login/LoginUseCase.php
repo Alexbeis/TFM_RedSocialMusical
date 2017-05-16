@@ -53,7 +53,6 @@ class LoginUseCase
         $service = $this->googleServiceInit($client);
         $this->googleService = new OAuthGoogleProvider($service);
         $code = $loginDTO->getGoogleCode();
-        //var_dump($code);
 
         if ($code == null) {
             // Create URL
@@ -68,11 +67,6 @@ class LoginUseCase
             //Authentification + token + get profile info
             $this->googleService->authenticate($code);
             $loginDTO->getSession()->set('access_token', $this->googleService->getAccessToken());
-
-
-//            if ($loginDTO->getSession()->get('access_token')) {
-//                $this->googleService->setAccessToken($loginDTO->getSession()->get('access_token'));
-//            }
 
             if ($this->googleService->getAccessToken()) {
 
@@ -91,11 +85,13 @@ class LoginUseCase
                 $user =  $this->userRepository->findBy(array('email' => $loginDTO->getEmail()));
                 if ($user) {
                     $loginDTO->setStatusCode('home');
+                    $loginDTO->setUserId($user[0]->getId());
                     return $loginDTO;
                 } else {
-                    $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getUserName());
+                    $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail());
                     if ($newUser) {
                         $loginDTO->setStatusCode('userProfile');
+                        $loginDTO->setUserId($newUser->getId());
                         return $loginDTO;
                     }
 
@@ -105,7 +101,6 @@ class LoginUseCase
                 $e->getMessage();
                 }
 
-            //return $loginDTO;
         }
 
     }

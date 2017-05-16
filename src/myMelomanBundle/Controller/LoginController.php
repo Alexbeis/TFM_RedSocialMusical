@@ -16,9 +16,10 @@ class LoginController extends Controller
         $returnLoginDTO = $loginUseCase->execute($loginDTO);
 
         return $this->render('loginView/googleLogin.html.twig',
-            array('authUrl' => $returnLoginDTO->getGoogleURL())
+            array(
+                'authUrl' => $returnLoginDTO->getGoogleURL()
+            )
         );
-
     }
 
     public function validateAction(Request $request)
