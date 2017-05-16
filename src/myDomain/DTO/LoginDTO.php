@@ -9,6 +9,7 @@ class LoginDTO
     private $statusCode;
     private $googleCode;
     private $userName;
+    private $userId;
     private $email;
     /**
      * @var Session
@@ -109,6 +110,22 @@ class LoginDTO
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 
 }
