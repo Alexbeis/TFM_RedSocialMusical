@@ -3,20 +3,75 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="{{ asset('assets/bootstrap/css/bootstrap-social.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="{{ asset('assets/css/styles.css') }}" type="text/css" rel="stylesheet"/>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <header>
-            <h1>MELOMANIACS</h1>
-        </header>
+        <div>
+            {#<h1>MELOMANIACS</h1>#}
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ path('home') }}">
+                            <span alt="Brand" class=" glyphicon glyphicon-music"> </span>
+                            Melomaniaks
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="login">
+                                <a href="{{ path("login") }}">
+                                    <span class="fa fa-google"></span>
+                                    &nbsp;
+                                    Google Login
+                                </a>
+                            </li>
+                            <li class="logout" style="display: none">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                                    &nbsp;
+                                    Logout
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    &nbsp;
+                                    Quién Somos
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
         <section id="content">
             {% block content %}{% endblock %}
         </section>
-        <footer>
-            <p>Melomaniacs - Alex Albàs</p>
+        <footer class="col-lg-12">
+            <hr/>
+            <div class="container">
+                <div class="text-muted col-xs-4">Melomaniacs - Alex Albàs</div>
+                <div class="text-muted col-xs-4">Web Development</div>
+            </div>
+
         </footer>
 
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
