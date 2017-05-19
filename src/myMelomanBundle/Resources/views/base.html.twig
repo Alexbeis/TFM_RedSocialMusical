@@ -30,29 +30,29 @@
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="login">
-                                <a href="{{ path("login") }}">
-                                    <span class="fa fa-google"></span>
-                                    &nbsp;
-                                    Google Login
-                                </a>
-                            </li>
-                            <li class="logout" style="display: none">
-                                <a href="#">
-                                    <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-                                    &nbsp;
-                                    Logout
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                    &nbsp;
-                                    Quién Somos
-                                </a>
-                            </li>
+                        <ul class="nav navbar-nav ">
                         </ul>
+                        {% set user = app.session.get('user') %}
+                        {% if  user is not null %}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Hello {{ app.session.get('name') }}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">My User Profile</a></li>
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">About Us</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li class="logout">
+                                            <a href="#">Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        {% endif %}
+
                     </div>
                 </div>
             </nav>
@@ -72,6 +72,7 @@
         {% block javascripts %}
             <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
             <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
         {% endblock %}
     </body>
 </html>
