@@ -12,18 +12,24 @@ myDomain\Entity\UserProfile:
         aboutMe:
             type: string
             length: 255
-            nullable: false
+            nullable: true
             column: about_me
         image:
             type: string
             length: 255
-            nullable: false
+            nullable: true
+        birthDate:
+            type: datetime
+            column: birth_date
+            nullable: true
         musicalTastes:
             type: string
             length: 255
+            nullable: true
             column: musical_tastes
         favouriteArtists:
             type: string
             length: 255
+            nullable: true
             column: favourite_artists
     lifecycleCallbacks: {  }

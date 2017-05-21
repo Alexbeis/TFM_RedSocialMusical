@@ -1,5 +1,4 @@
 
-
 #content{
     background-image: url("https://source.unsplash.com/featured/?music");
     width: 100%;
@@ -36,3 +35,16 @@ h2 {
     font-weight: 700;
 
 }
+
+.image{
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /*don't forget prefixes*/
+    background-position: center center;
+    /* as mentioned by Vad: */
+    background-size: cover;
+    border: 5px #efefef solid;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2), 1px 1px 4px rgba(0,0,0,0.3);
+}
+

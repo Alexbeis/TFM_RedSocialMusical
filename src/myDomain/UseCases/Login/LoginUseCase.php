@@ -4,7 +4,7 @@ namespace myDomain\UseCases\Login;
 
 use myDomain\DTO\LoginDTO;
 use Google_Client;
-use myDomain\Provider\OAuthGoogleProvider;
+use myMelomanBundle\Provider\OAuthGoogleProvider;
 use myDomain\UseCases\User\CreateUserUseCase;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\Container;
@@ -49,10 +49,10 @@ class LoginUseCase
     {
 
         //Inicia google client
-        $client = $this->googleClientInit();
-        $service = $this->googleServiceInit($client);
+        $client     = $this->googleClientInit();
+        $service    = $this->googleServiceInit($client);
         $this->googleService = new OAuthGoogleProvider($service);
-        $code = $loginDTO->getGoogleCode();
+        $code       = $loginDTO->getGoogleCode();
 
         if ($code == null) {
             // Create URL
@@ -86,14 +86,17 @@ class LoginUseCase
             {
                 $user =  $this->userRepository->findBy(array('email' => $loginDTO->getEmail()));
                 if ($user) {
+
                     $loginDTO->setStatusCode('home');
                     $loginDTO->setUserId($user[0]->getId());
+
                     return $loginDTO;
                 } else {
                     $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail());
                     if ($newUser) {
                         $loginDTO->setStatusCode('user_profile');
                         $loginDTO->setUserId($newUser->getId());
+
                         return $loginDTO;
                     }
 

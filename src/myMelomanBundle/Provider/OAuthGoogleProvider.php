@@ -1,6 +1,6 @@
 <?php
 
-namespace myDomain\Provider;
+namespace myMelomanBundle\Provider;
 
 use myDomain\OAuthGoogleProviderInterface;
 

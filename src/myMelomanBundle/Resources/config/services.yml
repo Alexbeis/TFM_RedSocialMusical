@@ -21,6 +21,20 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         dispatcher: '@event_dispatcher'
 
+    app.application.usecases.userprofile.create:
+      class: myDomain\UseCases\UserProfile\CreateUserProfileUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        userProfileRepository: '@app.repository.userProfile'
+        entityManager: '@doctrine.orm.entity_manager'
+        dispatcher: '@event_dispatcher'
+
+    app.application.usecases.userprofile.show:
+      class: myDomain\UseCases\UserProfile\ShowUserProfileUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        userProfileRepository: '@app.repository.userProfile'
+
 #repositories
     app.repository.user:
       class: myMelomanBundle\Repository\UserRepository
@@ -29,10 +43,10 @@ services:
         mapping: '@app.user.metadata'
 
     app.repository.userProfile:
-          class: myMelomanBundle\Repository\UserProfileRepository
-          arguments:
-            em: '@doctrine.orm.entity_manager'
-            mapping: '@app.user.metadata'
+      class: myMelomanBundle\Repository\UserProfileRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.user.metadata'
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -41,7 +55,7 @@ services:
         arguments: [ myDomain\Entity\User ]
 
     app.userProfile.metadata:
-            class: Doctrine\ORM\Mapping\ClassMetadata
-            factory_service: doctrine # this is an instance of Registry
-            factory_method: getRepository
-            arguments: [ myDomain\Entity\UserProfile ]
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\UserProfile ]

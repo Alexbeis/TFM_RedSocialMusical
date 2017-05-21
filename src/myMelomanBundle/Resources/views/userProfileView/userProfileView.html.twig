@@ -6,16 +6,22 @@
 {% block content %}
     <div class="col-xs-8 col-xs-offset-2 form-style">
         <form action="" method="post" class="row box-form">
-                <h2 class="text-center"><span>Fill Your Profile</span></h2>
+                <div class="text-center">
+
+                    <img class="image" src="{{ app.session.get('picture') }}" alt="">
+                    <h2 class="text-center"><span>Hey, {{ app.session.get('name') }} fill your profile :)</span></h2>
+
+                </div>
+
                 <input type="hidden" value="{{ app.session.get('user') }}">
                 <div class="form-group row">
                     <label for="aboutme">AboutME</label>
-                    <textarea class="form-control col-10" id="aboutme" rows="6"></textarea>
+                    <textarea class="form-control col-10" id="aboutme" value= {{ userProfile.aboutMe ? userProfile.aboutMe : "" }}rows="6"></textarea>
                 </div>
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
                     <div class="col-10">
-                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                        <input class="form-control" type="date" value="{{userProfile.birthDate != null ? userProfile.birthDate : userProfile.birthDate|date('Y-m-d H:i:s') }}" id="example-date-input">
                     </div>
                 </div>
                 <div class="form-group row">

@@ -21,8 +21,14 @@ class UserProfile
     private $image;
 
     /**
+     * @var \DateTime
+     */
+    private $birthDate;
+
+    /**
      * @var string
      */
+
     private $musicalTastes;
 
     /**
@@ -130,6 +136,22 @@ class UserProfile
     public function getFavouriteArtists()
     {
         return $this->favouriteArtists;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param \DateTime $birthDate
+     */
+    public function setBirthDate(\DateTime $birthDate)
+    {
+        $this->birthDate = $birthDate;
     }
 }
 

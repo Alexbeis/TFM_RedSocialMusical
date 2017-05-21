@@ -1,0 +1,16 @@
+myDomain\Entity\MusicalTaste:
+    type: entity
+    table: musical_taste
+    repositoryClass: MyMelomanBundle\Repository\MusicalTasteRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+            column: name

@@ -108,23 +108,7 @@ class User
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getBirthDate()
-    {
-        return $this->birthDate;
-    }
-
-    /**
-     * @param \DateTime $birthDate
-     */
-    public function setBirthDate($birthDate)
-    {
-        $this->birthDate = $birthDate;
-    }
-
-    /**
-     * @return \AppBundle\Component\Domain\Entity\UserProfile
+     * @return UserProfile
      */
     public function getUserProfile()
     {
@@ -132,7 +116,7 @@ class User
     }
 
     /**
-     * @param \AppBundle\Component\Domain\Entity\UserProfile $user_profile
+     * @param UserProfile
      */
     public function setUserProfile($user_profile)
     {
