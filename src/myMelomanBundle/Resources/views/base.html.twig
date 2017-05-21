@@ -25,15 +25,15 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{ path('home') }}">
-                            <span alt="Brand" class=" glyphicon glyphicon-music"> </span>
-                            Melomaniaks
+                            <span alt="Brand" class=" glyphicon glyphicon-volume-up"> </span>
+                            &nbsp; Melomaniaks
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
                         </ul>
                         {% set user = app.session.get('user') %}
-                        {% if  user is not null %}
+                        {% if user is not null %}
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -41,12 +41,23 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">My User Profile</a></li>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="{{ path('user_profile') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                &nbsp; My User Profile
+                                            </a>
+                                        </li>
+                                        <li><a href="{{ path('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                                &nbsp; Home
+                                            </a>
+                                        </li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+                                                &nbsp; About Us
+                                            </a>
+                                        </li>
                                         <li role="separator" class="divider"></li>
                                         <li class="logout">
-                                            <a href="#">Logout</a>
+                                            <a href="{{ path('logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                                &nbsp; Logout
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
