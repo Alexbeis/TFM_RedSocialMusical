@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/userProfile.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <div class="col-xs-8 col-xs-offset-2 form-style">
+        <form action="" method="post" class="row box-form">
+                <h2 class="text-center"><span>Fill Your Profile</span></h2>
+                <input type="hidden" value="{{ app.session.get('user') }}">
+                <div class="form-group row">
+                    <label for="aboutme">AboutME</label>
+                    <textarea class="form-control col-10" id="aboutme" rows="6"></textarea>
+                </div>
+                <div class="form-group row">
+                    <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
+                    <div class="col-10">
+                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" value="" id="tastes">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-date-input" class="col-2 col-form-label">Favourite Artists</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" value="" id="tastes">
+                    </div>
+                </div>
+                <div class="button-section row">
+                    <button type="submit" class="btn btn-primary col-xs-3">Submit</button>
+                    <div class="col-xs-4 col-xs-offset-5">
+                        <span class="privacy-policy ">
+                        <input type="checkbox" class="form-check-input " name="policy" required>&nbsp;You agree to our Terms and Policy.
+                    </span>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {#<script src="{{ asset('assets/js/userProfile.js') }}"></script>#}
+{% endblock %}
