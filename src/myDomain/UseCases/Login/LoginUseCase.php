@@ -70,14 +70,16 @@ class LoginUseCase
 
             if ($this->googleService->getAccessToken()) {
 
-                $email = $this->googleService->getUserEmail();
-                $name = $this->googleService->getUserName();
+                $email      = $this->googleService->getUserEmail();
+                $name       = $this->googleService->getUserName();
+                $picture    = $this->googleService->getPictureUrl();
                 $loginDTO->getSession()->set('email', $email);
                 $loginDTO->getSession()->set('name', $name);
+                $loginDTO->getSession()->set('picture', $picture);
                 $loginDTO->setEmail($email);
                 $loginDTO->setUserName($name);
+                $loginDTO->setPicture($picture);
             }
-
 
             //user exist?
             try
@@ -90,7 +92,7 @@ class LoginUseCase
                 } else {
                     $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail());
                     if ($newUser) {
-                        $loginDTO->setStatusCode('userProfile');
+                        $loginDTO->setStatusCode('user_profile');
                         $loginDTO->setUserId($newUser->getId());
                         return $loginDTO;
                     }

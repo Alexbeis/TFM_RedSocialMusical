@@ -11,6 +11,8 @@ class LoginDTO
     private $userName;
     private $userId;
     private $email;
+    private $picture;
+
     /**
      * @var Session
      */
@@ -126,6 +128,22 @@ class LoginDTO
     public function setUserId($userId)
     {
         $this->userId = $userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
     }
 
 }

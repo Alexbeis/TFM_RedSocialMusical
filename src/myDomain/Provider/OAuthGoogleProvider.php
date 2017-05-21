@@ -41,6 +41,11 @@ class OAuthGoogleProvider implements OAuthGoogleProviderInterface
         return $this->googleService->userinfo->get()->getFamilyName();
 
     }
+    public  function getPictureUrl()
+    {
+        return $this->googleService->userinfo->get()->getPicture();
+    }
+
     public function authenticate($code) {
 
         $this->googleService->getClient()->authenticate($code);

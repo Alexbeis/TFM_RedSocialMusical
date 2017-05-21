@@ -11,5 +11,6 @@ interface OAuthGoogleProviderInterface
     public function setAccessToken($token);
     public function getUserEmail();
     public function getUserName();
+    public function getPictureUrl();
 
 }
