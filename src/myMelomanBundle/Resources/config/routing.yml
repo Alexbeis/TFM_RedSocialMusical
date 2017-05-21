@@ -13,6 +13,10 @@ home:
   path: /home
   defaults: { _controller: myMelomanBundle:User:home }
 
-#logout:
-#  path: /logout
-#  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
+logout:
+  path: /logout
+  defaults: { _controller: myMelomanBundle:Login:logout }
+
+user_profile:
+  path: /user-profile
+  defaults: { _controller: myMelomanBundle:User:userProfile }
