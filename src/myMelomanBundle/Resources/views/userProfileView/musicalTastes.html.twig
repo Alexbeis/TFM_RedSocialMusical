@@ -1,0 +1,8 @@
+{% for taste in tastes %}
+    <div class="col-xs-23 form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input">
+            {{ taste.name }}
+        </label>
+    </div>
+{% endfor %}

@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <div class="col-xs-8 col-xs-offset-2 form-style">
-        <form action="" method="post" class="row box-form">
+        <form action="{{ path('create_userProfile') }}" method="post" class="row box-form">
                 <div class="text-center">
 
                     <img class="image" src="{{ app.session.get('picture') }}" alt="">
@@ -13,27 +13,30 @@
 
                 </div>
 
-                <input type="hidden" value="{{ app.session.get('user') }}">
+                <input name="user" type="hidden" value="{{ app.session.get('user') }}">
                 <div class="form-group row">
                     <label for="aboutme">AboutME</label>
-                    <textarea class="form-control col-10" id="aboutme" value= {{ userProfile.aboutMe ? userProfile.aboutMe : "" }}rows="6"></textarea>
+                    <textarea name="aboutme" class="form-control col-10" id="aboutme" value= {{ userProfile.aboutMe ? userProfile.aboutMe : "" }} rows="6"></textarea>
                 </div>
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
                     <div class="col-10">
-                        <input class="form-control" type="date" value="{{userProfile.birthDate != null ? userProfile.birthDate : userProfile.birthDate|date('Y-m-d H:i:s') }}" id="example-date-input">
+                        <input name="birth" class="form-control" type="date" value="{{userProfile.birthDate != null ? userProfile.birthDate : userProfile.birthDate|date('Y-m-d H:i:s') }}" id="example-date-input">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" value="" id="tastes">
+                        <input name="taste" class="form-control" type="text" value="" id="tastes">
                     </div>
                 </div>
+                {#<div class="form-control row">#}
+                    {#{%  include 'userProfileView/musicalTastes.htm.twig' %}#}
+                {#</div>#}
                 <div class="form-group row">
-                    <label for="example-date-input" class="col-2 col-form-label">Favourite Artists</label>
+                    <label for="artist" class="col-2 col-form-label">Favourite Artists</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" value="" id="tastes">
+                        <input name="artist" class="form-control" type="text" value="" id="artist">
                     </div>
                 </div>
                 <div class="button-section row">

@@ -26,15 +26,15 @@ class UserProfile
     private $birthDate;
 
     /**
-     * @var string
+     * @var MusicalTaste[]
      */
 
-    private $musicalTastes;
+    private $musicalTaste;
 
     /**
-     * @var string
+     * @var FavouriteArtist[]
      */
-    private $favouriteArtists;
+    private $favouriteArtist;
 
 
     /**
@@ -94,48 +94,44 @@ class UserProfile
     }
 
     /**
-     * Set musicalTastes
+     * Set musicalTaste[]
      *
-     * @param string $musicalTastes
+     * @param
      *
      */
-    public function setMusicalTastes($musicalTastes)
+    public function setMusicalTaste($musicalTaste)
     {
-        $this->musicalTastes = $musicalTastes;
+        $this->musicalTaste = $musicalTaste;
 
     }
 
     /**
-     * Get musicalTastes
-     *
-     * @return string
+     * @var MusicalTaste[]
      */
-    public function getMusicalTastes()
+    public function getMusicalTaste()
     {
-        return $this->musicalTastes;
+        return $this->musicalTaste;
     }
 
     /**
-     * Set favouriteArtists
+     * Set favouriteArtist
      *
-     * @param string $favouriteArtists
+     * @param FavouriteArtist[]
      *
      */
-    public function setFavouriteArtists($favouriteArtists)
+    public function setFavouriteArtist($favouriteArtist)
     {
-        $this->favouriteArtists = $favouriteArtists;
-
+        $this->favouriteArtist = $favouriteArtist;
 
     }
 
     /**
-     * Get favouriteArtists
      *
-     * @return string
+     * @return FavouriteArtist[]
      */
-    public function getFavouriteArtists()
+    public function getFavouriteArtist()
     {
-        return $this->favouriteArtists;
+        return $this->favouriteArtist;
     }
 
     /**

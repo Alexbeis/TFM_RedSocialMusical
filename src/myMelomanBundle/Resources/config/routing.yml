@@ -20,3 +20,8 @@ logout:
 user_profile:
   path: /user-profile
   defaults: { _controller: myMelomanBundle:User:userProfile }
+
+create_userProfile:
+  path: /create-userprofile
+  defaults: { _controller: myMelomanBundle:User:createUserProfile }
+  methods: [POST]

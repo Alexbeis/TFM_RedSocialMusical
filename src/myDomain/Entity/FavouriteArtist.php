@@ -3,7 +3,7 @@
 namespace myDomain\Entity;
 
 
-class MusicalTaste
+class FavouriteArtist
 {
     private $id;
     private $name;
@@ -56,5 +56,6 @@ class MusicalTaste
     {
         $this->userProfile = $userProfile;
     }
+
 
 }

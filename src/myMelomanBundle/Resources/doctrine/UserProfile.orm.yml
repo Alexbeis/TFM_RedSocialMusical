@@ -22,14 +22,18 @@ myDomain\Entity\UserProfile:
             type: datetime
             column: birth_date
             nullable: true
-        musicalTastes:
-            type: string
-            length: 255
-            nullable: true
-            column: musical_tastes
-        favouriteArtists:
-            type: string
-            length: 255
-            nullable: true
-            column: favourite_artists
+    oneToMany:
+        musicalTaste:
+            targetEntity: myDomain\Entity\MusicalTaste
+            mappedBy: userProfile
+            joinColumn:
+                name: musicalTaste_id
+                referencedColumnName: id
+        favouriteArtist:
+            targetEntity: myDomain\Entity\FavouriteArtist
+            mappedBy: userProfile
+            joinColumn:
+                name: favouriteArtist_id
+                referencedColumnName: id
+
     lifecycleCallbacks: {  }
