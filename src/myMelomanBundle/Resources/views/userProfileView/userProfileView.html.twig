@@ -10,10 +10,9 @@
 
                     <img class="image" src="{{ app.session.get('picture') }}" alt="">
                     <h2 class="text-center"><span>Hey, {{ app.session.get('name') }} fill your profile :)</span></h2>
-
                 </div>
-
                 <input name="user" type="hidden" value="{{ app.session.get('user') }}">
+                <input name="picture" type="hidden" value="{{ app.session.get('picture') }}">
                 <div class="form-group row">
                     <label for="aboutme">AboutME</label>
                     <textarea name="aboutme" class="form-control col-10" id="aboutme" value= {{ userProfile.aboutMe ? userProfile.aboutMe : "" }} rows="6"></textarea>
@@ -26,13 +25,39 @@
                 </div>
                 <div class="form-group row">
                     <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
-                    <div class="col-10">
-                        <input name="taste" class="form-control" type="text" value="" id="tastes">
-                    </div>
+                    <ul>
+                        <li><input name="rock" type="checkbox" id="cb1" />
+                            <label class="check-label" for="cb1"><img src="http://lorempixel.com/100/100" /></label>
+                        </li>
+                        <li><input name="reggae" type="checkbox" id="cb2" />
+                            <label class="check-label" for="cb2"><img src="http://lorempixel.com/101/101" /></label>
+                        </li>
+                        <li><input name="techno" type="checkbox" id="cb3" />
+                            <label class="check-label" for="cb3"><img src="http://lorempixel.com/102/102" /></label>
+                        </li>
+                        <li><input name="funk" type="checkbox" id="cb4" />
+                            <label class="check-label" for="cb4"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="blues" type="checkbox" id="cb5" />
+                            <label class="check-label" for="cb5"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="mestizaje" type="checkbox" id="cb6" />
+                            <label class="check-label" for="cb6"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="edm" type="checkbox" id="cb7" />
+                            <label class="check-label" for="cb7"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="drum&bass" type="checkbox" id="cb8" />
+                            <label class="check-label" for="cb8"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="hardrock" type="checkbox" id="cb9" />
+                            <label class="check-label" for="cb9"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                        <li><input name="metal" type="checkbox" id="cb10" />
+                            <label class="check-label" for="cb10"><img src="http://lorempixel.com/103/103" /></label>
+                        </li>
+                    </ul>
                 </div>
-                {#<div class="form-control row">#}
-                    {#{%  include 'userProfileView/musicalTastes.htm.twig' %}#}
-                {#</div>#}
                 <div class="form-group row">
                     <label for="artist" class="col-2 col-form-label">Favourite Artists</label>
                     <div class="col-10">

@@ -22,18 +22,28 @@ myDomain\Entity\UserProfile:
             type: datetime
             column: birth_date
             nullable: true
-    oneToMany:
+    manyToMany:
         musicalTaste:
             targetEntity: myDomain\Entity\MusicalTaste
-            mappedBy: userProfile
-            joinColumn:
-                name: musicalTaste_id
-                referencedColumnName: id
+            joinTable:
+              name: musicalTaste
+              joinColumns:
+                userProfile:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                musicalTaste:
+                  referencedColumnName: id
+            cascade:
+              - persist
         favouriteArtist:
             targetEntity: myDomain\Entity\FavouriteArtist
-            mappedBy: userProfile
-            joinColumn:
-                name: favouriteArtist_id
-                referencedColumnName: id
+            joinTable:
+              name: favouriteArtist
+              joinColumns:
+                userProfile:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                favouriteArtist:
+                  referencedColumnName: id
 
     lifecycleCallbacks: {  }

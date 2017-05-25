@@ -5,15 +5,24 @@ namespace myDomain\DTO;
 
 class UserProfileDTO
 {
+    private $user;
     private $picture;
     private $aboutMe;
-    private $tastes;
-    private $favourite;
+    private $birth;
+    private $tastes = [];
+    private $favourite = [];
 
-    public function __construct($picture = null, $aboutMe = null, $tastes = null, $favourite = null)
+    public function __construct($user             ,
+                                $picture    = null,
+                                $aboutMe    = null,
+                                $birth      = null,
+                                $tastes     = null,
+                                $favourite  = null)
     {
+        $this->user         = $user;
         $this->picture      = $picture;
         $this->aboutMe      = $aboutMe;
+        $this->birth        = $birth;
         $this->tastes       = $tastes;
         $this->favourite    = $favourite;
 
@@ -52,7 +61,7 @@ class UserProfileDTO
     }
 
     /**
-     * @return mixed
+     * @return mixed $tastes[]
      */
     public function getTastes()
     {
@@ -60,7 +69,7 @@ class UserProfileDTO
     }
 
     /**
-     * @param mixed $tastes
+     * @param mixed $tastes[]
      */
     public function setTastes($tastes)
     {
@@ -68,7 +77,7 @@ class UserProfileDTO
     }
 
     /**
-     * @return mixed
+     * @return mixed $favourite[]
      */
     public function getFavourite()
     {
@@ -76,11 +85,43 @@ class UserProfileDTO
     }
 
     /**
-     * @param mixed $favourite
+     * @param mixed $favourite[]
      */
     public function setFavourite($favourite)
     {
         $this->favourite = $favourite;
+    }
+
+    /**
+     * @return $user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirth()
+    {
+        return $this->birth;
+    }
+
+    /**
+     * @param \DateTime $birth
+     */
+    public function setBirth($birth)
+    {
+        $this->birth = $birth;
     }
 
 

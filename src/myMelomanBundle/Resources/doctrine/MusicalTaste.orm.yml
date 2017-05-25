@@ -14,11 +14,11 @@ myDomain\Entity\MusicalTaste:
             length: 255
             nullable: true
             column: name
-    manyToOne:
-        userProfile:
-            targetEntity: myDomain\Entity\UserProfile
-            inversedBy: musicalTaste
-            joinColumn:
-                name: userProfile_id
-                referencedColumName: id
+#    manyToOne:
+#        userProfile:
+#            targetEntity: myDomain\Entity\UserProfile
+#            inversedBy: musicalTaste
+#            joinColumn:
+#                name: userProfile_id
+#                referencedColumName: id
     lifecycleCallbacks: {  }

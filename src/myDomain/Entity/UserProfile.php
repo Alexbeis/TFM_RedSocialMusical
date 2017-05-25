@@ -106,7 +106,7 @@ class UserProfile
     }
 
     /**
-     * @var MusicalTaste[]
+     * @return  MusicalTaste[]
      */
     public function getMusicalTaste()
     {
