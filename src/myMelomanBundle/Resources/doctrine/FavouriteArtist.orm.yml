@@ -14,10 +14,10 @@ myDomain\Entity\FavouriteArtist:
             length: 255
             nullable: true
             column: name
-#    manyToOne:
-#        userProfile:
-#            targetEntity: myDomain\Entity\UserProfile
+#    manyToMany:
+#        user:
+#            targetEntity: myDomain\Entity\User
 #            inversedBy: favouriteArtist
 #            joinColumn:
-#                name: userProfile_id
+#                name: user_id
 #                referencedColumName: id

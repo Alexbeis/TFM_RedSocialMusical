@@ -26,10 +26,31 @@ class User
     private $email;
 
     /**
-     * @var UserProfile
+     * @var string
+     */
+    private $aboutMe;
+
+    /**
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @var \DateTime
+     */
+    private $birthDate;
+
+    /**
+     * @var MusicalTaste[]
      */
 
-    private $user_profile;
+    private $musicalTaste;
+
+    /**
+     * @var FavouriteArtist[]
+     */
+    private $favouriteArtist;
+
 
 
     /**
@@ -107,20 +128,89 @@ class User
         return $this->email;
     }
 
+
     /**
-     * @return UserProfile
+     * @return string
      */
-    public function getUserProfile()
+    public function getAboutMe()
     {
-        return $this->user_profile;
+        return $this->aboutMe;
     }
 
     /**
-     * @param UserProfile
+     * @param string $aboutMe
      */
-    public function setUserProfile($user_profile)
+    public function setAboutMe(string $aboutMe)
     {
-        $this->user_profile = $user_profile;
+        $this->aboutMe = $aboutMe;
     }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param \DateTime $birthDate
+     */
+    public function setBirthDate(\DateTime $birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return MusicalTaste[]
+     */
+    public function getMusicalTaste()
+    {
+        return $this->musicalTaste;
+    }
+
+    /**
+     * @param MusicalTaste[] $musicalTaste
+     */
+    public function setMusicalTaste(array $musicalTaste)
+    {
+        $this->musicalTaste = $musicalTaste;
+    }
+
+    /**
+     * @return FavouriteArtist[]
+     */
+    public function getFavouriteArtist()
+    {
+        return $this->favouriteArtist;
+    }
+
+    /**
+     * @param FavouriteArtist[] $favouriteArtist
+     */
+    public function setFavouriteArtist(array $favouriteArtist)
+    {
+        $this->favouriteArtist = $favouriteArtist;
+    }
+
+
+
+
 }
 

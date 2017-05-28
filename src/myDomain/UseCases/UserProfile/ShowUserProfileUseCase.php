@@ -12,13 +12,11 @@ class ShowUserProfileUseCase
 {
 
     private $userRepository;
-    private $userProfileRepository;
 
 
-    function __construct(UserRepositoryInterface $userRepository, UserProfileRepositoryInterface $userProfileRepository)
+    function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->userProfileRepository = $userProfileRepository;
     }
 
     public function execute($userId)
@@ -28,11 +26,10 @@ class ShowUserProfileUseCase
          */
         $user = $this->userRepository->find($userId);
 
-        if ($user->getUserProfile() == null) {
-            return new UserProfile();
-        } else {
-            return $user->getUserProfile();
+        if ($user) {
+            return $user;
         }
+        else return false;
 
 
     }

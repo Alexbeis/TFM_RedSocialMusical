@@ -15,12 +15,13 @@
                 <input name="picture" type="hidden" value="{{ app.session.get('picture') }}">
                 <div class="form-group row">
                     <label for="aboutme">AboutME</label>
-                    <textarea name="aboutme" class="form-control col-10" id="aboutme" value= {{ userProfile.aboutMe ? userProfile.aboutMe : "" }} rows="6"></textarea>
+                    <textarea name="aboutme" class="form-control col-10" id="aboutme" value="" rows="6">{{ userProfile.aboutMe ? userProfile.aboutMe : "" }} </textarea>
                 </div>
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
                     <div class="col-10">
-                        <input name="birth" class="form-control" type="date" value="{{userProfile.birthDate != null ? userProfile.birthDate : userProfile.birthDate|date('Y-m-d H:i:s') }}" id="example-date-input">
+
+                        <input name="birth" class="form-control" type="datetime" value="{{userProfile.birthDate is null ? "" : userProfile.birthDate.date|date('d-m-Y') }}" id="example-date-input">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -66,7 +67,8 @@
                 </div>
                 <div class="button-section row">
                     <button type="submit" class="btn btn-primary col-xs-3">Submit</button>
-                    <div class="col-xs-4 col-xs-offset-5">
+                    <button class="btn btn-primary"><a  href="{{ path('home') }}">Go Home</a></button>
+                    <div class="col-xs-4 col-xs-offset-3">
                         <span class="privacy-policy ">
                         <input type="checkbox" class="form-check-input " name="policy" required>&nbsp;You agree to our Terms and Policy.
                     </span>

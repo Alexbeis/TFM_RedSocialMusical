@@ -7,6 +7,7 @@ class MusicalTaste
 {
     private $id;
     private $name;
+    private $user;
 
     /**
      * @return integer
@@ -38,6 +39,22 @@ class MusicalTaste
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

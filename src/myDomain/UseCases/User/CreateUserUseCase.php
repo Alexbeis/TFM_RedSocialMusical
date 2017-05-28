@@ -25,16 +25,17 @@ class CreateUserUseCase
         $this->eventDispatcher  = $eventDispatcher;
     }
 
-    public function execute($name, $email)
+    public function execute($name, $email, $picture)
     {
         $user = new User();
         $user->setEmail($email);
         $user->setJoinDate(new \DateTime('now'));
         $user->setUsername($name);
+        $user->setImage($picture);
 
         //$this->entityManager->persist($user);
         $this->userRepository->create($user);
-        $this->entityManager->flush();
+        $this->entityManager->flush($user);
 
         return $user;
 

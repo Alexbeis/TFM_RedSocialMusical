@@ -25,7 +25,6 @@ class LoginUseCase
      * @var Container
      */
     private $container;
-    private $userProfileRepository;
     private $entityManager;
     private $dispatcher;
 
@@ -40,7 +39,6 @@ class LoginUseCase
         $this->createUser = $createUser;
         $this->userRepository = $userRepository;
         $this->container = $container;
-        $this->userProfileRepository = $userProfileRepository;
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
     }
@@ -92,7 +90,7 @@ class LoginUseCase
 
                     return $loginDTO;
                 } else {
-                    $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail());
+                    $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail(), $loginDTO->getPicture());
                     if ($newUser) {
                         $loginDTO->setStatusCode('user_profile');
                         $loginDTO->setUserId($newUser->getId());

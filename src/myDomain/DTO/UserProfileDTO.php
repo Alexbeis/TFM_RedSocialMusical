@@ -13,16 +13,14 @@ class UserProfileDTO
     private $favourite = [];
 
     public function __construct($user             ,
-                                $picture    = null,
                                 $aboutMe    = null,
                                 $birth      = null,
                                 $tastes     = null,
                                 $favourite  = null)
     {
         $this->user         = $user;
-        $this->picture      = $picture;
         $this->aboutMe      = $aboutMe;
-        $this->birth        = $birth;
+        $this->birth        = \DateTime::createFromFormat('Y-m-d', $birth);
         $this->tastes       = $tastes;
         $this->favourite    = $favourite;
 

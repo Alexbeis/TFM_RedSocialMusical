@@ -20,11 +20,43 @@ myDomain\Entity\User:
             type: string
             length: 255
             unique: true
-    oneToOne:
-        user_profile:
-          targetEntity: myDomain\Entity\UserProfile
-          joinColumn:
-            name: userprofile_id
-            referencedColumnName: id
+        aboutMe:
+            type: string
+            length: 255
+            nullable: true
+            column: about_me
+        image:
+            type: string
+            length: 255
+            nullable: true
+        birthDate:
+            type: datetime
+            column: birth_date
+            nullable: true
+    manyToMany:
+        musicalTaste:
+            targetEntity: myDomain\Entity\MusicalTaste
+            joinTable:
+              name: musicalTaste
+              joinColumns:
+                user:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                musicalTaste:
+                  referencedColumnName: id
+            cascade:
+              - persist
+        favouriteArtist:
+            targetEntity: myDomain\Entity\FavouriteArtist
+            joinTable:
+              name: favouriteArtist
+              joinColumns:
+                user:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                favouriteArtist:
+                  referencedColumnName: id
+            cascade:
+              - persist
 
     lifecycleCallbacks: {  }

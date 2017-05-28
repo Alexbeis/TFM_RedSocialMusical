@@ -7,7 +7,7 @@ class FavouriteArtist
 {
     private $id;
     private $name;
-    private $userProfile;
+    private $user;
 
     /**
      * @return integer
@@ -42,20 +42,19 @@ class FavouriteArtist
     }
 
     /**
-     * @return UserProfile
+     * @return User
      */
-    public function getUserProfile()
+    public function getUser()
     {
-        return $this->userProfile;
+        return $this->user;
     }
 
     /**
-     * @param UserProfile $userProfile
+     * @param User $user
      */
-    public function setUserProfile($userProfile)
+    public function setUser($user)
     {
-        $this->userProfile = $userProfile;
+        $this->user = $user;
     }
-
 
 }

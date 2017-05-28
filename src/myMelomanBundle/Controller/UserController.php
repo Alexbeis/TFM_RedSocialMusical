@@ -26,13 +26,18 @@ class UserController extends Controller
         }
 
         $userId = $request->getSession()->get('user');
-        $showProfile = $this->get('app.application.usecases.userprofile.show')->execute($userId);
+        $user = $this->get('app.application.usecases.userprofile.show')->execute($userId);
 
-        return $this->render('userProfileView/userProfileView.html.twig',
-            array(
-                'userProfile' => $showProfile
-            )
-        );
+        if ($user) {
+            return $this->render('userProfileView/userProfileView.html.twig',
+                array(
+                    'userProfile' => $user
+                )
+            );
+        } else {
+            return $this->redirectToRoute('home');
+        }
+
 
     }
 
@@ -45,14 +50,12 @@ class UserController extends Controller
         $user           = $request->request->get('user');
         $aboutMe        = $request->request->get('aboutme');
         $birth          = $request->request->get('birth');
-        $picture        = $request->request->get('picture');
         $currentTastes  = $this->getCheckedTastes($request);
 
+        $userProfileDTO = new UserProfileDTO($user, $aboutMe, $birth , $currentTastes);
 
-        $userProfileDTO = new UserProfileDTO($user, $picture, $aboutMe, $birth , $currentTastes);
-
-        $createUserProfile = $this->get('app.application.usecases.userprofile.create');
-        $userProfile = $createUserProfile->execute($userProfileDTO);
+        $updateUserProfile = $this->get('app.application.usescases.user.update');
+        $user= $updateUserProfile->execute($user, $userProfileDTO);
 
 
         return $this->redirectToRoute('home');

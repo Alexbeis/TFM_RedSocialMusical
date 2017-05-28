@@ -21,15 +21,6 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         dispatcher: '@event_dispatcher'
 
-    app.application.usecases.userprofile.create:
-      class: myDomain\UseCases\UserProfile\CreateUserProfileUseCase
-      arguments:
-        userrepository: '@app.repository.user'
-        userProfileRepository: '@app.repository.userProfile'
-        userUpdate: '@app.application.usescases.user.update'
-        entityManager: '@doctrine.orm.entity_manager'
-        dispatcher: '@event_dispatcher'
-
     app.application.usecases.userprofile.show:
       class: myDomain\UseCases\UserProfile\ShowUserProfileUseCase
       arguments:
@@ -49,11 +40,6 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.user.metadata'
 
-    app.repository.userProfile:
-      class: myMelomanBundle\Repository\UserProfileRepository
-      arguments:
-        em: '@doctrine.orm.entity_manager'
-        mapping: '@app.userProfile.metadata'
 
     app.repository.musicaltaste:
       class: myMelomanBundle\Repository\MusicalTasteRepository
@@ -66,12 +52,6 @@ services:
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
         arguments: [ myDomain\Entity\User ]
-
-    app.userProfile.metadata:
-        class: Doctrine\ORM\Mapping\ClassMetadata
-        factory_service: doctrine # this is an instance of Registry
-        factory_method: getRepository
-        arguments: [ myDomain\Entity\UserProfile ]
 
     app.musicaltaste.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
