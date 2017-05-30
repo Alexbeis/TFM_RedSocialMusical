@@ -56,7 +56,7 @@ li {
     display: inline-block;
 }
 
-input[type="checkbox"][id^="cb"] {
+input[type="checkbox"][id^="c"] {
     display: none;
 }
 
