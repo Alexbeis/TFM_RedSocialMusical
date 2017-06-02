@@ -17,3 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    google_client_id: '721970566997-72emhffh5962uvddmr4s0lp3duq4rl4o.apps.googleusercontent.com'
+    google_secret_id: 's43KLQ1Wilx23Ae2aXqTqTvO'
+    google_redirect_uri: 'http://melomaniacs.com/app_dev.php/validate/'
+    google_email_scope: 'https://www.googleapis.com/auth/userinfo.email'
+    google_profile_scope: 'https://www.googleapis.com/auth/userinfo.profile'
