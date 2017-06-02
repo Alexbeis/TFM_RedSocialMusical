@@ -11,6 +11,15 @@ class LoginController extends Controller
 
     public function loginAction(Request $request)
     {
+        if ($request->getSession()->get('user')) {
+            $userid = $request->getSession()->get('user');
+            $publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid);
+            return $this->render('homeView/homeView.html.twig',
+                array(
+                    'publications' => $publications
+                ));
+        }
+
         $loginDTO       = new LoginDTO(null, $request->getSession());
         $loginUseCase   = $this->get('app.application.usecases.login.login');
         $returnLoginDTO = $loginUseCase->execute($loginDTO);
