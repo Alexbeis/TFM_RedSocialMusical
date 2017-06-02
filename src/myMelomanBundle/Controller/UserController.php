@@ -6,6 +6,7 @@ use myDomain\DTO\UserProfileDTO;
 use myDomain\Entity\UserProfile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -62,10 +63,22 @@ class UserController extends Controller
         $userProfileDTO = new UserProfileDTO($user, $aboutMe, $birth , $currentTastes);
 
         $updateUserProfile = $this->get('app.application.usescases.user.update');
-        $user= $updateUserProfile->execute($user, $userProfileDTO);
+        $user = $updateUserProfile->execute($user, $userProfileDTO);
 
 
         return $this->redirectToRoute('home');
+
+    }
+
+    public function userListAction(Request $request)
+    {
+        $pagination = $this->get('app.application.usescases.user.get')->execute($request);
+        return $this->render('userView/user-list.html.twig',
+            array(
+                'pagination' => $pagination
+            )
+        );
+
 
     }
 

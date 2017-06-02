@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/user-list.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-xs-12 box-default">
+            <h1>People</h1>
+            <div class="count">
+                <span class="label label-primary">
+                   Total Users:  {{ pagination.getTotalItemCount }}
+                </span>
+            </div>
+            <hr/>
+
+                {% for user in pagination  %}
+            <div class="box-content box-users row">
+                <div class="col-xs-2 user-item">
+                    <div class="avatar">
+                        <img src="{{ user.image }}" alt="">
+                    </div>
+                </div>
+
+                <div class=" col-xs-10 user-item-content">
+                    <p> {{ user.username }}-{{ user.email }}</p>
+                    <p> {{ user.aboutMe }} </p>
+                </div>
+
+                <div class="clearfix">
+                </div>
+                <hr>
+            </div>
+                {% endfor %}
+
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {#<script src="{{ asset('assets/js/userProfile.js') }}"></script>#}
+{% endblock %}

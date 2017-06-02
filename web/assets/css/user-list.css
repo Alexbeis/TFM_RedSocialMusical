@@ -1,0 +1,45 @@
+#content{
+    background-image: url("https://source.unsplash.com/featured/?music");
+    width: 100%;
+    height: 100vh;
+    padding: 50px 10px 60px 10px;
+    margin :0 auto;
+    border: 1px black solid;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.container {
+    background-color: white;
+    margin-top: 50px;
+    padding-top: 50px;
+    height: 100%;
+}
+
+.box-default {
+    padding-top: 5px;
+    border: 1px solid #ccc;
+    float: none
+}
+
+.user-item .avatar {
+    background: #eee;
+    border-radius: 550px;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    float: left;
+}
+
+.user-item .avatar img {
+    height: 100%;
+    text-align: center;
+
+}

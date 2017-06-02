@@ -22,4 +22,13 @@ class UserRepository extends EntityRepository implements userRepositoryInterface
         $this->getEntityManager()->remove($user);
     }
 
+    public function getQuery()
+    {
+        $dql = "SELECT u FROM myDomain\Entity\User u ORDER BY u.id";
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query;
+
+    }
+
 }
