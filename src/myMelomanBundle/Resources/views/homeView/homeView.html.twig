@@ -4,12 +4,17 @@
     <link href="{{ asset('assets/css/home.css') }}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="container ">
     <div class="row">
         <div id="timeline" class="col-xs-12 col-lg-7  box-default">
             <h1 class="box-header">Timeline</h1>
-            <div class="box-content">
-                PUBLICATIONS
+            <div class="box-content ">
+                {% for publication in publications %}
+                    <div class="publication"> {{ publication.message }} at {{ publication.createdAt.date|date('d-m-Y') }} </div>
+                    <hr>
+                {% else %}
+                    There ara no publications yet!!
+                {% endfor %}
             </div>
         </div>
         <div class="col-xs-12 col-lg-4">
@@ -33,7 +38,7 @@
                 <h1 class="box-header">
                     Create Publication
                 </h1>
-                <form method="POST" action="">
+                <form method="POST" action="{{ path('create_publication') }}">
                     <label for="message">Message</label>
                     <textarea name="message" id="message" class="form-control" rows="3"></textarea>
                     <input type="submit" class="btn btn-primary" value="Share">

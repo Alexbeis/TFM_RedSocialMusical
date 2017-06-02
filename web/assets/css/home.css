@@ -1,5 +1,6 @@
 .container{
     margin-top: 50px;
+    padding: 0;
 }
 .box {
     border: 1px solid black;
@@ -36,7 +37,6 @@
 #user-card .avatar img {
     height: 100%;
     text-align: center;
-    border: 2px solid black;
 }
 
 #user-card .avatar img.default{

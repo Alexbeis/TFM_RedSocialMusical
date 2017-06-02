@@ -25,3 +25,8 @@ create_userProfile:
   path: /create-userprofile
   defaults: { _controller: myMelomanBundle:User:createUserProfile }
   methods: [POST]
+
+create_publication:
+  path: /create-publication/new
+  defaults: { _controller: myMelomanBundle:Publication:createPublication }
+
