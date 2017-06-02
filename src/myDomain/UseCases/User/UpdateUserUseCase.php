@@ -37,23 +37,27 @@ class UpdateUserUseCase
         $user = $this->userRepository->findOneBy(array('id' => $userId));
         $user->setAboutMe($userProfile->getAboutMe());
         $user->setBirthDate($userProfile->getBirth());
-        $user->setMusicalTaste($this->getCurrentTastes($userProfile->getTastes()));
+        $user->setMusicalTaste($this->getCurrentTastes($user, $userProfile->getTastes()));
         $this->userRepository->update($user);
-        $this->entityManager->flush();
+        $this->entityManager->flush($user);
 
         return $user;
 
     }
 
-    private function getCurrentTastes($rawTastes)
+    private function getCurrentTastes($user, $rawTastes)
     {
         $tastes = [];
 
         foreach ($rawTastes as $rawTaste) {
             $taste =  new MusicalTaste();
             $taste->setName($rawTaste);
+            if (in_array($taste,$user->getMusicalTaste())) continue;
+
+            $this->entityManager->persist($taste);
             $tastes[] = $taste;
         }
+        $this->entityManager->flush();
         return $tastes;
     }
 

@@ -21,7 +21,16 @@ user_profile:
   path: /user-profile
   defaults: { _controller: myMelomanBundle:User:userProfile }
 
+user_list:
+  path: /user-list
+  defaults: { _controller: myMelomanBundle:User:userList }
+
 create_userProfile:
   path: /create-userprofile
   defaults: { _controller: myMelomanBundle:User:createUserProfile }
   methods: [POST]
+
+create_publication:
+  path: /create-publication/new
+  defaults: { _controller: myMelomanBundle:Publication:createPublication }
+

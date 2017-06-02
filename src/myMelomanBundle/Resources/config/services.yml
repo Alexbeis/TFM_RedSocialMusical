@@ -20,6 +20,11 @@ services:
         userProfilerepository: '@app.repository.user'
         entityManager: '@doctrine.orm.entity_manager'
         dispatcher: '@event_dispatcher'
+        google_client_id: %google_client_id%
+        google_secret_id: %google_secret_id%
+        google_redirect_uri: %google_redirect_uri%
+        google_email_scope: %google_email_scope%
+        google_profile_scope: %google_profile_scope%
 
     app.application.usecases.userprofile.show:
       class: myDomain\UseCases\UserProfile\ShowUserProfileUseCase
@@ -33,6 +38,26 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         dispatcher: '@event_dispatcher'
 
+    app.application.usescases.user.get:
+      class: myDomain\UseCases\User\GetUsers
+      arguments:
+        userrepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+        paginator: '@knp_paginator'
+
+    app.application.usescases.publication.create:
+      class: myDomain\UseCases\Publication\CreatePublicationUseCase
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.applicarion.usecases.publication.get:
+      class: myDomain\UseCases\Publication\GetPublicationsUseCase
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        entityManager: '@doctrine.orm.entity_manager'
+
 #repositories
     app.repository.user:
       class: myMelomanBundle\Repository\UserRepository
@@ -40,12 +65,18 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.user.metadata'
 
-
     app.repository.musicaltaste:
       class: myMelomanBundle\Repository\MusicalTasteRepository
-      argument:
+      arguments:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.musicaltaste.metadata'
+
+    app.repository.publication:
+      class: myMelomanBundle\Repository\PublicationRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.publication.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -58,3 +89,9 @@ services:
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
         arguments: [ myDomain\Entity\MusicalTaste ]
+
+    app.publication.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Publication ]

@@ -6,6 +6,7 @@ use myDomain\DTO\UserProfileDTO;
 use myDomain\Entity\UserProfile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -15,7 +16,12 @@ class UserController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('homeView/homeView.html.twig');
+        $userid = $request->getSession()->get('user');
+        $publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid);
+        return $this->render('homeView/homeView.html.twig',
+            array(
+                'publications' => $publications
+            ));
 
     }
 
@@ -26,12 +32,14 @@ class UserController extends Controller
         }
 
         $userId = $request->getSession()->get('user');
-        $user = $this->get('app.application.usecases.userprofile.show')->execute($userId);
+        $user   = $this->get('app.application.usecases.userprofile.show')->execute($userId);
+        $tastes = $this->getTastes();
 
         if ($user) {
             return $this->render('userProfileView/userProfileView.html.twig',
                 array(
-                    'userProfile' => $user
+                    'userProfile'   => $user,
+                    'tastes'        => $tastes
                 )
             );
         } else {
@@ -55,16 +63,28 @@ class UserController extends Controller
         $userProfileDTO = new UserProfileDTO($user, $aboutMe, $birth , $currentTastes);
 
         $updateUserProfile = $this->get('app.application.usescases.user.update');
-        $user= $updateUserProfile->execute($user, $userProfileDTO);
+        $user = $updateUserProfile->execute($user, $userProfileDTO);
 
 
         return $this->redirectToRoute('home');
 
     }
 
+    public function userListAction(Request $request)
+    {
+        $pagination = $this->get('app.application.usescases.user.get')->execute($request);
+        return $this->render('userView/user-list.html.twig',
+            array(
+                'pagination' => $pagination
+            )
+        );
+
+
+    }
+
     private function getCheckedTastes(Request $request)
     {
-        $tastes = [ '1'=>'rock', '2'=>'funk', '3'=>'techno', '4'=>'reggae', '5'=>'blues', '6'=>'mestizaje', '7'=>'edm', '8'=> 'drum&bass', '9'=>'hardrock', '10'=>'metal'];
+        $tastes = $this->getTastes();
         $currentTastes = [];
 
         foreach ($tastes as $key => $taste) {
@@ -74,6 +94,12 @@ class UserController extends Controller
             }
         }
         return $currentTastes;
+    }
+
+    private function getTastes()
+    {
+        return $tastes = [ '1'=>'rock', '2'=>'funk', '3'=>'techno', '4'=>'reggae', '5'=>'blues', '6'=>'mestizaje', '7'=>'edm', '8'=> 'drum&bass', '9'=>'hardrock', '10'=>'metal'];
+
     }
 
 }

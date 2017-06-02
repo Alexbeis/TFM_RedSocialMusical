@@ -1,7 +1,7 @@
 myDomain\Entity\User:
     type: entity
     table: user
-    repositoryClass: myMelomanBUndle\Repository\UserRepository
+    repositoryClass: myMelomanBundle\Repository\UserRepository
     id:
         id:
             type: integer

@@ -1,0 +1,41 @@
+myDomain\Entity\Publication:
+    type: entity
+    table: publication
+    repositoryClass: myMelomanBundle\Repository\PublicationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        message:
+            column: pu_message
+            type: string
+            length: 255
+            nullable: true
+        status:
+            column: pu_status
+            type: boolean
+            nullable: false
+            options:
+                default: false
+        link:
+            column: pu_link
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            column: pu_created_at
+            type: datetime
+            nullable: false
+    manyToOne:
+        user:
+            targetEntity: myDomain\Entity\User
+            joinColumn:
+              name: user
+              referencedColumnName: id
+    lifecycleCallbacks: {  }
+
+
+

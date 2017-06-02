@@ -1,0 +1,68 @@
+.container{
+    margin-top: 50px;
+    padding: 0;
+}
+.box {
+    border: 1px solid black;
+}
+#user-card {
+    margin-left: 10px;
+    padding:10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+#user-card .avatar {
+    background: #EEEEEE;
+    border-radius: 500px;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    float: left;
+    margin-right: 12px;
+    margin-top: 20px;
+
+
+}
+#timeline {
+    margin-right: 20px;
+    min-height: 750px;
+}
+.box-header{
+    border-bottom: 1px solid black;
+    padding: 10px;
+    padding-top: 0px;
+    font-size: 25px;
+}
+
+#user-card .avatar img {
+    height: 100%;
+    text-align: center;
+}
+
+#user-card .avatar img.default{
+   opacity: 0.5;
+}
+
+#user-card .name {
+    float: left;
+    font-size: 20px;
+    padding: 20px;
+}
+
+#user-card .name .role {
+    opacity: 0.5;
+}
+
+#user-card .name a{
+  color: black;
+}
+
+#new-publication input,
+#new-publication textarea {
+
+    margin-bottom: 10px;
+
+}
+
+
+

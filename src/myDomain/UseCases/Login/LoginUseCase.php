@@ -27,6 +27,11 @@ class LoginUseCase
     private $container;
     private $entityManager;
     private $dispatcher;
+    private $google_client_id;
+    private $google_secret_id;
+    private $google_redirect_uri;
+    private $google_email_scope;
+    private $google_profile_scope;
 
     public function __construct(
         $createUser,
@@ -34,13 +39,23 @@ class LoginUseCase
         $container,
         $userProfileRepository,
         $entityManager,
-        $dispatcher)
+        $dispatcher,
+        $google_client_id,
+        $google_secret_id,
+        $google_redirect_uri,
+        $google_email_scope,
+        $google_profile_scope)
     {
-        $this->createUser = $createUser;
-        $this->userRepository = $userRepository;
-        $this->container = $container;
-        $this->entityManager = $entityManager;
-        $this->dispatcher = $dispatcher;
+        $this->createUser           = $createUser;
+        $this->userRepository       = $userRepository;
+        $this->container            = $container;
+        $this->entityManager        = $entityManager;
+        $this->dispatcher           = $dispatcher;
+        $this->google_client_id     = $google_client_id;
+        $this->google_secret_id     = $google_secret_id;
+        $this->google_redirect_uri  = $google_redirect_uri;
+        $this->google_email_scope   = $google_email_scope;
+        $this->google_profile_scope = $google_profile_scope;
     }
 
     public function execute(LoginDTO $loginDTO)
@@ -112,10 +127,10 @@ class LoginUseCase
     {
         $client = new Google_Client();
         $client->setApplicationName("Melomaniacs");
-        $client->setClientId($this->container->getParameter('google_client_id'));
-        $client->setClientSecret($this->container->getParameter('google_secret_id'));
-        $client->setRedirectUri($this->container->getParameter('google_redirect_uri'));
-        $client->setScopes(array($this->container->getParameter('google_email_scope'),$this->container->getParameter('google_profile_scope')));
+        $client->setClientId($this->google_client_id);
+        $client->setClientSecret($this->google_secret_id);
+        $client->setRedirectUri($this->google_redirect_uri);
+        $client->setScopes(array($this->google_email_scope, $this->google_profile_scope));
 
         return $client;
     }

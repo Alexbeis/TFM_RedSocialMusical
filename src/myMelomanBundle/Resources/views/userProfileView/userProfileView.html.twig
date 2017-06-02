@@ -20,43 +20,19 @@
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
                     <div class="col-10">
-
-                        <input name="birth" class="form-control" type="datetime" value="{{userProfile.birthDate is null ? "" : userProfile.birthDate.date|date('d-m-Y') }}" id="example-date-input">
+                        <input name="birth" class="form-control" type="date" value="{{userProfile.birthDate is null ? "" : userProfile.birthDate.format('Y-m-d')|date('Y-m-d') }}" id="example-date-input">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
                     <ul>
-                        <li><input name="rock" type="checkbox" id="cb1" />
-                            <label class="check-label" for="cb1"><img src="http://lorempixel.com/100/100" /></label>
-                        </li>
-                        <li><input name="reggae" type="checkbox" id="cb2" />
-                            <label class="check-label" for="cb2"><img src="http://lorempixel.com/101/101" /></label>
-                        </li>
-                        <li><input name="techno" type="checkbox" id="cb3" />
-                            <label class="check-label" for="cb3"><img src="http://lorempixel.com/102/102" /></label>
-                        </li>
-                        <li><input name="funk" type="checkbox" id="cb4" />
-                            <label class="check-label" for="cb4"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="blues" type="checkbox" id="cb5" />
-                            <label class="check-label" for="cb5"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="mestizaje" type="checkbox" id="cb6" />
-                            <label class="check-label" for="cb6"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="edm" type="checkbox" id="cb7" />
-                            <label class="check-label" for="cb7"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="drum&bass" type="checkbox" id="cb8" />
-                            <label class="check-label" for="cb8"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="hardrock" type="checkbox" id="cb9" />
-                            <label class="check-label" for="cb9"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
-                        <li><input name="metal" type="checkbox" id="cb10" />
-                            <label class="check-label" for="cb10"><img src="http://lorempixel.com/103/103" /></label>
-                        </li>
+                        {{ dump(userProfile.musicalTaste.getValues) }}
+                        {% for key, taste in tastes %}
+
+                            <li><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {#{{ t.name == taste ? 'checked': ''}}#}/>
+                                <label class="check-label" for="{{ 'cd' ~ key }}" ><img src="http://lorempixel.com/100/100" /></label>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="form-group row">
