@@ -22,7 +22,7 @@ class GetPublicationsUseCase
 
     public function execute($id)
     {
-        $publications  = $this-> publicationRepository->findby(array('user' => $id));
+        $publications  = $this->publicationRepository->findby(array('user' => $id),array('createdAt' => 'DESC'));
 
         return $publications;
 
