@@ -45,6 +45,13 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         paginator: '@knp_paginator'
 
+    app.application.usescases.user.search:
+      class: myDomain\UseCases\User\SearchUserUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+        paginator: '@knp_paginator'
+
     app.application.usescases.publication.create:
       class: myDomain\UseCases\Publication\CreatePublicationUseCase
       arguments:

@@ -2,13 +2,13 @@
 
 namespace myDomain\UseCases\User;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Bundle\PaginatorBundle\DependencyInjection\KnpPaginatorExtension;
-use myDomain\UserRepositoryInterface;
-use myMelomanBundle\Repository\UserRepository;
 
-class GetUsers
+use Doctrine\ORM\EntityManagerInterface;
+use myDomain\UserRepositoryInterface;
+
+class SearchUserUseCase
 {
+
     /**
      * @var UserRepository $userRepository
      */
@@ -26,16 +26,17 @@ class GetUsers
         $this->knpPaginator = $knPaginator;
     }
 
-   public function execute($request)
-   {
-       $query =  $this->userRepository->getAllUsersQuery();
+    public function execute($search, $request)
+    {
+        $query =  $this->userRepository->getSearchQuery($search);
 
-       $paginator = $this->knpPaginator->paginate(
-           $query,
-           $request->query->getInt('page', 1),
-           5
-       );
-       return $paginator;
-   }
+        $paginator = $this->knpPaginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            5
+        );
+        return $paginator;
+    }
+
 
 }

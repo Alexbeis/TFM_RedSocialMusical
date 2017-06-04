@@ -27,6 +27,7 @@
         "doctrine/orm": "^2.5",
         "google/apiclient": "^2.0",
         "incenteev/composer-parameter-handler": "^2.0",
+        "jwilsson/spotify-web-api-php": "^1.10",
         "knplabs/knp-paginator-bundle": "^2.5",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",

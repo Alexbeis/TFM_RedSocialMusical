@@ -13,25 +13,25 @@
                 </span>
             </div>
             <hr/>
-
-                {% for user in pagination  %}
-            <div class="box-content box-users row">
-                <div class="col-xs-2 user-item">
-                    <div class="avatar">
-                        <img src="{{ user.image }}" alt="">
+            {% for user in pagination  %}
+                <div class="box-content box-users row">
+                    <div class="col-xs-2 user-item">
+                        <div class="avatar">
+                            <img src="{{ user.image }}" alt="">
+                        </div>
                     </div>
-                </div>
 
-                <div class=" col-xs-10 user-item-content">
-                    <p> {{ user.username }}-{{ user.email }}</p>
-                    <p> {{ user.aboutMe }} </p>
+                    <div class=" col-xs-10 user-item-content">
+                        <p> {{ user.username }}-{{ user.email }}</p>
+                        <p> {{ user.aboutMe }} </p>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <hr>
                 </div>
-
-                <div class="clearfix">
-                </div>
-                <hr>
-            </div>
-                {% endfor %}
+            {% else  %}
+                No users found!
+            {% endfor %}
 
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}

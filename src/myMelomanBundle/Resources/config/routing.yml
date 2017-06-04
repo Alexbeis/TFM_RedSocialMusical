@@ -25,6 +25,10 @@ user_list:
   path: /user-list
   defaults: { _controller: myMelomanBundle:User:userList }
 
+user_search:
+  path: /user-search
+  defaults: { _controller: myMelomanBundle:User:search }
+
 create_userProfile:
   path: /create-userprofile
   defaults: { _controller: myMelomanBundle:User:createUserProfile }

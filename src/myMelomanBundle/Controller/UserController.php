@@ -78,7 +78,19 @@ class UserController extends Controller
                 'pagination' => $pagination
             )
         );
+    }
 
+    public function searchAction(Request $request)
+    {
+        $search = $request->query->get('search');
+
+        $pagination = $this->get('app.application.usescases.user.search')->execute($search, $request);
+
+        return $this->render('userView/user-list.html.twig',
+            array(
+                'pagination' => $pagination
+            )
+        );
 
     }
 
