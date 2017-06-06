@@ -13,6 +13,7 @@
                 </span>
             </div>
             <hr/>
+            {% set me = app.session.get('user') %}
             {% for user in pagination  %}
                 <div class="box-content box-users row">
                     <div class="col-xs-2 user-item">
@@ -20,30 +21,46 @@
                             <img src="{{ user.image }}" alt="">
                         </div>
                     </div>
-
-                    <div class=" col-xs-10 user-item-content">
+                    <div class=" col-xs-6 user-item-content">
                         <p> {{ user.username }}-{{ user.email }}</p>
                         <p> {{ user.aboutMe }} </p>
                     </div>
-                    <div class="clearfix">
-                    </div>
+                    {% if me != user.id %}
+                        <div class="buttons-following col-xs-4">
+                            <button class="btn btn-md btn-success btn-follow
+                                {% if me|following(user) ==  true %}
+                                    hidden
+                                {% endif %}
+                                "
+                                data-follow="{{ user.id }}" onclick="followAjax.followRequest(this)">
+                            <span class="fa fa-user-plus" aria-hidden="true"></span>
+                                Follow
+                            </button>
+                            <button class="btn btn-md btn-default btn-unfollow
+                                {% if me|following(user) == false %}
+                                    hidden
+                                {% endif %}
+                                "
+                                    data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
+                                <span class="fa fa-user-times" aria-hidden="true"></span>
+                                Unfollow
+                            </button>
+                        </div>
+                    {% endif %}
+                    <div class="clearfix"></div>
                     <hr>
                 </div>
             {% else  %}
-                No users found!
+                <h3>No users found!</h3>
             {% endfor %}
-
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}
-
             </div>
-
         </div>
     </div>
-
 
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {#<script src="{{ asset('assets/js/userProfile.js') }}"></script>#}
+    <script src="{{ asset('assets/js/follow.js') }}"></script>
 {% endblock %}

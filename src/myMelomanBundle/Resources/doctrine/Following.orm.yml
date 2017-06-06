@@ -1,0 +1,31 @@
+myDomain\Entity\Following:
+    type: entity
+    table: following
+    id:
+        id:
+            type: integer
+            nullable: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        user:
+            targetEntity: User
+            columnName: fo_user
+            cascade: {  }
+            fetch: LAZY
+            joinColumns:
+                user:
+                    referencedColumnName: id
+            orphanRemoval: false
+        friend:
+            targetEntity: User
+            columnName: fo_friend
+            cascade: {  }
+            fetch: LAZY
+            joinColumns:
+                friend:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    lifecycleCallbacks: {  }

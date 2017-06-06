@@ -65,6 +65,22 @@ services:
         publicationrepository: '@app.repository.publication'
         entityManager: '@doctrine.orm.entity_manager'
 
+    app.application.usecases.follow.create:
+      class: myDomain\UseCases\Follow\CreateFollowUseCase
+      arguments:
+        userRepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+        followingRepository: '@app.repository.following'
+
+    app.application.usecases.follow.delete:
+      class: myDomain\UseCases\Follow\DeleteFollowUseCase
+      arguments:
+        userRepository: '@app.repository.user'
+        entityManager: '@doctrine.orm.entity_manager'
+        followingRepository: '@app.repository.following'
+
+
+
 #repositories
     app.repository.user:
       class: myMelomanBundle\Repository\UserRepository
@@ -84,6 +100,12 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.publication.metadata'
 
+    app.repository.following:
+      class: myMelomanBundle\Repository\FollowingRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.following.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -102,3 +124,18 @@ services:
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
         arguments: [ myDomain\Entity\Publication ]
+
+    app.following.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Following ]
+
+#Twig Filters
+    app.following.twig_extension:
+        class: myMelomanBundle\TwigFilters\FollowingFilter
+        arguments:
+          userRepository: '@app.repository.user'
+          followingRepository: '@app.repository.following'
+        tags:
+            - { name: twig.extension }
