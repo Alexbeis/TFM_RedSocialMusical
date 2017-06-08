@@ -54,7 +54,6 @@ class CreateFollowUseCase
                     'friend'=> $friend
                 )
             );
-            //\Doctrine\Common\Util\Debug::dump($following);
 
             if ($following) {
                 return false;

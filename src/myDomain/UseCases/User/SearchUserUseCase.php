@@ -28,7 +28,7 @@ class SearchUserUseCase
 
     public function execute($search, $request)
     {
-        $query =  $this->userRepository->getSearchQuery($search);
+        $query =  $this->userRepository->getSearchQuery(trim($search));
 
         $paginator = $this->knpPaginator->paginate(
             $query,

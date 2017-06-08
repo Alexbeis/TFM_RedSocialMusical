@@ -63,7 +63,10 @@ services:
       class: myDomain\UseCases\Publication\GetPublicationsUseCase
       arguments:
         publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+        followingRepository: '@app.repository.following'
         entityManager: '@doctrine.orm.entity_manager'
+        paginator: '@knp_paginator'
 
     app.application.usecases.follow.create:
       class: myDomain\UseCases\Follow\CreateFollowUseCase

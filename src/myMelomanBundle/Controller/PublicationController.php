@@ -16,19 +16,16 @@ class PublicationController extends Controller
     public function createPublicationAction(Request $request)
     {
         $message = $request->request->get('message');
+
         $userid = $request->getSession()->get('user');
         $result = $this->get('app.application.usescases.publication.create')->execute($userid, $message);
-        $publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid);
+        //$publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid, $request);
 
         if (!$result) {
-
+            //TODO:
         }
 
-        return $this->render('homeView/homeView.html.twig',
-            array(
-                'publications' => $publications
-            ));
-
+        return $this->redirectToRoute('home');
 
 
 

@@ -1,6 +1,7 @@
 .container{
     margin-top: 50px;
     padding: 0;
+    width: 90%;
 }
 .box {
     border: 1px solid black;
@@ -11,7 +12,8 @@
     margin-bottom: 20px;
     border-bottom: 1px solid black;
 }
-#user-card .avatar {
+#user-card .avatar,
+.publication-row .avatar{
     background: #EEEEEE;
     border-radius: 500px;
     width: 75px;
@@ -34,7 +36,8 @@
     font-size: 25px;
 }
 
-#user-card .avatar img {
+#user-card .avatar img,
+.publication-row .avatar img{
     height: 100%;
     text-align: center;
 }
@@ -57,12 +60,23 @@
   color: black;
 }
 
-#new-publication input,
-#new-publication textarea {
-
-    margin-bottom: 10px;
-
+.publication-row .publication-row-content {
+    padding: 25px;
+    margin-left: 85px;
 }
 
+#new-publication input,
+#new-publication textarea {
+    margin-bottom: 10px;
+}
 
+.pub-name-link {
+    font-weight: bold;
+    color: black;
+}
+
+.pub-date {
+    color: gray;
+
+}
 

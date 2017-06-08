@@ -22,5 +22,21 @@ class PublicationRepository extends EntityRepository implements PublicationRepos
         // TODO: Implement remove() method.
     }
 
+    public function findMeAndFriendPublications($userId, $myFollows)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.user = (:user_id) OR p.user IN (:following)')
+            ->setParameters(
+                array(
+                    'user_id' => $userId,
+                    'following' => $myFollows
+                )
+            )
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
+//        $result = $qb->getResult();
+
+        return $query;
+    }
 
 }

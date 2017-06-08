@@ -6,34 +6,57 @@
 {% block content %}
 <div class="container ">
     <div class="row">
-        <div id="timeline" class="col-xs-12 col-lg-7  box-default">
+        <div id="user-card" class="col-xs-12  box-default">
+            <div class="avatar text-center">
+                {% set picture = app.session.get('picture') %}
+                <img src="{{ picture }}"/>
+            </div>
+            <div class="name">
+                <a href="#">{{ app.session.get('name') }}</a>
+                <div class="clearfix"></div>
+                <span class="role">
+                        Meloman
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="timeline" class="col-xs-12 col-lg-6  box-default">
             <h1 class="box-header">Timeline</h1>
             <div class="box-content ">
-                {% for publication in publications %}
-                    <div class="publication"> {{ publication.message }} at {{ publication.createdAt.date|date('d-m-Y') }} </div>
-                    <hr>
+                {% for publication in pagination %}
+                    <div class="col-xs-12 publication-row">
+                        <div class=" avatar">
+                            <img src="{{ publication.user.image }}">
+                        </div>
+                        <div class="publication-row-content">
+                            <p>
+                                <a class="pub-name-link" href="#">
+                                    {{ publication.user.username }}
+                                </a>
+                                -
+                                <span class="pub-date">
+                                    <em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>
+                                </span>
+                            </p>
+                            <div class="pub-message">
+                                {{ publication.message }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr>
+                        </div>
+                    </div>
+
+
                 {% else %}
                     There ara no publications yet!!
                 {% endfor %}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-lg-4">
-            <div id="user-card" class="col-xs-12  box-default">
-                <div class="avatar">
-                    {% set picture = app.session.get('picture') %}
-                    <img src="{{ picture }}"/>
-                </div>
-                <div class="name">
-                    <a href="#">{{ app.session.get('name') }}</a>
-                    <div class="clearfix">
-
-                    </div>
-                    <span class="role">
-                        User
-                    </span>
-
-                </div>
-            </div>
+        <div class="col-xs-12 col-lg-5">
             <div id="new-publication" class="col-xs-12 box-default ">
                 <h1 class="box-header">
                     Create Publication
@@ -41,10 +64,11 @@
                 <form method="POST" action="{{ path('create_publication') }}">
                     <label for="message">Message</label>
                     <textarea name="message" id="message" class="form-control" rows="3"></textarea>
-                    <input type="submit" class="btn btn-primary" value="Share">
+                    <input type="submit" class="btn btn-primary pull-right" value="Share">
                 </form>
 
             </div>
+
             <div id="new-publication" class="col-xs-12 box-default ">
                 <h1 class="box-header">
                     Spotify
@@ -54,10 +78,11 @@
                     <input name="artist" id="artist" type="text" class="form-control" placeholder="Artist">
                     <label for="song">Song</label>
                     <input name="song" id="song" type="text" class="form-control" placeholder="Song">
-                    <input type="submit" class="btn btn-primary" value="Find">
+                    <input type="submit" class="btn btn-primary pull-right" value="Find">
                 </form>
-                <iframe src="https://open.spotify.com/embed?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="500" frameborder="10" allowtransparency="true"></iframe>
-
+                <div class=>
+                    <iframe class="col-xs-12 " src="https://open.spotify.com/embed?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="500" {#frameborder="1"#} allowtransparency="true"></iframe>
+                </div>
             </div>
         </div>
 
