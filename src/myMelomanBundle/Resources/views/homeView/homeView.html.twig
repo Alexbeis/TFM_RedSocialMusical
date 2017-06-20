@@ -42,6 +42,20 @@
                             <div class="pub-message">
                                 {{ publication.message }}
                             </div>
+                            <div class="icons">
+                                {% if publication.user.id is defined and (app.session.get('user') == publication.user.id) %}
+                                    <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
+                                        <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+                                {% if publication.link is defined %}
+                                    {#Aqui ire el iframe + link#}
+                                    <a href="#" >
+                                        <span class="btn-spotify" data-id="{{ publication.id }}"><i class="fa fa-spotify"></i></span>
+                                    </a>
+                                {% endif %}
+                            </div>
+
                             <div class="clearfix"></div>
                             <hr>
                         </div>
@@ -88,4 +102,8 @@
 
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/home.js') }}"></script>
 {% endblock %}

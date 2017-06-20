@@ -8,10 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PublicationController extends Controller
 {
-    public function viewPublicationsAction(Request $request)
-    {
-
-    }
 
     public function createPublicationAction(Request $request)
     {
@@ -27,10 +23,19 @@ class PublicationController extends Controller
 
         return $this->redirectToRoute('home');
 
+    }
+
+    public function deletePublicationAction(Request $request, $id)
+    {
+        $userId = $request->getSession()->get('user');
+        $result = $this->get('app.application.usescases.publication.delete')->execute($userId, $id);
 
 
-
-
+        return new JsonResponse(
+            array(
+            'url' => $this->generateUrl('home')
+            )
+        );
     }
 
 }

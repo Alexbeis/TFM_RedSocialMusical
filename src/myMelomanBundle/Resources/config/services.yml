@@ -59,7 +59,13 @@ services:
         userrepository: '@app.repository.user'
         entityManager: '@doctrine.orm.entity_manager'
 
-    app.applicarion.usecases.publication.get:
+    app.application.usescases.publication.delete:
+      class: myDomain\UseCases\Publication\DeletePublicationUseCase
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.publication.get:
       class: myDomain\UseCases\Publication\GetPublicationsUseCase
       arguments:
         publicationrepository: '@app.repository.publication'

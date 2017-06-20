@@ -16,7 +16,7 @@ class UserController extends Controller
         }
 
         $userid = $request->getSession()->get('user');
-        $publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid, $request);
+        $publications = $this->get('app.application.usecases.publication.get')->execute($userid, $request);
         return $this->render('homeView/homeView.html.twig',
             array(
                 'pagination' => $publications

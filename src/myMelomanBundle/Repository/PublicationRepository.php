@@ -19,7 +19,7 @@ class PublicationRepository extends EntityRepository implements PublicationRepos
 
     public function remove($publication)
     {
-        // TODO: Implement remove() method.
+        $this->getEntityManager()->remove($publication);
     }
 
     public function findMeAndFriendPublications($userId, $myFollows)

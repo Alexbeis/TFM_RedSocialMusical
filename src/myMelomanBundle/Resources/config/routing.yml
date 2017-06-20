@@ -38,6 +38,10 @@ create_publication:
   path: /create-publication/new
   defaults: { _controller: myMelomanBundle:Publication:createPublication }
 
+delete_publication:
+  path: /delete-publication/{id}
+  defaults: { _controller: myMelomanBundle:Publication:deletePublication }
+
 follow_user:
   path: /follow-user/{id}
   defaults: { _controller: myMelomanBundle:Follow:follow }

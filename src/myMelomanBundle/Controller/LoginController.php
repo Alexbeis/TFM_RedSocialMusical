@@ -13,10 +13,10 @@ class LoginController extends Controller
     {
         if ($request->getSession()->get('user')) {
             $userid = $request->getSession()->get('user');
-            $publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid);
+            $publications = $this->get('app.application.usecases.publication.get')->execute($userid, $request);
             return $this->render('homeView/homeView.html.twig',
                 array(
-                    'publications' => $publications
+                    'pagination' => $publications
                 ));
         }
 
