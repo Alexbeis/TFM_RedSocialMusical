@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="my-following-data col-xs-2 col-xs-offset-1">
+        <a href="#">
+            <h4 class="label-stat">
+                Following
+            </h4>
+            <span class="number-stat">
+             {{ user|userStats('following') }}
+            </span>
+        </a>
+    </div>
+    <div class="my-following-data col-xs-2">
+        <a href="#">
+            <h4 class="label-stat">
+                Followers
+            </h4>
+            <span class="number-stat">
+            {{ user|userStats('follower') }}
+            </span>
+        </a>
+    </div>
+    <div class="my-following-data col-xs-2">
+        <a href="#">
+            <h4 class="label-stat">
+                Publications
+            </h4>
+            <span class="number-stat">
+            {{ pagination.getTotalItemCount }}
+            </span>
+        </a>
+    </div>
+</div>

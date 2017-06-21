@@ -38,7 +38,8 @@ var PublicationAjax = (function () {
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
-                    location.reload();
+                } else {
+                    console.log(xhr.status);
                 }
             }
             xhr.open("GET", url, false);
@@ -62,7 +63,8 @@ var PublicationAjax = (function () {
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
-                    location.reload();
+                } else {
+                    console.log(xhr.status);
                 }
             }
             xhr.open("GET", url, false);

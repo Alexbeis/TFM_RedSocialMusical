@@ -60,6 +60,26 @@
   color: black;
 }
 
+#user-card .my-following-data {
+    width: 20%;
+    float: left;
+    text-align: center;
+    padding: 10px;
+    margin-top: 5px;
+}
+#user-card .my-following-data a {
+    color: #444;
+}
+#user-card .my-following-data a :hover {
+    color: black;
+    text-decoration: none;
+}
+
+#user-card .my-following-data .label-stat {
+    display: block;
+}
+
+
 .publication-row .publication-row-content {
     padding: 25px;
     margin-left: 85px;

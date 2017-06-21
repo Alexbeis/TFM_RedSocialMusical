@@ -104,6 +104,17 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         followingRepository: '@app.repository.following'
 
+    app.application.usecases.get.users.following:
+      class: myDomain\UseCases\Follow\GetUsersFollowing
+      arguments:
+        followingRepository: '@app.repository.following'
+        userRepository: '@app.repository.user'
+
+    app.application.usecases.get.users.followers:
+      class: myDomain\UseCases\Follow\GetUsersFollowers
+      arguments:
+        followingRepository: '@app.repository.following'
+        userRepository: '@app.repository.user'
 
 
 #repositories
@@ -184,3 +195,11 @@ services:
           followingRepository: '@app.repository.likes'
         tags:
             - { name: twig.extension }
+
+    app.user.stadistics_extension:
+            class: myMelomanBundle\TwigFilters\UserStadisticsFilter
+            arguments:
+              following: '@app.application.usecases.get.users.following'
+              followers: '@app.application.usecases.get.users.followers'
+            tags:
+                - { name: twig.extension }
