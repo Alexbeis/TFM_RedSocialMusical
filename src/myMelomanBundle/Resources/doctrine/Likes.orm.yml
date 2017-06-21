@@ -1,0 +1,34 @@
+myDomain\Entity\Likes:
+    type: entity
+    table: likes
+    repositoryClass: myMelomanBundle\Repository\LikeRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        publication:
+            targetEntity: myDomain\Entity\Publication
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                publication:
+                    referencedColumnName: id
+            orphanRemoval: false
+        user:
+            targetEntity: myDomain\Entity\User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

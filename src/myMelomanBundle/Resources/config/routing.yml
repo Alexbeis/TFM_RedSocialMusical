@@ -42,6 +42,14 @@ delete_publication:
   path: /delete-publication/{id}
   defaults: { _controller: myMelomanBundle:Publication:deletePublication }
 
+like_publication:
+  path: /like/{id}
+  defaults: { _controller: myMelomanBundle:Like:like}
+
+dislike_publication:
+  path: /dislike/{id}
+  defaults: { _controller: myMelomanBundle:Like:dislike}
+
 follow_user:
   path: /follow-user/{id}
   defaults: { _controller: myMelomanBundle:Follow:follow }

@@ -5,9 +5,10 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
-            <link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet"/>
+            {#<link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet"/>#}
             <link href="{{ asset('assets/bootstrap/css/bootstrap-social.css') }}" type="text/css" rel="stylesheet"/>
             <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" type="text/css" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css?family=Bevan|Cabin" rel="stylesheet">
             <link href="{{ asset('assets/css/styles.css') }}" type="text/css" rel="stylesheet"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -15,7 +16,7 @@
     <body>
         <div>
             {#<h1>MELOMANIACS</h1>#}
-            <nav class="navbar navbar-default navbar-fixed-top">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,7 +27,6 @@
                         </button>
                         <a class="navbar-brand" href="{{ path('home') }}">
                             <span alt="Brand" class=" glyphicon glyphicon-volume-up"> </span>
-                            &nbsp; M
                         </a>
                     </div>
                     {% set user = app.session.get('user') %}
@@ -34,12 +34,6 @@
                     {% if user is not null %}
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
-                            <li>
-                                <a href="{{ path('user_list') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                                    &nbsp;
-                                    &nbsp;People
-                                </a>
-                            </li>
                             <li>
                                 <form action=" {{ path('user_search') }}" class="navbar-form navbar-left row">
                                     <div class="form-group col-xs-10">
@@ -50,6 +44,13 @@
                                     </button>
                                 </form>
                             </li>
+                            <li>
+                                <a href="{{ path('user_list') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                                    &nbsp;
+                                    &nbsp;People
+                                </a>
+                            </li>
+
                         </ul>
 
                             <ul class="nav navbar-nav navbar-right">
@@ -58,10 +59,14 @@
                                         <div class="avatar">
                                             <img src="{{ picture }}"/>
                                         </div>
-                                        Hello {{ app.session.get('name') }}
+
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Signed in as: <b>{{ app.session.get('name') }}</b></a href="#">
+                                        </li>
+                                        <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('user_profile') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                 &nbsp; My User Profile
                                             </a>
@@ -103,6 +108,7 @@
         {% block javascripts %}
             <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
             <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/js/general.js') }}"></script>
             <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
         {% endblock %}
     </body>

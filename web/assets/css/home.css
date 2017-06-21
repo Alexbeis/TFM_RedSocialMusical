@@ -83,4 +83,21 @@
     margin: 10px 0 0 0;
 }
 
+.like  {
+    font-size: 20px;
+    /*margin-top: -30px;*/
+}
 
+.like .btn-like:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.like .btn-dislike:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.like .active {
+    color: red;
+}

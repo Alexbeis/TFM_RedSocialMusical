@@ -1,4 +1,5 @@
 {% extends "base.html.twig" %}
+{% block title %}Meloman Home{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('assets/css/home.css') }}" type="text/css" rel="stylesheet"/>
@@ -9,6 +10,7 @@
         <div id="user-card" class="col-xs-12  box-default">
             <div class="avatar text-center">
                 {% set picture = app.session.get('picture') %}
+                {% set user = app.session.get('user') %}
                 <img src="{{ picture }}"/>
             </div>
             <div class="name">
@@ -43,7 +45,7 @@
                                 {{ publication.message }}
                             </div>
                             <div class="icons">
-                                {% if publication.user.id is defined and (app.session.get('user') == publication.user.id) %}
+                                {% if publication.user.id is defined and (user == publication.user.id) %}
                                     <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
                                         <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
@@ -51,19 +53,38 @@
                                 {% if publication.link is defined %}
                                     {#Aqui ire el iframe + link#}
                                     <a href="#" >
-                                        <span class="btn-spotify" data-id="{{ publication.id }}"><i class="fa fa-spotify"></i></span>
+                                        <span class="btn-spotify" data-id="{{ publication.id }}">
+
+                                            <i class="fa fa-spotify"></i>
+                                        </span>
                                     </a>
                                 {% endif %}
-                            </div>
 
+                                <div class="pull-right like">
+                                        <span class="
+                                        {% if user|liked(publication) %}
+                                            hidden
+                                        {% endif %}
+                                        btn-like"
+                                              data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
+                                            <i class="fa fa-thumbs-o-up"></i>
+                                        </span>
+                                        <span class="
+                                        {% if user|liked(publication) == false %}
+                                            hidden
+                                        {% endif %}
+
+                                        btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
+                                            <i class="fa fa-thumbs-o-up"></i>
+                                        </span>
+                                </div>
+                            </div>
                             <div class="clearfix"></div>
                             <hr>
                         </div>
                     </div>
-
-
                 {% else %}
-                    There ara no publications yet!!
+                    There are no publications yet!!
                 {% endfor %}
                 <div class="navigation">
                     {{ knp_pagination_render(pagination) }}
@@ -95,7 +116,7 @@
                     <input type="submit" class="btn btn-primary pull-right" value="Find">
                 </form>
                 <div class=>
-                    <iframe class="col-xs-12 " src="https://open.spotify.com/embed?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="500" {#frameborder="1"#} allowtransparency="true"></iframe>
+                    {#<iframe class="col-xs-12 " src="https://open.spotify.com/embed?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="500" #}{#frameborder="1"#}{# allowtransparency="true"></iframe>#}
                 </div>
             </div>
         </div>

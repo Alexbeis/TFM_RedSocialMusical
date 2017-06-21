@@ -65,6 +65,22 @@ services:
         publicationrepository: '@app.repository.publication'
         entityManager: '@doctrine.orm.entity_manager'
 
+    app.application.usescases.publication.like:
+      class: myDomain\UseCases\Like\LikePublicationUseCase
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+        likerepository: '@app.repository.likes'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.application.usescases.publication.dislike:
+      class: myDomain\UseCases\Like\DislikePublicationUseCase
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+        likerepository: '@app.repository.likes'
+        entityManager: '@doctrine.orm.entity_manager'
+
     app.application.usecases.publication.get:
       class: myDomain\UseCases\Publication\GetPublicationsUseCase
       arguments:
@@ -115,6 +131,12 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.following.metadata'
 
+    app.repository.likes:
+      class: myMelomanBundle\Repository\LikesRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.likes.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -140,11 +162,25 @@ services:
         factory_method: getRepository
         arguments: [ myDomain\Entity\Following ]
 
+    app.likes.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Likes ]
+
 #Twig Filters
     app.following.twig_extension:
         class: myMelomanBundle\TwigFilters\FollowingFilter
         arguments:
           userRepository: '@app.repository.user'
           followingRepository: '@app.repository.following'
+        tags:
+            - { name: twig.extension }
+
+    app.likes.twig_extension:
+        class: myMelomanBundle\TwigFilters\LikesFilter
+        arguments:
+          userRepository: '@app.repository.user'
+          followingRepository: '@app.repository.likes'
         tags:
             - { name: twig.extension }

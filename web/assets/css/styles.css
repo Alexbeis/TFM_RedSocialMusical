@@ -10,6 +10,13 @@
     /*height:100%;*/
 /*}*/
 
+body{
+    font-family: 'Cabin', sans-serif;
+}
+h1,h2,h3 {
+    font-family: 'Bevan', cursive;
+}
+
 /*HEADER NAV */
 
 .navbar-collapse .avatar {
@@ -25,4 +32,10 @@
 .navbar-collapse .avatar img {
     height: 100%;
     text-align: center;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    padding: 0;
+    width: 85%;
 }

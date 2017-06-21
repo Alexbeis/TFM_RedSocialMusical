@@ -57,5 +57,4 @@ class FollowingFilter extends \Twig_Extension
         return 'following_extension';
     }
 
-
 }
