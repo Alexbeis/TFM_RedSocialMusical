@@ -13,6 +13,7 @@ myDomain\Entity\Likes:
     manyToOne:
         publication:
             targetEntity: myDomain\Entity\Publication
+            nullable: true
             cascade: {  }
             fetch: LAZY
             mappedBy: null
@@ -20,9 +21,11 @@ myDomain\Entity\Likes:
             joinColumns:
                 publication:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
         user:
             targetEntity: myDomain\Entity\User
+            nullable: true
             cascade: {  }
             fetch: LAZY
             mappedBy: null
@@ -30,5 +33,6 @@ myDomain\Entity\Likes:
             joinColumns:
                 user:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
     lifecycleCallbacks: {  }

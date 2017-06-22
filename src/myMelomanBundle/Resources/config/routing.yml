@@ -38,6 +38,10 @@ create_publication:
   path: /create-publication/new
   defaults: { _controller: myMelomanBundle:Publication:createPublication }
 
+create_publication_from_spotify:
+  path: /create-publication-spotify/new
+  defaults: { _controller: myMelomanBundle:Publication:createPublicationFromSpotify }
+
 delete_publication:
   path: /delete-publication/{id}
   defaults: { _controller: myMelomanBundle:Publication:deletePublication }
@@ -57,4 +61,8 @@ follow_user:
 unfollow_user:
   path: /unfollow-user/{id}
   defaults: { _controller: myMelomanBundle:Follow:unfollow }
+
+spotify_search_song:
+  path: /spotify/search
+  defaults: { _controller: myMelomanBundle:Spotify:searchSong }
 

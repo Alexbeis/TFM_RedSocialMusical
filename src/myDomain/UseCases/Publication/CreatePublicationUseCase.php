@@ -34,7 +34,7 @@ class CreatePublicationUseCase
         $this->entityManager         = $entityManager;
     }
 
-    public function execute($userId, $message)
+    public function execute($userId, $message = null, $uri = null)
     {
         try{
             /**
@@ -43,10 +43,11 @@ class CreatePublicationUseCase
             $user = $this->userRepository->findOneBy(array('id'=>$userId));
 
             $publication = new Publication();
-            $publication->setMessage($message);
+            $publication->setMessage($message == null ? '' : $message);
             $publication->setCreatedAt(new \DateTime());
             $publication->setUser($user);
             $publication->setStatus(0);
+            $publication->setLink($uri == null ? '' : $uri);
             //\Doctrine\Common\Util\Debug::dump($publication);
             $this->publicationRepository->create($publication);
 

@@ -29,99 +29,44 @@
         <div id="timeline" class="col-xs-12 col-lg-6  box-default">
             <h1 class="box-header">Timeline</h1>
             <div class="box-content ">
-                {% for publication in pagination %}
-                    <div class="col-xs-12 publication-row">
-                        <div class=" avatar">
-                            <img src="{{ publication.user.image }}">
-                        </div>
-                        <div class="publication-row-content">
-                            <p>
-                                <a class="pub-name-link" href="#">
-                                    {{ publication.user.username }}
-                                </a>
-                                -
-                                <span class="pub-date">
-                                    <em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>
-                                </span>
-                            </p>
-                            <div class="pub-message">
-                                {{ publication.message }}
-                            </div>
-                            <div class="icons">
-                                {% if publication.user.id is defined and (user == publication.user.id) %}
-                                    <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
-                                        <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                    </a>
-                                {% endif %}
-                                {% if publication.link is defined %}
-                                    {#Aqui ire el iframe + link#}
-                                    <a href="#" >
-                                        <span class="btn-spotify" data-id="{{ publication.id }}">
-
-                                            <i class="fa fa-spotify"></i>
-                                        </span>
-                                    </a>
-                                {% endif %}
-
-                                <div class="pull-right like">
-                                        <span class="
-                                        {% if user|liked(publication) %}
-                                            hidden
-                                        {% endif %}
-                                        btn-like"
-                                              data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
-                                            <i class="fa fa-thumbs-o-up"></i>
-                                        </span>
-                                        <span class="
-                                        {% if user|liked(publication) == false %}
-                                            hidden
-                                        {% endif %}
-
-                                        btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
-                                            <i class="fa fa-thumbs-o-up"></i>
-                                        </span>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <hr>
-                        </div>
-                    </div>
-                {% else %}
-                    There are no publications yet!!
-                {% endfor %}
+                {{ include('homeView/publicationsTimeline.html.twig') }}
                 <div class="navigation">
                     {{ knp_pagination_render(pagination) }}
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-lg-5">
-            <div id="new-publication" class="col-xs-12 box-default ">
+
+            <div id="new-publication" class="col-xs-12 ">
+                <h1 class="box-header">
+                    <i class="fa fa-spotify"></i> Spotify
+                </h1>
+                <div class="row">
+                    <div class="spoti-content col-xs-11">
+                        {{ include('homeView/spotifyPlayer.html.twig') }}
+                    </div>
+                    <form class="col-xs-12" id="spotiForm" method="POST" action="">
+                        <label for="song">Song</label>
+                        <input name="song" id="song" type="text" class="form-control" placeholder="Song">
+                        <input type="button" class="btn btn-primary pull-left" value="Find" onclick="SpotifyRequest.search()">
+                        <input type="button" id="share-button" class="btn btn-primary pull-right" value="Share" onclick="SpotifyRequest.share(this)">
+                    </form>
+                </div>
+            </div>
+            <div id="new-publication" class="col-xs-12">
                 <h1 class="box-header">
                     Create Publication
                 </h1>
                 <form method="POST" action="{{ path('create_publication') }}">
                     <label for="message">Message</label>
-                    <textarea name="message" id="message" class="form-control" rows="3"></textarea>
+                    <textarea name="message" id="message" class="form-control" rows="10"></textarea>
                     <input type="submit" class="btn btn-primary pull-right" value="Share">
                 </form>
-
             </div>
 
-            <div id="new-publication" class="col-xs-12 box-default ">
-                <h1 class="box-header">
-                    Spotify
-                </h1>
-                <form method="POST" action="">
-                    <label for="artist">Artist</label>
-                    <input name="artist" id="artist" type="text" class="form-control" placeholder="Artist">
-                    <label for="song">Song</label>
-                    <input name="song" id="song" type="text" class="form-control" placeholder="Song">
-                    <input type="submit" class="btn btn-primary pull-right" value="Find">
-                </form>
-                <div class=>
-                    {#<iframe class="col-xs-12 " src="https://open.spotify.com/embed?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="500" #}{#frameborder="1"#}{# allowtransparency="true"></iframe>#}
-                </div>
-            </div>
+            {#<div class="spoti-content col-lg-12 ">#}
+                {#{{ include('homeView/spotifyPlayer.html.twig') }}#}
+            {#</div>#}
         </div>
 
     </div>
@@ -129,5 +74,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('assets/js/spotify.js') }}"></script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
+    {#<script src="{{ asset('assets/js/spotify.js') }}"></script>#}
 {% endblock %}

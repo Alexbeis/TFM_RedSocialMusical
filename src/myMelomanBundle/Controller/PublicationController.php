@@ -12,16 +12,31 @@ class PublicationController extends Controller
     public function createPublicationAction(Request $request)
     {
         $message = $request->request->get('message');
-
         $userid = $request->getSession()->get('user');
-        $result = $this->get('app.application.usescases.publication.create')->execute($userid, $message);
-        //$publications = $this->get('app.applicarion.usecases.publication.get')->execute($userid, $request);
+        $result = $this->get('app.application.usescases.publication.create')->execute($userid, $message, null);
 
         if (!$result) {
-            //TODO:
+
         }
 
         return $this->redirectToRoute('home');
+
+    }
+
+    public function createPublicationFromSpotifyAction(Request $request)
+    {
+        $uri =  json_decode($request->getContent(), true);
+        $userid = $request->getSession()->get('user');
+        $result = $this->get('app.application.usescases.publication.create')->execute($userid, null, $uri['uri']);
+
+        if (!$result) {
+
+        }
+        return new JsonResponse(
+            array(
+                'url' => $this->generateUrl('home')
+            )
+        );
 
     }
 

@@ -116,6 +116,13 @@ services:
         followingRepository: '@app.repository.following'
         userRepository: '@app.repository.user'
 
+    app.application.usecases.spotify:
+      class: myDomain\UseCases\Spotify\SpotifyUseCase
+      arguments:
+        spotify_client_id: %spotify_client_id%
+        spotify_secret_id: %spotify_secret_id%
+
+
 
 #repositories
     app.repository.user:
