@@ -13,8 +13,6 @@ var SpotifyRequest = (function () {
         },
 
         share: function(e) {
-            // Pillar uri
-            //e.preventDefault();
             var share = document.getElementById('share-button'),
                 shareLen = share.parentNode.parentNode.childNodes.length;
 
@@ -27,7 +25,6 @@ var SpotifyRequest = (function () {
                     }
                 }
             }
-            console.log(uri);
             var data = {uri: uri};
             this.createPublicationRequest(method, createUrl, data);
         },
@@ -37,7 +34,6 @@ var SpotifyRequest = (function () {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
                     // Pass to Pure javascript
                     $('.spoti-content').html(JSON.parse(xhr.responseText).view);
 
@@ -51,7 +47,7 @@ var SpotifyRequest = (function () {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     //console.log(xhr.responseText);
-                    //location.reload();
+                    location.reload();
                 }
             };
             xhr.open(method, url, false);
