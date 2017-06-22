@@ -85,7 +85,7 @@ class Publication
     /**
      * @return string
      */
-    public function getLink(): string
+    public function getLink()
     {
         return $this->link;
     }

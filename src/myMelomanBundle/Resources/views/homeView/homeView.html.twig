@@ -36,17 +36,6 @@
             </div>
         </div>
         <div class="col-xs-12 col-lg-5">
-            <div id="new-publication" class="col-xs-12 box-default ">
-                <h1 class="box-header">
-                    Create Publication
-                </h1>
-                <form method="POST" action="{{ path('create_publication') }}">
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" class="form-control" rows="10"></textarea>
-                    <input type="submit" class="btn btn-primary pull-right" value="Share">
-                </form>
-
-            </div>
 
             <div id="new-publication" class="col-xs-12 ">
                 <h1 class="box-header">
@@ -62,11 +51,19 @@
                         <input type="button" class="btn btn-primary pull-left" value="Find" onclick="SpotifyRequest.search()">
                         <input type="button" id="share-button" class="btn btn-primary pull-right" value="Share" onclick="SpotifyRequest.share(this)">
                     </form>
-
                 </div>
-
-
             </div>
+            <div id="new-publication" class="col-xs-12">
+                <h1 class="box-header">
+                    Create Publication
+                </h1>
+                <form method="POST" action="{{ path('create_publication') }}">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" class="form-control" rows="10"></textarea>
+                    <input type="submit" class="btn btn-primary pull-right" value="Share">
+                </form>
+            </div>
+
             {#<div class="spoti-content col-lg-12 ">#}
                 {#{{ include('homeView/spotifyPlayer.html.twig') }}#}
             {#</div>#}
