@@ -1,0 +1,54 @@
+{% for publication in pagination %}
+    <div class="col-xs-12 publication-row">
+        <div class=" avatar">
+            <img src="{{ publication.user.image }}">
+        </div>
+        <div class="publication-row-content">
+            <p>
+                <a class="pub-name-link" href="#">
+                    {{ publication.user.username }}
+                </a>
+                -
+                <span class="pub-date">
+                                    <em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>
+                                </span>
+            </p>
+            <div class="pub-message">
+                {{ publication.message }}
+                {% if publication.link is defined and publication.link is not null and publication.link is not empty%}
+                    {% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}
+                 {% endif %}
+            </div>
+            <div class="icons">
+                {% if publication.user.id is defined and (user == publication.user.id) %}
+                    <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
+                        <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                {% endif %}
+
+                <div class="pull-right like">
+                    <span class="
+                    {% if user|liked(publication) %}
+                        hidden
+                    {% endif %}
+                    btn-like"
+                          data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
+                        <i class="fa fa-thumbs-o-up"></i>
+                    </span>
+                    <span class="
+                    {% if user|liked(publication) == false %}
+                        hidden
+                    {% endif %}
+
+                    btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
+                        <i class="fa fa-thumbs-o-up"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+        </div>
+    </div>
+{% else %}
+    There are no publications yet!!
+{% endfor %}
