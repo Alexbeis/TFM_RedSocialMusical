@@ -18,7 +18,6 @@ class SpotifyUseCase
         $this->spotifyWebApi   = new SpotifyWebAPI\SpotifyWebAPI();
         $this->spotifySession  = new SpotifyWebAPI\Session($this->spotifyClientId,$this->spotifySecretId);
 
-
         $this->spotifySession->requestCredentialsToken();
         $accessToken = $this->spotifySession->getAccessToken();
 
@@ -28,10 +27,12 @@ class SpotifyUseCase
 
     public function searchSong($data)
     {
+        $song   = $data['song'];
+        $result =  (array)$this->spotifyWebApi->search($song, array("track"), array('limit'=>5, 'offset'=>0));
 
-        $result =  (array)$this->spotifyWebApi->search($data['song'],array("track"),array('limit'=>5,'offset'=>0));
-        //  $uri = $result['tracks']->items[0]->uri;
-        return $result;
+        $uri    = $result['tracks']->items[0]->uri;
+
+        return $uri;
 
     }
 

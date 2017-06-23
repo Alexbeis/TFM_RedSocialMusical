@@ -47,7 +47,7 @@
                     </div>
                     <form class="col-xs-12" id="spotiForm" method="POST" action="">
                         <label for="song">Song</label>
-                        <input name="song" id="song" type="text" class="form-control" placeholder="Song">
+                        <input name="song" id="song" type="text" class="form-control" placeholder="Song" required>
                         <input type="button" class="btn btn-primary pull-left" value="Find" onclick="SpotifyRequest.search()">
                         <input type="button" id="share-button" class="btn btn-primary pull-right" value="Share" onclick="SpotifyRequest.share(this)">
                     </form>
