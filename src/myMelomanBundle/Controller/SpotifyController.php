@@ -12,19 +12,34 @@ class SpotifyController extends Controller
     {
         $data = json_decode($request->getContent(), true);
 
-        $spotifyUseCase = $this->get('app.application.usecases.spotify')->searchSong($data);
+        $spotifyUseCase = $this->get('app.application.usecases.spotify.cache')->searchSong($data);
 
-        $uri = $spotifyUseCase['tracks']->items[0]->uri;
+        if (!$spotifyUseCase) {
 
+            $notFound = $this->renderView(
+                'homeView/notFound.html.twig',
+                array(
+                    'data' => $data['song']
+                )
+            );
+
+            return new JsonResponse(
+                array(
+                    'done' => false,
+                    'errorView' => $notFound
+                )
+            );
+        }
         $view = $this->renderView(
             'homeView/spotifyPlayer.html.twig',
              array(
-                 'uri' => $uri
+                 'uri' => $spotifyUseCase
              )
         );
 
         return new JsonResponse(
             array(
+                'done' => true,
                 'view' => $view
             )
         );

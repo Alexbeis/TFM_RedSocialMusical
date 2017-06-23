@@ -7,6 +7,7 @@ var SpotifyRequest = (function () {
     return {
         search: function (e) {
              var song = document.getElementById('song').value;
+             if (song == '') return;
              var data = {song :song};
              this.spotifyRequest(method , searchUrl, data);
 
@@ -34,8 +35,15 @@ var SpotifyRequest = (function () {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
                     // Pass to Pure javascript
-                    $('.spoti-content').html(JSON.parse(xhr.responseText).view);
+                    console.log(response);
+                    if (response.done == true) {
+                        $('.spoti-content').html(response.view);
+                    } else {
+                        $('.spoti-content').html(response.errorView);
+                    }
+
 
                 }
             };
