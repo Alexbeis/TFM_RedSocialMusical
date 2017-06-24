@@ -35,8 +35,11 @@ services:
       class: myDomain\UseCases\User\UpdateUserUseCase
       arguments:
         userrepository: '@app.repository.user'
+        musicalTasteRepo: '@app.repository.musicaltaste'
         entityManager: '@doctrine.orm.entity_manager'
-        dispatcher: '@event_dispatcher'
+
+    app.application.usecase.userprofile.get.musical.tastes:
+        class: myDomain\UseCases\UserProfile\GetMusicalTastes
 
     app.application.usescases.user.get:
       class: myDomain\UseCases\User\GetUsers

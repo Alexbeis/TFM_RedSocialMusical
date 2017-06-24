@@ -5,6 +5,10 @@
 {% endblock %}
 {% block content %}
     <div class="col-xs-8 col-xs-offset-2 form-style">
+        {% set userTastes = {} %}
+        {% for u in userProfile.musicalTaste.getValues %}
+            {%  set userTastes = userTastes|merge([u.name]) %}
+        {% endfor %}
         <form action="{{ path('create_userProfile') }}" method="post" class="row box-form">
                 <div class="text-center">
 
@@ -26,24 +30,17 @@
                 <div class="form-group row">
                     <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
                     <ul>
-                        {{ dump(userProfile.musicalTaste.getValues) }}
                         {% for key, taste in tastes %}
 
-                            <li><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {#{{ t.name == taste ? 'checked': ''}}#}/>
-                                <label class="check-label" for="{{ 'cd' ~ key }}" ><img src="http://lorempixel.com/100/100" /></label>
+                            <li><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
+                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h3>{{ taste }}</h3></label>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="form-group row">
-                    <label for="artist" class="col-2 col-form-label">Favourite Artists</label>
-                    <div class="col-10">
-                        <input name="artist" class="form-control" type="text" value="" id="artist">
-                    </div>
-                </div>
                 <div class="button-section row">
                     <button type="submit" class="btn btn-primary col-xs-3">Submit</button>
-                    <button class="btn btn-primary"><a  href="{{ path('home') }}">Go Home</a></button>
+                    {#<button class="btn btn-primary">#}<a class="btn btn-primary" href="{{ path('home') }}">Go Home</a>{#</button>#}
                     <div class="col-xs-4 col-xs-offset-3">
                         <span class="privacy-policy ">
                         <input type="checkbox" class="form-check-input " name="policy" required>&nbsp;You agree to our Terms and Policy.
@@ -56,5 +53,4 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    {#<script src="{{ asset('assets/js/userProfile.js') }}"></script>#}
 {% endblock %}

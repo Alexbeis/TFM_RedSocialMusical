@@ -38,6 +38,7 @@ myDomain\Entity\User:
             targetEntity: myDomain\Entity\MusicalTaste
             joinTable:
               name: musicalTaste
+              onDelete: "SET NULL"
               joinColumns:
                 user:
                   referencedColumnName: id
@@ -46,17 +47,17 @@ myDomain\Entity\User:
                   referencedColumnName: id
             cascade:
               - persist
-        favouriteArtist:
-            targetEntity: myDomain\Entity\FavouriteArtist
-            joinTable:
-              name: favouriteArtist
-              joinColumns:
-                user:
-                  referencedColumnName: id
-              inverseJoinColumns:
-                favouriteArtist:
-                  referencedColumnName: id
-            cascade:
-              - persist
+#        favouriteArtist:
+#            targetEntity: myDomain\Entity\FavouriteArtist
+#            joinTable:
+#              name: favouriteArtist
+#              joinColumns:
+#                user:
+#                  referencedColumnName: id
+#              inverseJoinColumns:
+#                favouriteArtist:
+#                  referencedColumnName: id
+#            cascade:
+#              - persist
 
     lifecycleCallbacks: {  }
