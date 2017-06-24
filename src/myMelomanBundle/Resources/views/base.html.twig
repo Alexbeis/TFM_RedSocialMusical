@@ -5,10 +5,9 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
-            {#<link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet"/>#}
             <link href="{{ asset('assets/bootstrap/css/bootstrap-social.css') }}" type="text/css" rel="stylesheet"/>
             <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" type="text/css" rel="stylesheet"/>
-            <link href="https://fonts.googleapis.com/css?family=Bevan|Cabin" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Bevan|Cabin|Lobster" rel="stylesheet">
             <link href="{{ asset('assets/css/styles.css') }}" type="text/css" rel="stylesheet"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -46,7 +45,6 @@
                             </li>
                             <li>
                                 <a href="{{ path('user_list') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                                    &nbsp;
                                     &nbsp;People
                                 </a>
                             </li>
@@ -97,12 +95,33 @@
         <section id="content" {#class="container"#}>
             {% block content %}{% endblock %}
         </section>
-        <footer class="col-lg-12">
-            <hr/>
-            <div class="container">
-                <div class="text-muted col-xs-4">Melomaniacs - Alex Albàs</div>
-                <div class="text-muted col-xs-4">Web Development</div>
+        {#<footer class="col-lg-12">#}
+            {#<hr/>#}
+            {#<div class="container">#}
+                {#<div class="text-muted col-xs-4">Melomaniacs - Alex Albàs</div>#}
+                {#<div class="text-muted col-xs-4">Web Development</div>#}
+            {#</div>#}
+        {#</footer>#}
+        <footer class="row text-center">
+            <div class="col-xs-4">
+                <p>Melomaniacs - Alex Albàs</p>
+                <p >Web Development</p>
             </div>
+
+            <div class="col-xs-4">
+                <ul class="social">
+                    <li>Connect with us on</li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-4">
+                <p><small>Copyright &copy; 2017. All rights reserved. <br>
+                        Created by <a href="http://beisWeb.com">BeisWebDevelopment</a></small></p>
+            </div>
+
         </footer>
 
         {% block javascripts %}

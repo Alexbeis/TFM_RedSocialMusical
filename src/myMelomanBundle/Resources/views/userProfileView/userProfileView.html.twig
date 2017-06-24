@@ -29,11 +29,11 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tastes" class="col-2 col-form-label">Musical Tastes</label>
+                    <label for="tastes" class=" col-form-label">Musical Tastes</label>
                     <ul>
                         {% for key, taste in tastes %}
 
-                            <li><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
+                            <li class="list-taste col-xs-2 "><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
                                 <label class="check-label" for="{{ 'cd' ~ key }}" ><h3>{{ taste }}</h3></label>
                             </li>
                         {% endfor %}

@@ -1,16 +1,36 @@
+#content {
+    width: 100%;
+    padding: 50px 10px 60px 10px;
+    background-image: url("https://source.unsplash.com/featured/?music");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
 .container{
     margin-top: 50px;
+    /*margin-bottom: 50px;*/
     padding: 0;
-    width: 90%;
+    /*width: 90%;*/
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+
 }
 .box {
     border: 1px solid black;
 }
 #user-card {
-    margin-left: 10px;
+    margin-left: 50px;
     padding:10px;
     margin-bottom: 20px;
-    border-bottom: 1px solid black;
 }
 #user-card .avatar,
 .publication-row .avatar{
@@ -28,7 +48,8 @@
 
 }
 #timeline{
-    margin-right: 20px;
+    /*margin-right: 50px;*/
+    margin-left: 55px;
     min-height: 750px;
     position:relative;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
