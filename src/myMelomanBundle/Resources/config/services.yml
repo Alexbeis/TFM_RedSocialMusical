@@ -9,17 +9,14 @@ services:
       arguments:
         userrepository: '@app.repository.user'
         entityManager: '@doctrine.orm.entity_manager'
-        dispatcher: '@event_dispatcher'
 
     app.application.usecases.login.login:
       class: myDomain\UseCases\Login\LoginUseCase
       arguments:
         createUser: '@app.application.usecases.user.create'
         userrepository: '@app.repository.user'
-        container: '@service_container'
         userProfilerepository: '@app.repository.user'
         entityManager: '@doctrine.orm.entity_manager'
-        dispatcher: '@event_dispatcher'
         google_client_id: %google_client_id%
         google_secret_id: %google_secret_id%
         google_redirect_uri: %google_redirect_uri%
@@ -221,5 +218,12 @@ services:
         arguments:
           following: '@app.application.usecases.get.users.following'
           followers: '@app.application.usecases.get.users.followers'
+        tags:
+            - { name: twig.extension }
+
+    app.user.getOwnPublications_extension:
+        class: myMelomanBundle\TwigFilters\GetOwnPublicationsFilter
+        arguments:
+          publicationRepository: '@app.repository.publication'
         tags:
             - { name: twig.extension }

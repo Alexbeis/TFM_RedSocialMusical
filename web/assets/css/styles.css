@@ -70,5 +70,11 @@ footer a:hover {
 
 .social  {
     list-style:none;
+}
+.social li {
     display: inline;
+}
+
+.fa {
+   font-size: 20px;
 }

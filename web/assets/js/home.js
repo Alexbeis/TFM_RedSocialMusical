@@ -22,9 +22,7 @@ var PublicationAjax = (function () {
         },
         like: function(e) {
             var id =  e.getAttribute('data-id'),
-                url = likeUrl + parseInt(id),
-                xhr = new XMLHttpRequest();
-
+                url = likeUrl + parseInt(id);
             e.classList.toggle('hidden');
 
             for (var i =0; i < e.parentNode.childNodes.length; i++) {
@@ -33,26 +31,14 @@ var PublicationAjax = (function () {
                     e.parentNode.childNodes[i].classList.remove('hidden');
                 }
             }
-            console.log(e.childNodes);
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
-                } else {
-                    console.log(xhr.status);
-                }
-            }
-            xhr.open("GET", url, false);
-            xhr.send();
-
+            this.Request("GET", url);
         },
 
         dislike: function(e) {
 
             var id =  e.getAttribute('data-id'),
-                url = dislikeUrl + parseInt(id),
-                xhr = new XMLHttpRequest();
-            console.log(id);
+                url = dislikeUrl + parseInt(id);
+
             e.classList.toggle('hidden');
 
             for (var i =0; i < e.parentNode.childNodes.length; i++) {
@@ -60,14 +46,16 @@ var PublicationAjax = (function () {
                     e.parentNode.childNodes[i].classList.remove('hidden');
                 }
             }
-            xhr.onreadystatechange = function() {
+            this.Request("GET", url);
+        },
+        Request: function (method, url) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
-                } else {
-                    console.log(xhr.status);
                 }
-            }
-            xhr.open("GET", url, false);
+            };
+            xhr.open(method, url, false);
             xhr.send();
         }
     }

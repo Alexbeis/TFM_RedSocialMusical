@@ -10,7 +10,6 @@ var SpotifyRequest = (function () {
              if (song == '') return;
              var data = {song :song};
              this.spotifyRequest(method , searchUrl, data);
-
         },
 
         share: function(e) {
@@ -37,14 +36,11 @@ var SpotifyRequest = (function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
                     // Pass to Pure javascript
-                    console.log(response);
                     if (response.done == true) {
                         $('.spoti-content').html(response.view);
                     } else {
                         $('.spoti-content').html(response.errorView);
                     }
-
-
                 }
             };
             xhr.open(method, url, false);
@@ -54,15 +50,12 @@ var SpotifyRequest = (function () {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    //console.log(xhr.responseText);
                     location.reload();
                 }
             };
             xhr.open(method, url, false);
             xhr.send(JSON.stringify(data));
-
         }
-
     }
 }());
 
