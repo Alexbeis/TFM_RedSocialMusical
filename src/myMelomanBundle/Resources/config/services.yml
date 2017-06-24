@@ -35,8 +35,16 @@ services:
       class: myDomain\UseCases\User\UpdateUserUseCase
       arguments:
         userrepository: '@app.repository.user'
+        musicalTasteRepo: '@app.repository.musicaltaste'
         entityManager: '@doctrine.orm.entity_manager'
-        dispatcher: '@event_dispatcher'
+
+    app.application.usecases.userprofile.get.musical.tastes:
+        class: myDomain\UseCases\UserProfile\GetMusicalTastes
+
+    app.application.usecases.get.checked.tastes:
+        class: myDomain\UseCases\UserProfile\GetCheckedTastes
+        arguments:
+          getTastes: '@app.application.usecases.userprofile.get.musical.tastes'
 
     app.application.usescases.user.get:
       class: myDomain\UseCases\User\GetUsers

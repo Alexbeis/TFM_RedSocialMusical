@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use myDomain\DTO\UserProfileDTO;
 use myDomain\Entity\MusicalTaste;
 use myDomain\Entity\User;
+use myDomain\MusicalTasteInterface;
 use myDomain\UserRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -17,27 +18,30 @@ class UpdateUserUseCase
      * @var Registry
      */
     private $userRepository;
+    private $musicalTasteRepository;
     private $entityManager;
-    private $dispatcher;
+
 
     public function __construct(UserRepositoryInterface $userRepository,
-                                EntityManagerInterface $entityManager,
-                                EventDispatcherInterface $dispatcher)
+                                MusicalTasteInterface $musicalTasteRepository,
+                                EntityManagerInterface $entityManager
+                               )
     {
-        $this->userRepository = $userRepository;
-        $this->entityManager  = $entityManager;
-        $this->dispatcher     = $dispatcher;
+        $this->userRepository           = $userRepository;
+        $this->musicalTasteRepository   = $musicalTasteRepository;
+        $this->entityManager            = $entityManager;
+
     }
 
-    public function execute($userId, UserProfileDTO $userProfile)
+    public function execute($userId, UserProfileDTO $userProfileDTO)
     {
         /**
          * @var User $user
          */
         $user = $this->userRepository->findOneBy(array('id' => $userId));
-        $user->setAboutMe($userProfile->getAboutMe());
-        $user->setBirthDate($userProfile->getBirth());
-        $user->setMusicalTaste($this->getCurrentTastes($user, $userProfile->getTastes()));
+        $user->setAboutMe($userProfileDTO->getAboutMe());
+        $user->setBirthDate($userProfileDTO->getBirth());
+        $user->setMusicalTaste($this->getCurrentTastes($user, $userProfileDTO->getTastes()));
         $this->userRepository->update($user);
         $this->entityManager->flush($user);
 
@@ -52,12 +56,14 @@ class UpdateUserUseCase
         foreach ($rawTastes as $rawTaste) {
             $taste =  new MusicalTaste();
             $taste->setName($rawTaste);
-            if (in_array($taste,$user->getMusicalTaste())) continue;
+            if (in_array($taste,$user->getMusicalTaste()->getValues())) {
+                $this->musicalTasteRepository->remove($taste);
+            }
 
-            $this->entityManager->persist($taste);
+            $this->musicalTasteRepository->create($taste);
             $tastes[] = $taste;
         }
-        $this->entityManager->flush();
+
         return $tastes;
     }
 

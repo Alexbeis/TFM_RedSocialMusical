@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $userId = $request->getSession()->get('user');
         $user   = $this->get('app.application.usecases.userprofile.show')->execute($userId);
-        $tastes = $this->getTastes();
+        $tastes = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
 
         if ($user) {
             return $this->render('userProfileView/userProfileView.html.twig',
@@ -57,7 +57,7 @@ class UserController extends Controller
         $user           = $request->request->get('user');
         $aboutMe        = $request->request->get('aboutme');
         $birth          = $request->request->get('birth');
-        $currentTastes  = $this->getCheckedTastes($request);
+        $currentTastes  = $this->get('app.application.usecases.get.checked.tastes')->execute($request);
 
         $userProfileDTO = new UserProfileDTO($user, $aboutMe, $birth , $currentTastes);
 
@@ -92,25 +92,4 @@ class UserController extends Controller
         );
 
     }
-
-    private function getCheckedTastes(Request $request)
-    {
-        $tastes = $this->getTastes();
-        $currentTastes = [];
-
-        foreach ($tastes as $key => $taste) {
-
-            if ($request->request->get($taste) == 'on') {
-                $currentTastes[$key] =  $taste;
-            }
-        }
-        return $currentTastes;
-    }
-
-    private function getTastes()
-    {
-        return $tastes = [ '1'=>'rock', '2'=>'funk', '3'=>'techno', '4'=>'reggae', '5'=>'blues', '6'=>'mestizaje', '7'=>'edm', '8'=> 'drum&bass', '9'=>'hardrock', '10'=>'metal'];
-
-    }
-
 }

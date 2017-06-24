@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository implements userRepositoryInterface
 
     public function update($user)
     {
-       $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->persist($user);
     }
 
     public function remove($user)
