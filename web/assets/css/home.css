@@ -22,6 +22,8 @@
     float: left;
     margin-right: 12px;
     margin-top: 20px;
+    border: 2px #efefef solid;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2), 1px 1px 4px rgba(0,0,0,0.3);
 
 
 }
