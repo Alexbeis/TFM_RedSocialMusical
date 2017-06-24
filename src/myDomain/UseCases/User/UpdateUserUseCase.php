@@ -33,15 +33,15 @@ class UpdateUserUseCase
 
     }
 
-    public function execute($userId, UserProfileDTO $userProfile)
+    public function execute($userId, UserProfileDTO $userProfileDTO)
     {
         /**
          * @var User $user
          */
         $user = $this->userRepository->findOneBy(array('id' => $userId));
-        $user->setAboutMe($userProfile->getAboutMe());
-        $user->setBirthDate($userProfile->getBirth());
-        $user->setMusicalTaste($this->getCurrentTastes($user, $userProfile->getTastes()));
+        $user->setAboutMe($userProfileDTO->getAboutMe());
+        $user->setBirthDate($userProfileDTO->getBirth());
+        $user->setMusicalTaste($this->getCurrentTastes($user, $userProfileDTO->getTastes()));
         $this->userRepository->update($user);
         $this->entityManager->flush($user);
 
@@ -63,7 +63,7 @@ class UpdateUserUseCase
             $this->musicalTasteRepository->create($taste);
             $tastes[] = $taste;
         }
-//        $this->entityManager->flush();
+
         return $tastes;
     }
 
