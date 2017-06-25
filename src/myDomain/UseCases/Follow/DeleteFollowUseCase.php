@@ -54,7 +54,6 @@ class DeleteFollowUseCase
                     'friend'=> $friend
                 )
             );
-            //\Doctrine\Common\Util\Debug::dump($following);
 
             if ($following) {
                 $this->followingRepository->delete($following);

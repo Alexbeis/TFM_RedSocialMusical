@@ -32,16 +32,15 @@
                     <label for="tastes" class=" col-form-label">Musical Tastes</label>
                     <ul>
                         {% for key, taste in tastes %}
-
                             <li class="list-taste col-xs-2 "><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
-                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h3>{{ taste }}</h3></label>
+                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h4>{{ taste }}</h4></label>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="button-section row">
                     <button type="submit" class="btn btn-primary col-xs-3">Submit</button>
-                    {#<button class="btn btn-primary">#}<a class="btn btn-primary" href="{{ path('home') }}">Go Home</a>{#</button>#}
+                   <a class="btn btn-primary" href="{{ path('home') }}">Go Home</a>
                     <div class="col-xs-4 col-xs-offset-3">
                         <span class="privacy-policy ">
                         <input type="checkbox" class="form-check-input " name="policy" required>&nbsp;You agree to our Terms and Policy.

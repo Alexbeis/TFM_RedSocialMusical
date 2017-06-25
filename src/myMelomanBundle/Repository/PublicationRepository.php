@@ -34,8 +34,7 @@ class PublicationRepository extends EntityRepository implements PublicationRepos
             )
             ->orderBy('p.id', 'DESC')
             ->getQuery();
-//        $result = $qb->getResult();
-
+        
         return $query;
     }
 

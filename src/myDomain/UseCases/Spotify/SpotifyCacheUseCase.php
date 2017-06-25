@@ -33,7 +33,6 @@ class SpotifyCacheUseCase
             }
 
             $uri = $this->spotifyUseCase->searchSong($data);
-//            $uri = $data['tracks']->items[0]->uri;
             $this->client->set($song, $uri);
 
             return $uri;
@@ -41,6 +40,5 @@ class SpotifyCacheUseCase
         } catch (\Exception $e) {
             return false;
         }
-
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace myMelomanBundle\Repository;
-
 
 use Doctrine\ORM\EntityRepository;
 use myDomain\FollowingRepositoryInterface;
@@ -18,6 +16,4 @@ class FollowingRepository extends EntityRepository implements FollowingRepositor
     {
         $this->getEntityManager()->remove($following);
     }
-
-
 }
