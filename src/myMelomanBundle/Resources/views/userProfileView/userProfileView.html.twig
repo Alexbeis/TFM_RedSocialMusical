@@ -33,7 +33,7 @@
                     <ul>
                         {% for key, taste in tastes %}
                             <li class="list-taste col-xs-2 "><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
-                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h3>{{ taste }}</h3></label>
+                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h4>{{ taste }}</h4></label>
                             </li>
                         {% endfor %}
                     </ul>
