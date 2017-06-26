@@ -88,7 +88,7 @@ class LoginUseCase
                 } else {
                     $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail(), $loginDTO->getPicture());
                     if ($newUser) {
-                        $loginDTO->setStatusCode('user_profile');
+                        $loginDTO->setStatusCode('user_profile_edit');
                         $loginDTO->setUserId($newUser->getId());
 
                         return $loginDTO;

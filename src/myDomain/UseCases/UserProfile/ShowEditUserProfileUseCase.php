@@ -8,7 +8,7 @@ use myDomain\Entity\UserProfile;
 use myDomain\UserProfileRepositoryInterface;
 use myDomain\UserRepositoryInterface;
 
-class ShowUserProfileUseCase
+class ShowEditUserProfileUseCase
 {
 
     private $userRepository;
@@ -30,7 +30,6 @@ class ShowUserProfileUseCase
             return $user;
         }
         else return false;
-
 
     }
 

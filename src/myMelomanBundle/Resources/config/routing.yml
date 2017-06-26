@@ -17,9 +17,13 @@ logout:
   path: /logout
   defaults: { _controller: myMelomanBundle:Login:logout }
 
-user_profile:
-  path: /user-profile
-  defaults: { _controller: myMelomanBundle:User:userProfile }
+user_profile_edit:
+  path: /user-profile/edit
+  defaults: { _controller: myMelomanBundle:User:userEditProfile }
+
+user_profile_page:
+  path: /user-profile/show
+  defaults: { _controller: myMelomanBundle:User:userProfilePage }
 
 user_list:
   path: /user-list
