@@ -8,13 +8,14 @@
     <div class="col-xs-8 col-xs-offset-2 form-style">
         {% set userTastes = {} %}
         {% for u in userProfile.musicalTaste.getValues %}
+            {#Creo array només amb gustos musicals de l'usuari#}
             {%  set userTastes = userTastes|merge([u.name]) %}
         {% endfor %}
         <form action="{{ path('create_userProfile') }}" method="post" class="row box-form">
                 <div class="text-center">
 
-                    <img class="image" src="{{ app.session.get('picture') }}" alt="">
-                    <h2 class="text-center"><span>Hey, {{ app.session.get('name') }} fill your profile :)</span></h2>
+                    <img class="image" src="{{ userProfile.image }}" alt="">
+                    <h2 class="text-center"><span>Hey, {{ userProfile.username}} fill your profile :)</span></h2>
                 </div>
                 <input name="user" type="hidden" value="{{ app.session.get('user') }}">
                 <input name="picture" type="hidden" value="{{ app.session.get('picture') }}">

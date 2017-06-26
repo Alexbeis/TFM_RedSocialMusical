@@ -23,10 +23,16 @@ services:
         google_email_scope: %google_email_scope%
         google_profile_scope: %google_profile_scope%
 
-    app.application.usecases.userprofile.show:
-      class: myDomain\UseCases\UserProfile\ShowUserProfileUseCase
+    app.application.usecases.edit.userprofile.show:
+      class: myDomain\UseCases\UserProfile\ShowEditUserProfileUseCase
       arguments:
         userrepository: '@app.repository.user'
+
+    app.application.usecases.page.userprofile.show:
+      class: myDomain\UseCases\UserProfile\ShowProfilePageUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        publicationrepository: '@app.repository.publication'
 
     app.application.usescases.user.update:
       class: myDomain\UseCases\User\UpdateUserUseCase

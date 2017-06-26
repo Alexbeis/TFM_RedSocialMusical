@@ -5,7 +5,7 @@
         </div>
         <div class="publication-row-content">
             <p>
-                <a class="pub-name-link" href="#">
+                <a class="pub-name-link" href="{{ path('user_profile_page', {'id': publication.user.id}) }}">
                     {{ publication.user.username }}
                 </a>
                 -

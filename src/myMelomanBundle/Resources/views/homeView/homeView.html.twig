@@ -14,7 +14,7 @@
                 <img src="{{ picture }}"/>
             </div>
             <div class="name">
-                <a href="#">{{ app.session.get('name') }}</a>
+                <a href="{{ path('user_profile_page', {'id': user}) }}">{{ app.session.get('name') }}</a>
                 <div class="clearfix"></div>
                 <span class="role">
                         Meloman
