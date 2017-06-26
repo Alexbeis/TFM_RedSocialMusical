@@ -11,7 +11,7 @@
             {#Creo array només amb gustos musicals de l'usuari#}
             {%  set userTastes = userTastes|merge([u.name]) %}
         {% endfor %}
-        <div class="text-center card">
+        <div class="text-center">
             <img class="image" src="{{ userProfile.image }}" alt="">
             <div class="publication-row-content container-fluid">
                 <h2 class="text-center"><span>Welcome to {{ userProfile.username}} 's Profile :)</span></h2>
