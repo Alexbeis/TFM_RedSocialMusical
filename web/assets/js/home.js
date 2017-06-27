@@ -26,7 +26,6 @@ var PublicationAjax = (function () {
             e.classList.toggle('hidden');
 
             for (var i =0; i < e.parentNode.childNodes.length; i++) {
-                console.log(e.parentNode.childNodes[i].classList);
                 if(e.parentNode.childNodes[i].classList != undefined && e.parentNode.childNodes[i].classList.contains('btn-dislike')) {
                     e.parentNode.childNodes[i].classList.remove('hidden');
                 }

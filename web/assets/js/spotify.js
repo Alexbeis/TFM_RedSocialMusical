@@ -9,7 +9,7 @@ var SpotifyRequest = (function () {
              var song = document.getElementById('song').value;
              if (song == '') return;
              var data = {song :song};
-             this.spotifyRequest(method , searchUrl, data);
+             this.spotifyRequest(method , searchUrl, data, this.add);
         },
 
         share: function(e) {
@@ -25,11 +25,14 @@ var SpotifyRequest = (function () {
                     }
                 }
             }
+            if (uri == 0) {
+                return;
+            }
             var data = {uri: uri};
-            this.createPublicationRequest(method, createUrl, data);
+            this.createPublicationRequest(method, createUrl, data, this.reload);
         },
 
-        spotifyRequest: function(method, url , data) {
+        spotifyRequest: function(method, url , data, callback) {
 
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -37,24 +40,30 @@ var SpotifyRequest = (function () {
                     var response = JSON.parse(xhr.responseText);
                     // Pass to Pure javascript
                     if (response.done == true) {
-                        $('.spoti-content').html(response.view);
+                        callback(response.view);
                     } else {
-                        $('.spoti-content').html(response.errorView);
+                       callback(response.errorView);
                     }
                 }
             };
             xhr.open(method, url, false);
             xhr.send(JSON.stringify(data));
         },
-        createPublicationRequest: function (method, url, data) {
+        createPublicationRequest: function (method, url, data, callback) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    location.reload();
+                    callback();
                 }
             };
             xhr.open(method, url, false);
             xhr.send(JSON.stringify(data));
+        },
+        add: function(view) {
+            $('.spoti-content').html(view);
+        },
+        reload: function () {
+            location.reload();
         }
     }
 }());
