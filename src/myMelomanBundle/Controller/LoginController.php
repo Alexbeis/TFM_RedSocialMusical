@@ -50,7 +50,8 @@ class LoginController extends Controller
             return $this->redirectToRoute('login');
         }
 
-          $request->getSession()->clear();
+        $request->getSession()->clear();
+        $request->getSession()->invalidate();
 
         return $this->redirectToRoute('login');
 
