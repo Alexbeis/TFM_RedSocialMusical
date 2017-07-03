@@ -14,11 +14,5 @@ myDomain\Entity\MusicalTaste:
             length: 255
             nullable: true
             column: name
-#    manyToMany:
-#        user:
-#            targetEntity: myDomain\Entity\User
-#            inversedBy: musicalTaste
-#            joinColumn:
-#                name: user_id
-#                referencedColumName: id
+
     lifecycleCallbacks: {  }
