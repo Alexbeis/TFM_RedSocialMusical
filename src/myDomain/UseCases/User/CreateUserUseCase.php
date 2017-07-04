@@ -13,16 +13,13 @@ class CreateUserUseCase
 
     private $userRepository;
     private $entityManager;
-    private $eventDispatcher;
 
     public function __construct(
         userRepositoryInterface $userRepository,
-        EntityManagerInterface $entityManager,
-        EventDispatcherInterface $eventDispatcher)
+        EntityManagerInterface $entityManager)
     {
         $this->userRepository   = $userRepository;
         $this->entityManager    = $entityManager;
-        $this->eventDispatcher  = $eventDispatcher;
     }
 
     public function execute($name, $email, $picture)
@@ -33,7 +30,6 @@ class CreateUserUseCase
         $user->setUsername($name);
         $user->setImage($picture);
 
-        //$this->entityManager->persist($user);
         $this->userRepository->create($user);
         $this->entityManager->flush($user);
 

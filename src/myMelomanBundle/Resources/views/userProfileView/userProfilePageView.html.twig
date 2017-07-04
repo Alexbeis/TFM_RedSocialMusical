@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+{% block title %}User Profile{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/userProfilePage.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <div class="col-xs-8 col-xs-offset-2 form-style">
+        {% set userTastes = {} %}
+        {% for u in userProfile.musicalTaste.getValues %}
+            {#Creo array només amb gustos musicals de l'usuari#}
+            {%  set userTastes = userTastes|merge([u.name]) %}
+        {% endfor %}
+        <div class="text-center">
+            <img class="image" src="{{ userProfile.image }}" alt="">
+            <div class="publication-row-content container-fluid">
+                <h2 class="text-center"><span>Welcome to {{ userProfile.username}} 's Profile :)</span></h2>
+
+            </div>
+            <div class="about-me">
+                <h4>{{ userProfile.aboutMe }}</h4>
+            </div>
+
+            <div class="title">
+                <h3>I love: </h3><h4> {{ userTastes|join(', ')|default('No love yet :(') }} </h4>
+            </div>
+            <h3>And my 5 last Publications...</h3>
+            <div class="text-center">
+                {% set break = false %}
+                {% for publication in publications if not break %}
+                    <div class="col-xs-12 publication-row">
+                        <div class="publication-row-content">
+                            <p>
+                                <a class="pub-name-link" href="{{ path('user_profile_page', {'id': publication.user.id}) }}">
+                                    {{ publication.user.username }}
+                                </a>
+                                -
+                                <span class="pub-date">
+                                    <em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>
+                                </span>
+                            </p>
+                            <div class="pub-message">
+                                {{ publication.message }}
+                                {% if publication.link is defined and publication.link is not null and publication.link is not empty%}
+                                    {% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}
+                                {% endif %}
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <hr>
+                        </div>
+                    </div>
+                    {% if loop.index == 5 %}
+                        {% set break = true %}
+                    {% endif %}
+                {% else %}
+                    <h3>Not publications yet!</h3>
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

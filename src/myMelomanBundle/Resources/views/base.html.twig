@@ -14,7 +14,6 @@
     </head>
     <body>
         <div>
-            {#<h1>MELOMANIACS</h1>#}
             <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -35,10 +34,10 @@
                         <ul class="nav navbar-nav ">
                             <li>
                                 <form action=" {{ path('user_search') }}" class="navbar-form navbar-left row">
-                                    <div class="form-group col-xs-10">
+                                    <div class="form-group ">
                                         <input type="text" class="form-control" placeholder="Search People" name="search"/>
                                     </div>
-                                    <button type="submit" class="btn btn-default col-xs-2">
+                                    <button type="submit" class="btn btn-default">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </button>
                                 </form>
@@ -48,80 +47,67 @@
                                     &nbsp;People
                                 </a>
                             </li>
-
                         </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="avatar">
+                                        <img src="{{ picture }}"/>
+                                    </div>
 
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <div class="avatar">
-                                            <img src="{{ picture }}"/>
-                                        </div>
-
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">Signed in as: <b>{{ app.session.get('name') }}</b></a href="#">
-                                        </li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('user_profile') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                &nbsp; My User Profile
-                                            </a>
-                                        </li>
-                                        <li><a href="{{ path('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                                                &nbsp; Home
-                                            </a>
-                                        </li>
-                                        <li><a href="#"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>
-                                                &nbsp; About Us
-                                            </a>
-                                        </li>
-                                        <li role="separator" class="divider"></li>
-                                        <li class="logout">
-                                            <a href="{{ path('logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                                                &nbsp; Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Signed in as: <b>{{ app.session.get('name') }}</b></a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('user_profile_edit') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                            &nbsp; Edit Profile
+                                        </a>
+                                    </li>
+                                    <li><a href="{{ path('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                            &nbsp; Home
+                                        </a>
+                                    </li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>
+                                            &nbsp; About Us
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="logout">
+                                        <a href="{{ path('logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                            &nbsp; Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                         {% endif %}
-
                     </div>
                 </div>
             </nav>
         </div>
-        <section id="content" {#class="container"#}>
+        <section id="content">
             {% block content %}{% endblock %}
         </section>
-        {#<footer class="col-lg-12">#}
-            {#<hr/>#}
-            {#<div class="container">#}
-                {#<div class="text-muted col-xs-4">Melomaniacs - Alex Albàs</div>#}
-                {#<div class="text-muted col-xs-4">Web Development</div>#}
-            {#</div>#}
-        {#</footer>#}
         <footer class="row text-center">
             <div class="col-xs-4">
-                <p>Melomaniacs - Alex Albàs</p>
-                <p >Web Development</p>
-            </div>
-
-            <div class="col-xs-4">
+                <p>Connect with us on:</p>
                 <ul class="social">
-                    <li>Connect with us on</li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
-
+            <div class="col-xs-4">
+                <p>Melomaniacs - Alex Albàs</p>
+                <p >Web Development</p>
+            </div>
             <div class="col-xs-4">
                 <p><small>Copyright &copy; 2017. All rights reserved. <br>
                         Created by <a href="http://beisWeb.com">BeisWebDevelopment</a></small></p>
             </div>
-
         </footer>
 
         {% block javascripts %}

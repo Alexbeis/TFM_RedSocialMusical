@@ -7,13 +7,9 @@ use Google_Client;
 use myMelomanBundle\Provider\OAuthGoogleProvider;
 use myDomain\UseCases\User\CreateUserUseCase;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\DependencyInjection\Container;
 
 class LoginUseCase
 {
-    const REDIRECT_HOME_STATUS = 302;
-    const REDIRECT_USERPROFILE_STATUS = 301;
-    const USER_NOT_FOUND = 404;
 
     private $googleService;
     /**
@@ -21,12 +17,7 @@ class LoginUseCase
      */
     private $createUser;
     private $userRepository;
-    /**
-     * @var Container
-     */
-    private $container;
     private $entityManager;
-    private $dispatcher;
     private $google_client_id;
     private $google_secret_id;
     private $google_redirect_uri;
@@ -36,10 +27,8 @@ class LoginUseCase
     public function __construct(
         $createUser,
         $userRepository,
-        $container,
         $userProfileRepository,
         $entityManager,
-        $dispatcher,
         $google_client_id,
         $google_secret_id,
         $google_redirect_uri,
@@ -48,9 +37,7 @@ class LoginUseCase
     {
         $this->createUser           = $createUser;
         $this->userRepository       = $userRepository;
-        $this->container            = $container;
         $this->entityManager        = $entityManager;
-        $this->dispatcher           = $dispatcher;
         $this->google_client_id     = $google_client_id;
         $this->google_secret_id     = $google_secret_id;
         $this->google_redirect_uri  = $google_redirect_uri;
@@ -60,24 +47,19 @@ class LoginUseCase
 
     public function execute(LoginDTO $loginDTO)
     {
-
-        //Inicia google client
         $client     = $this->googleClientInit();
         $service    = $this->googleServiceInit($client);
         $this->googleService = new OAuthGoogleProvider($service);
         $code       = $loginDTO->getGoogleCode();
 
         if ($code == null) {
-            // Create URL
             $loginDTO->setGoogleURL($this->googleService->createURL());
-            $loginDTO->setStatusCode(302);
 
             return $loginDTO;
-
         }
 
         if (isset($code)) {
-            //Authentification + token + get profile info
+
             $this->googleService->authenticate($code);
             $loginDTO->getSession()->set('access_token', $this->googleService->getAccessToken());
 
@@ -94,7 +76,6 @@ class LoginUseCase
                 $loginDTO->setPicture($picture);
             }
 
-            //user exist?
             try
             {
                 $user =  $this->userRepository->findBy(array('email' => $loginDTO->getEmail()));
@@ -107,7 +88,7 @@ class LoginUseCase
                 } else {
                     $newUser = $this->createUser->execute($loginDTO->getUserName(), $loginDTO->getEmail(), $loginDTO->getPicture());
                     if ($newUser) {
-                        $loginDTO->setStatusCode('user_profile');
+                        $loginDTO->setStatusCode('user_profile_edit');
                         $loginDTO->setUserId($newUser->getId());
 
                         return $loginDTO;
@@ -118,7 +99,6 @@ class LoginUseCase
             } catch (Exception $e) {
                 $e->getMessage();
                 }
-
         }
 
     }

@@ -28,12 +28,10 @@ class SpotifyUseCase
     public function searchSong($data)
     {
         $song   = $data['song'];
-        $result =  (array)$this->spotifyWebApi->search($song, array("track"), array('limit'=>5, 'offset'=>0));
+        $result =  (array)$this->spotifyWebApi->search($song, array("track"), array('limit'=>1, 'offset'=>0));
 
         $uri    = $result['tracks']->items[0]->uri;
 
         return $uri;
-
     }
-
 }

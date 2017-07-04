@@ -1,6 +1,7 @@
 var followAjax = (function () {
-    var followUrl   = getBaseUrl() + '/follow-user/';
-    var unfollowUrl = getBaseUrl() + '/unfollow-user/';
+    var followUrl   = getBaseUrl() + '/follow-user/',
+        unfollowUrl = getBaseUrl() + '/unfollow-user/',
+        method      = "GET";
 
     return {
         followRequest: function (e) {
@@ -11,12 +12,8 @@ var followAjax = (function () {
                 }
             }
             var id = e.getAttribute('data-follow'),
-                url = followUrl + parseInt(id),
-                xhr = new XMLHttpRequest();
-            xhr.open("GET", url, false);
-            xhr.send();
-
-            console.log(xhr.responseText);
+                url = followUrl + parseInt(id);
+            this.Request(method, url);
         },
         unfollowRequest: function(e) {
             e.classList.toggle("hidden");
@@ -26,12 +23,18 @@ var followAjax = (function () {
                 }
             }
             var id = e.getAttribute('data-follow'),
-                url = unfollowUrl + parseInt(id),
-                xhr = new XMLHttpRequest();
-            xhr.open("GET", url, false);
+                url = unfollowUrl + parseInt(id);
+            this.Request(method, url);
+        },
+        Request: function (method, url) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.open(method, url, false);
             xhr.send();
-
-            console.log(xhr.responseText);
         }
     }
 }());

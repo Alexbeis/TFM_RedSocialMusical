@@ -24,14 +24,14 @@ class UserController extends Controller
 
     }
 
-    public function userProfileAction(Request $request)
+    public function userEditProfileAction(Request $request)
     {
         if (!$request->getSession()->get('user')) {
             return $this->redirectToRoute('login');
         }
 
         $userId = $request->getSession()->get('user');
-        $user   = $this->get('app.application.usecases.userprofile.show')->execute($userId);
+        $user   = $this->get('app.application.usecases.edit.userprofile.show')->execute($userId);
         $tastes = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
 
         if ($user) {
@@ -45,6 +45,30 @@ class UserController extends Controller
             return $this->redirectToRoute('home');
         }
 
+    }
+
+    public function userProfilePageAction(Request $request)
+    {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
+
+        $userId        = $request->query->get('id');
+        $resultArray   = $this->get('app.application.usecases.page.userprofile.show')->execute($userId);
+        //\Doctrine\Common\Util\Debug::dump($resultArray);
+        $tastes        = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
+
+        if ($resultArray) {
+            return $this->render('userProfileView/userProfilePageView.html.twig',
+                array(
+                    'userProfile'   => $resultArray['user'],
+                    'publications'  => $resultArray['publications'],
+                    'tastes'        => $tastes
+                )
+            );
+        } else {
+            return $this->redirectToRoute('home');
+        }
 
     }
 

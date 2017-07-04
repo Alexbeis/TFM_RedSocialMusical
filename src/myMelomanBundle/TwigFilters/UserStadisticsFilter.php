@@ -39,10 +39,6 @@ class UserStadisticsFilter extends \Twig_Extension
         else {
             return count($this->getUsersFollowers->execute($userId));
         }
-//
-//        if (!empty($liked) && is_object($liked)) {
-//            return true;
-//        } else return false;
 
     }
 
