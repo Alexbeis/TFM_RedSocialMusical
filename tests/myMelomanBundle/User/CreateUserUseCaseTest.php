@@ -3,11 +3,19 @@
 namespace myMelomanBundle\User;
 
 
+use Doctrine\ORM\EntityManagerInterface;
+use myDomain\Entity\User;
 use myDomain\UseCases\User\CreateUserUseCase;
+use myMelomanBundle\Repository\UserRepository;
 use PHPUnit_Framework_MockObject_MockObject;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
 {
+    const NAME      = "me";
+    const EMAIL     = "email";
+    const PICTURE   = "https://link_to_picture";
+
     /**
      * @var CreateUserUseCase
      */
@@ -26,7 +34,7 @@ class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @var PHPUnit_Framework_MockObject_MockObject
      */
-    private $createUserMock;
+    private $aEntityMock;
 
     /**
      * @var PHPUnit_Framework_MockObject_MockObject
@@ -39,9 +47,9 @@ class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
 
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
         $this->userMock = $this->createMock(User::class);
-        $this->aDispatcherMock = $this->createMock();
-
-        $this->createUserUseCase = new CreateUserUseCase($this->userRepositoryMock, $this->aDispatcherMock);
+        $this->aDispatcherMock = $this->createMock(EventDispatcherInterface::class);
+        $this->aEntityMock = $this->createMock(EntityManagerInterface::class);
+        $this->createUserUseCase = new CreateUserUseCase($this->userRepositoryMock, $this->aEntityMock ,$this->aDispatcherMock);
 
     }
 
@@ -62,24 +70,55 @@ class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function fakeTest()
+    public function shouldCreateAUserOneTimeIfItDoesNotExist()
     {
-        try {
+        $this->givenAUserRepositoryThatDoesNotHaveASpecificUser();
+        $this->thenTheUserShouldBeSavedOnce();
+        $this->whenTheCreateUserUseCaseIsExecutedWithASpecificParameters();
 
-            $this->userRepositoryMock->expects($this->once())->method('save');
-            $this->createUserUseCase->execute($this->createUserMock);
-        } catch (\Exception $e) {
-
-        }
     }
 
     /** @test */
-    public function stubTest()
+    public function shouldNotCreateAUserIfItAlreadyExists()
     {
-        $this->expectException(\Exception::class);
-        $this->userRepositoryMock->method('save')->willReturn(null);
-        $this->createUserUseCase->execute($this->createUserMock);
+        $this->givenAUserRepositoryThatHasASpecificUser();
+        $this->thenTheUserShouldNotBeCreated();
+
     }
 
+    private function givenAUserRepositoryThatDoesNotHaveASpecificUser()
+    {
+        $this->userRepositoryMock
+            ->method('find')
+            ->willReturn(false);
+    }
+
+    private function thenTheUserShouldBeSavedOnce()
+    {
+        $this->userRepositoryMock
+            ->expects($this->once())
+            ->method('create')
+            ->with($this->isInstanceOf(User::class));
+    }
+
+    private function whenTheCreateUserUseCaseIsExecutedWithASpecificParameters()
+    {
+        $this->createUserUseCase->execute(self::NAME , self::EMAIL, self::PICTURE);
+    }
+
+    private function givenAUserRepositoryThatHasASpecificUser()
+    {
+        $this->userRepositoryMock
+            ->method('find')
+            ->willReturn($this->isInstanceOf(User::class));
+
+    }
+
+    private function thenTheUserShouldNotBeCreated()
+    {
+        $this->userRepositoryMock
+            ->expects($this->never())
+            ->method('create');
+    }
 
 }
