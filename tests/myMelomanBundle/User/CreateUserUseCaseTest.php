@@ -2,7 +2,6 @@
 
 namespace myMelomanBundle\User;
 
-
 use Doctrine\ORM\EntityManagerInterface;
 use myDomain\Entity\User;
 use myDomain\UseCases\User\CreateUserUseCase;
@@ -41,7 +40,6 @@ class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
      */
     private $userMock;
 
-
     protected function setUp()
     {
 
@@ -51,15 +49,14 @@ class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
         $this->aEntityMock = $this->createMock(EntityManagerInterface::class);
         $this->createUserUseCase = new CreateUserUseCase($this->userRepositoryMock, $this->aEntityMock ,$this->aDispatcherMock);
 
+
     }
 
     protected function tearDown()
     {
         $this->userRepositoryMock = null;
         $this->aDependencyMock = null;
-        $this->createUserMock = null;
         $this->userMock = null;
-
         $this->createUserUseCase = null;
     }
 
