@@ -6,57 +6,71 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="col-xs-12 box-default">
-            <h1>People</h1>
-            <div class="count">
+        <div class="row people-header">
+            <div class="col-xs-12">
+                <h1>People</h1>
+                <div class="count">
                 <span class="label label-primary">
                    Total Users:  {{ pagination.getTotalItemCount }}
                 </span>
+                </div>
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
             </div>
+        </div>
+        <div></div>
             <hr/>
             {% set me = app.session.get('user') %}
             {% for user in pagination  %}
-                <div class="box-content box-users row">
-                    <div class="col-xs-2 user-item">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header-bg" width="250" height="70" id="header-blur"></div>
                         <div class="avatar">
-                            <img src="{{ user.image }}" alt="">
+                            <img src="{{ user.image }}" alt="" />
                         </div>
-                    </div>
-                    <div class=" col-xs-6 user-item-content">
-                        <p> {{ user.username }}-{{ user.email }}</p>
-                        <p> {{ user.aboutMe }} </p>
-                    </div>
-                    {% if me != user.id %}
-                        <div class="buttons-following col-xs-4">
-                            <button class="btn btn-md btn-success btn-follow
-                                {% if me|following(user) ==  true %}
-                                    hidden
+                        <div class="content-card">
+                            <div class=" col-xs-12 user-item-content">
+                                <p class="content-text-name"> {{ user.username }}</p>
+                                <p> {{ user.email }}</p>
+                                <hr>
+                                <p> {{ user.aboutMe }} </p>
+                            </div>
+                        </div>
+
+                        {% if me != user.id %}
+                            <div class="buttons-following col-xs-12">
+                                <button class="btn btn-md btn-success btn-follow
+                                {% if me|following(user) %}
+                                hidden
                                 {% endif %}
                                 "
                                 data-follow="{{ user.id }}" onclick="followAjax.followRequest(this)">
-                            <span class="fa fa-user-plus" aria-hidden="true"></span>
+                                <span class="fa fa-user-plus" aria-hidden="true"></span>
                                 Follow
-                            </button>
-                            <button class="btn btn-md btn-default btn-unfollow
-                                {% if me|following(user) == false %}
-                                    hidden
+                                </button>
+                                <button class="btn btn-md btn-default btn-unfollow
+                                {% if not me|following(user)  %}
+                                hidden
                                 {% endif %}
                                 "
-                                    data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
+                                data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
                                 <span class="fa fa-user-times" aria-hidden="true"></span>
                                 Unfollow
-                            </button>
-                        </div>
-                    {% endif %}
-                    <div class="clearfix"></div>
-                    <hr>
+                                </button>
+                            </div>
+
+                        {% endif %}
+                    </div>
                 </div>
+
             {% else  %}
                 <h3>No users found!</h3>
             {% endfor %}
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}
             </div>
+
         </div>
     </div>
 
