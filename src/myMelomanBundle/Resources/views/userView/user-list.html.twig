@@ -31,7 +31,7 @@
                         </div>
                         <div class="content-card">
                             <div class=" col-xs-12 user-item-content">
-                                <p class="content-text-name"> {{ user.username }}</p>
+                                <p class="content-text-name"><a href="{{ path('user_profile_page', {'id': user.id}) }} ">{{ user.username }}</a></p>
                                 <p> {{ user.email }}</p>
                                 <hr>
                                 <p> {{ user.aboutMe }} </p>

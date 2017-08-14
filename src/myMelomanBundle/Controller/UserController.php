@@ -55,7 +55,6 @@ class UserController extends Controller
 
         $userId        = $request->query->get('id');
         $resultArray   = $this->get('app.application.usecases.page.userprofile.show')->execute($userId);
-        //\Doctrine\Common\Util\Debug::dump($resultArray);
         $tastes        = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
 
         if ($resultArray) {

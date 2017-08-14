@@ -27,7 +27,7 @@ class ShowProfilePageUseCase
         $publications = $this->publicationRepository->findBy(array('user' => $user),array('id' => 'DESC'));
 
 
-        if ($user and $publications) {
+        if ($user) {
             return $returnArray = array('user' => $user, 'publications' => $publications);
         }
         else return false;
