@@ -13,16 +13,12 @@ var SpotifyRequest = (function () {
         },
 
         share: function(e) {
-            var share = document.getElementById('share-button'),
-                shareLen = share.parentNode.parentNode.childNodes.length;
 
-            for (var i=0; i < shareLen; i++) {
-                if(share.parentNode.parentNode.childNodes[i].classList != undefined  && share.parentNode.parentNode.childNodes[i].classList.contains('spoti-content')) {
-                    for (var j=0; j < share.parentNode.parentNode.childNodes[i].childNodes.length; j++){
-                        if (share.parentNode.parentNode.childNodes[i].childNodes[j].tagName == 'INPUT' ) {
-                            var uri = share.parentNode.parentNode.childNodes[i].childNodes[j].getAttribute('data-uri');
-                        }
-                    }
+            var spotiContent = document.getElementById('spoti-content');
+
+            for (var i = 0; i <  spotiContent.childNodes.length; i++) {
+                if (spotiContent.childNodes[i].tagName == 'INPUT') {
+                    var uri = spotiContent.childNodes[i].getAttribute('data-uri');
                 }
             }
             if (uri == 0) {

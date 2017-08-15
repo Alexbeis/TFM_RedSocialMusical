@@ -7,74 +7,56 @@
 {% block content %}
 <div class="container ">
     <div class="row">
-        <div id="user-card" class="col-xs-12  box-default">
-            <div class="avatar text-center">
-                {% set picture = app.session.get('picture') %}
-                {% set user = app.session.get('user') %}
-                <img src="{{ picture }}"/>
-            </div>
-            <div class="name">
-                <a href="{{ path('user_profile_page', {'id': user}) }}">{{ app.session.get('name') }}</a>
-                <div class="clearfix"></div>
-                <span class="role">
-                        Meloman
-                </span>
-            </div>
-            {{ include('homeView/userStadistics.html.twig') }}
-        </div>
-
-
-    </div>
-    <div class="row">
-        <div id="timeline" class="col-xs-12 col-lg-6 ">
-            <h1 class="box-header">Timeline</h1>
-            <div class="box-content ">
-                {{ include('homeView/publicationsTimeline.html.twig') }}
-                <div class="navigation">
-                    {{ knp_pagination_render(pagination) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-lg-5">
-
-            <div id="new-publication" class="col-xs-12 ">
-                <h1 class="box-header">
-                    <i class="fa fa-spotify"></i> Spotify
-                </h1>
-                <div class="row">
-                    <div class="spoti-content col-xs-11">
-                        {{ include('homeView/spotifyPlayer.html.twig') }}
-                    </div>
-                    <form class="col-xs-12" id="spotiForm" method="POST" action="">
-                        <label for="song">Song</label>
-                        <input name="song" id="song" type="text" class="form-control" placeholder="Song" required>
-                        <input type="button" class="btn btn-primary pull-left" value="Find" onclick="SpotifyRequest.search()">
-                        <input type="button" id="share-button" class="btn btn-primary pull-right" value="Share" onclick="SpotifyRequest.share(this)">
+        <div class="accordionWrapper col-xs-12">
+            <div class="accordionItem open">
+                <h2 class="accordionItemHeading">New Publication</h2>
+                <div class="accordionItemContent">
+                    <form method="POST" action="{{ path('create_publication') }}">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" class="form-control" rows="5" placeholder="What are you thinking?"></textarea>
+                        <input type="submit" class="btn btn-default pull-right" value="Share">
                     </form>
                 </div>
             </div>
-            <div id="new-publication" class="col-xs-12">
-                <h1 class="box-header">
-                    Create Publication
-                </h1>
-                <form method="POST" action="{{ path('create_publication') }}">
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" class="form-control" rows="10"></textarea>
-                    <input type="submit" class="btn btn-primary pull-right" value="Share">
-                </form>
+            <div class="accordionItem close">
+                <h2 class="accordionItemHeading"><i class="fa fa-spotify"></i> Spotify</h2>
+                <div class="accordionItemContent">
+                    <div class="row">
+                        <div class="spoti-content col-xs-10" id="spoti-content">
+                            {{ include('homeView/spotifyPlayer.html.twig') }}
+                        </div>
+                        <form class="col-xs-12" id="spotiForm" method="POST" action="">
+                            <div class="form-inline">
+                                <input name="song" id="song" type="text" class="form-control" placeholder="Song" required>
+                                <input type="button" class="btn btn-default " value="Find" onclick="SpotifyRequest.search()">
+                                <input type="button" id="share-button" class="btn btn-default" value="Share" onclick="SpotifyRequest.share(this)">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            {#<div class="spoti-content col-lg-12 ">#}
-                {#{{ include('homeView/spotifyPlayer.html.twig') }}#}
-            {#</div>#}
+            <div class="accordionItem close">
+                <h2 class="accordionItemHeading"><i class="fa fa-stats"></i> My Statistics</h2>
+                <div class="accordionItemContent">
+                    {{ include('homeView/userStadistics.html.twig') }}
+                </div>
+            </div>
         </div>
-
     </div>
+    <div class="row ">
+        <div id="timeline" class="col-xs-12">
+            <div class="box-content ">
+                {{ include('homeView/publicationsTimeline.html.twig') }}
+            </div>
+        </div>
+    </div>
+
 </div>
+
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('assets/js/spotify.js') }}"></script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
-    {#<script src="{{ asset('assets/js/spotify.js') }}"></script>#}
+    <script src="{{ asset('assets/js/PublicationAjax.js') }}"></script>
 {% endblock %}

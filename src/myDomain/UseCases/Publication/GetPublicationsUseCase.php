@@ -42,15 +42,9 @@ class GetPublicationsUseCase
             $myFollows[] = $follow->getFriend();
         }
 
-        $query = $this->publicationRepository->findMeAndFriendPublications($id, $myFollows);
+        $result = $this->publicationRepository->findMeAndFriendPublications($id, $myFollows);
 
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page',1),
-            5
-            );
-
-        return $pagination;
+        return $result;
 
 
     }

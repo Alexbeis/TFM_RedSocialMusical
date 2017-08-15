@@ -1,54 +1,52 @@
 {% for publication in pagination %}
-    <div class="col-xs-12 publication-row">
-        <div class=" avatar">
-            <img src="{{ publication.user.image }}">
-        </div>
-        <div class="publication-row-content">
-            <p>
-                <a class="pub-name-link" href="{{ path('user_profile_page', {'id': publication.user.id}) }}">
-                    {{ publication.user.username }}
-                </a>
-                -
-                <span class="pub-date">
-                                    <em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>
-                                </span>
-            </p>
-            <div class="pub-message">
-                {{ publication.message }}
-                {% if publication.link is defined and publication.link is not null and publication.link is not empty%}
-                    {% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}
-                 {% endif %}
-            </div>
-            <div class="icons">
-                {% if publication.user.id is defined and (user == publication.user.id) %}
-                    <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
-                        <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </a>
-                {% endif %}
+    <ul class="timeline">
+        <li>
+            <div class="timeline-panel">
+                <div class="timeline-heading">
+                    <img class="img-responsive" width="100%" height="25%" src="{{ publication.user.image }}" />
 
-                <div class="pull-right like">
-                    <span class="
-                    {% if user|liked(publication) %}
-                        hidden
-                    {% endif %}
-                    btn-like"
-                          data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
-                        <i class="fa fa-thumbs-o-up"></i>
-                    </span>
-                    <span class="
-                    {% if user|liked(publication) == false %}
-                        hidden
+                </div>
+                <div class="timeline-body">
+                    <p> {{ publication.message }}
+                        {% if publication.link is defined and publication.link is not null and publication.link is not empty%}
+                            {% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="timeline-footer">
+                    {% if publication.user.id is defined and (user == publication.user.id) %}
+                        <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
+                            <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
                     {% endif %}
 
-                    btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
-                        <i class="fa fa-thumbs-o-up"></i>
-                    </span>
+                    <div class="like">
+                        <span class="
+                            {% if user|liked(publication) %}
+                            hidden
+                            {% endif %}
+                            btn-like"
+                                  data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </span>
+                        <span class="
+                            {% if not user|liked(publication)%}
+                            hidden
+                            {% endif %}
+
+                            btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </span>
+                        <a href="{{ path('user_profile_page', {'id': publication.user.id}) }}" class="pull-right">
+                            {{ publication.user.username }} - <em>
+                                <span class="pub-date">{{ publication.createdAt.date|date('d-m-Y')  }}</span></em>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="clearfix"></div>
-            <hr>
-        </div>
-    </div>
+        </li>
+    </ul>
 {% else %}
     There are no publications yet!!
 {% endfor %}
