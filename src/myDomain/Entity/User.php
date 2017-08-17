@@ -36,7 +36,7 @@ class User
     private $image;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | null
      */
     private $birthDate;
 

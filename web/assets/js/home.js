@@ -1,14 +1,4 @@
-var sideBar = (function () {
 
-    return {
-        open: function() {
-            document.getElementById("mySidenav").style.width = "250px";
-        },
-        close: function() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    }
-}());
 
 var accItem = document.getElementsByClassName('accordionItem');
 var accHD = document.getElementsByClassName('accordionItemHeading');

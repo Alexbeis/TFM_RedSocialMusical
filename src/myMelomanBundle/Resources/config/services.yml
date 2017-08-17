@@ -127,6 +127,12 @@ services:
         followingRepository: '@app.repository.following'
         userRepository: '@app.repository.user'
 
+    app.application.usecases.get.user.likes:
+      class: myDomain\UseCases\Like\GetUserLikes
+      arguments:
+        likesRepository: '@app.repository.likes'
+        userRepository: '@app.repository.user'
+
     app.application.usecases.spotify:
       class: myDomain\UseCases\Spotify\SpotifyUseCase
       arguments:
@@ -224,6 +230,7 @@ services:
         arguments:
           following: '@app.application.usecases.get.users.following'
           followers: '@app.application.usecases.get.users.followers'
+          likes: '@app.application.usecases.get.user.likes'
         tags:
             - { name: twig.extension }
 

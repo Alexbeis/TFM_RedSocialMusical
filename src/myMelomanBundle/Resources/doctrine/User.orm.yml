@@ -24,6 +24,7 @@ myDomain\Entity\User:
             type: text
             length: 255
             column: about_me
+            nullable: true
         image:
             type: string
             length: 255

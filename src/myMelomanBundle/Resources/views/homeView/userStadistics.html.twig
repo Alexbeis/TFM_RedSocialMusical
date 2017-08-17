@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="my-following-data col-xs-3 pull-left">
+    <div class="my-following-data col-xs-3 ">
         <a href="#">
             <h3 class="label-stat">
                 Following
@@ -9,7 +9,7 @@
             </span>
         </a>
     </div>
-    <div class="my-following-data col-xs-3 pull-left">
+    <div class="my-following-data col-xs-3 ">
         <a href="#">
             <h3 class="label-stat">
                 Followers
@@ -26,6 +26,16 @@
             </h3>
             <span class="number-stat">
             {{ user|getOwnPublications() }}
+            </span>
+        </a>
+    </div>
+    <div class="my-following-data col-xs-3">
+        <a href="#timeline">
+            <h3 class="label-stat">
+                Likes
+            </h3>
+            <span class="number-stat">
+                {{ user|userStats('likes') }}
             </span>
         </a>
     </div>
