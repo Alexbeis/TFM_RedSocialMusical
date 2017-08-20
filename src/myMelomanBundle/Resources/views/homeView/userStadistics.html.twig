@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="my-following-data col-xs-3 ">
-        <a href="#">
+    {% set userId = app.session.get('user') %}
+    <div class="my-following-data col-xs-3 text-center">
+        <a href="{{ path('show_following_users', {'id': userId}) }}">
             <h3 class="label-stat">
                 Following
             </h3>
@@ -9,8 +10,8 @@
             </span>
         </a>
     </div>
-    <div class="my-following-data col-xs-3 ">
-        <a href="#">
+    <div class="my-following-data col-xs-3 text-center">
+        <a href="{{ path('show_follower_users', {'id': userId}) }}">
             <h3 class="label-stat">
                 Followers
             </h3>
@@ -19,8 +20,8 @@
             </span>
         </a>
     </div>
-    <div class="my-following-data col-xs-3">
-        <a href="#timeline">
+    <div class="my-following-data col-xs-3 text-center">
+        <a href="{{ path('show_user_publications', {'id': userId}) }}">
             <h3 class="label-stat">
                 Publications
             </h3>
@@ -29,8 +30,8 @@
             </span>
         </a>
     </div>
-    <div class="my-following-data col-xs-3">
-        <a href="#timeline">
+    <div class="my-following-data col-xs-3 text-center">
+        <a href="{{ path('show_user_likes', {'id': userId}) }}">
             <h3 class="label-stat">
                 Likes
             </h3>

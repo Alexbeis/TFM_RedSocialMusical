@@ -21,8 +21,9 @@ class GetUserLikes
 
     public function execute($userId)
     {
-        $user = $this->userRepository->find($userId);
-        $likes = $this->likesRepository->findBy(array('user' => $user));
+        $user  = $this->userRepository->find($userId);
+        $likes = $this->likesRepository->findBy(array('user' => $user), array('id'=> 'DESC'));
+
 
         return $likes;
     }

@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+{% block title %}People{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/user-list.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    {% set me = app.session.get('user') %}
+    <div class="container">
+        <div class="row people-header">
+            <div class="col-xs-12">
+                {%  if type == 'following' %}
+                <h1>Following</h1>
+                {% else  %}
+                <h1>Followers</h1>
+                {% endif %}
+            </div>
+        </div>
+        <div></div>
+        <hr/>
+        {% for user in followings  %}
+            {%  if type == 'following' %}
+                {%  set user = user.getFriend %}
+            {% else  %}
+                {%  set user = user.getUser %}
+            {% endif %}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header-bg" width="250" height="70" id="header-blur"></div>
+                    <div class="avatar">
+                        <img src="{{ user.image }}" alt="" />
+                    </div>
+                    <div class="content-card">
+                        <div class=" col-xs-12 user-item-content">
+                            <p class="content-text-name"><a href="{{ path('user_profile_page', {'id': user.id}) }} ">{{ user.username }}</a></p>
+                            <p> {{ user.email }}</p>
+                            <hr>
+                            <p> {{ user.aboutMe }} </p>
+                        </div>
+                    </div>
+
+                    {% if me != user.id %}
+                        <div class="buttons-following col-xs-12">
+                            <button class="btn btn-md btn-success btn-follow
+                                {% if me|following(user) %}
+                                hidden
+                                {% endif %}
+                                "
+                                    data-follow="{{ user.id }}" onclick="followAjax.followRequest(this)">
+                                <span class="fa fa-user-plus" aria-hidden="true"></span>
+                                Follow
+                            </button>
+                            <button class="btn btn-md btn-default btn-unfollow
+                                {% if not me|following(user)  %}
+                                hidden
+                                {% endif %}
+                                "
+                                    data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
+                                <span class="fa fa-user-times" aria-hidden="true"></span>
+                                Unfollow
+                            </button>
+                        </div>
+
+                    {% endif %}
+                </div>
+            </div>
+
+        {% else  %}
+            {%  if type == 'following' %}
+                <h3>No following users yet</h3>
+            {% else  %}
+                <h3>No followers yet</h3>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/follow.js') }}"></script>
+{% endblock %}

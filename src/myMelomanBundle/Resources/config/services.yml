@@ -101,6 +101,12 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         paginator: '@knp_paginator'
 
+    app.application.usecases.publication.specific.user.get:
+      class: myDomain\UseCases\Publication\GetSpecificUserPublications
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+
     app.application.usecases.follow.create:
       class: myDomain\UseCases\Follow\CreateFollowUseCase
       arguments:

@@ -15,24 +15,24 @@ myDomain\Entity\Likes:
             targetEntity: myDomain\Entity\Publication
             nullable: true
             cascade: {  }
-            fetch: LAZY
+            fetch: EAGER
             mappedBy: null
             inversedBy: null
             joinColumns:
                 publication:
                     referencedColumnName: id
-                    onDelete: "SET NULL"
+                    onDelete: "CASCADE"
             orphanRemoval: false
         user:
             targetEntity: myDomain\Entity\User
             nullable: true
             cascade: {  }
-            fetch: LAZY
+            fetch: EAGER
             mappedBy: null
             inversedBy: null
             joinColumns:
                 user:
                     referencedColumnName: id
-                    onDelete: "SET NULL"
+                    onDelete: "CASCADE"
             orphanRemoval: false
     lifecycleCallbacks: {  }
