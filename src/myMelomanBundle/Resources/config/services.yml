@@ -246,3 +246,8 @@ services:
           publicationRepository: '@app.repository.publication'
         tags:
             - { name: twig.extension }
+
+    app.publication.longtime_extension:
+        class: myMelomanBundle\TwigFilters\LongTimeFilter
+        tags:
+            - { name: twig.extension }

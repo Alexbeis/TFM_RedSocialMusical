@@ -40,7 +40,7 @@
                         </span>
                         <a href="{{ path('user_profile_page', {'id': publication.user.id}) }}" class="pull-right">
                             {{ publication.user.username }} - <em>
-                                <span class="pub-date">{{ publication.createdAt.date|date('d-m-Y')  }}</span></em>
+                                <span class="pub-date">{{ publication.createdAt|long_time  }}</span></em>
                         </a>
                     </div>
                 </div>
