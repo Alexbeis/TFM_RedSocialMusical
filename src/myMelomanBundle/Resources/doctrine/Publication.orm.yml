@@ -32,6 +32,7 @@ myDomain\Entity\Publication:
     manyToOne:
         user:
             targetEntity: myDomain\Entity\User
+            inversedBy: publication
             joinColumn:
               name: user
               referencedColumnName: id

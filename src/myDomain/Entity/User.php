@@ -51,7 +51,10 @@ class User
      */
     private $favouriteArtist;
 
-
+    /**
+     * @var Publication[]
+     */
+    private $publication;
 
     /**
      * Get id
@@ -209,7 +212,21 @@ class User
         $this->favouriteArtist = $favouriteArtist;
     }
 
+    /**
+     * @return Publication[]
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
 
+    /**
+     * @param Publication[] $publication
+     */
+    public function setPublication($publication)
+    {
+        $this->publication = $publication;
+    }
 
 
 }

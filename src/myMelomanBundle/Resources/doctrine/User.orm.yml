@@ -47,5 +47,9 @@ myDomain\Entity\User:
                   referencedColumnName: id
             cascade:
               - persist
+    oneToMany:
+        publication:
+            targetEntity: myDomain\Entity\Publication
+            mappedBy: user
 
     lifecycleCallbacks: {  }
