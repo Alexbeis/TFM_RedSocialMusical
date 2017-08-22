@@ -24,11 +24,9 @@ class ShowProfilePageUseCase
          * @var User $user
          */
         $user = $this->userRepository->find($userId);
-        $publications = $this->publicationRepository->findBy(array('user' => $user),array('id' => 'DESC'));
-
 
         if ($user) {
-            return $returnArray = array('user' => $user, 'publications' => $publications);
+            return $user;
         }
         else return false;
 

@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
@@ -17,7 +18,7 @@
             {% set user = app.session.get('user') %}
             {% set picture = app.session.get('picture') %}
             {% if user is not null %}
-            <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+            <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -94,7 +95,7 @@
         </section>
         {% if user is not null %}
         <footer class="row text-center">
-            <div class="col-xs-12 col-sm-4 text-center">
+            <div class="col-xs-12  text-center">
                 <p>Connect with us on:</p>
                 <ul class="social text-center">
                     <li class="col-xs-3"><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -103,11 +104,11 @@
                     <li class="col-xs-3"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 </ul>
             </div>
-            <div class=" col-xs-12 col-sm-4 text-center">
+            <div class=" col-xs-12 text-center">
                 <p>Melomaniacs - Alex Albàs</p>
                 <p >Web Development</p>
             </div>
-            <div class="col-xs-12 col-sm-4 text-center">
+            <div class="col-xs-12  text-center">
                 <p>Copyright &copy; 2017. All rights reserved. </p>
                 <p>Created by <a href="http://beisWeb.com">BeisWebDevelopment</a></p>
             </div>

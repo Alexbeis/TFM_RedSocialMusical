@@ -11,8 +11,7 @@ myDomain\Entity\Publication:
     fields:
         message:
             column: pu_message
-            type: string
-            length: 255
+            type: text
             nullable: true
         status:
             column: pu_status

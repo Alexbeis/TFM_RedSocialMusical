@@ -22,7 +22,6 @@ myDomain\Entity\User:
             unique: true
         aboutMe:
             type: text
-            length: 255
             column: about_me
             nullable: true
         image:
@@ -50,6 +49,7 @@ myDomain\Entity\User:
     oneToMany:
         publication:
             targetEntity: myDomain\Entity\Publication
+            orderBy: { 'id': 'DESC' }
             mappedBy: user
 
     lifecycleCallbacks: {  }

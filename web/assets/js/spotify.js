@@ -17,8 +17,11 @@ var SpotifyRequest = (function () {
             var spotiContent = document.getElementById('spoti-content');
 
             for (var i = 0; i <  spotiContent.childNodes.length; i++) {
-                if (spotiContent.childNodes[i].tagName == 'INPUT') {
-                    var uri = spotiContent.childNodes[i].getAttribute('data-uri');
+                for (var j = 0; j < spotiContent.childNodes[i].childNodes.length; j++) {
+                    console.log()
+                    if (spotiContent.childNodes[i].childNodes[j].tagName == 'INPUT') {
+                        var uri = spotiContent.childNodes[i].childNodes[j].getAttribute('data-uri');
+                    }
                 }
             }
             if (uri == 0) {
@@ -66,14 +69,14 @@ var SpotifyRequest = (function () {
 
 //Spotify player responsive:
 $(document).ready(function(){
-    $('#spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width'));
+    $('.spoti-iframe').each( function() {
+        $(this).css('width',$(this).parent(1).css('width') );
         $(this).attr('src',$(this).attr('src'));
     });
 });
 $(window).resize(function() {
-    $('#spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width'));
+    $('.spoti-iframe').each( function() {
+        $(this).css('width',$(this).parent(1).css('width') );
         $(this).attr('src',$(this).attr('src'));
     });
 });

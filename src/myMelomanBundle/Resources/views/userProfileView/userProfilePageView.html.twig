@@ -5,116 +5,43 @@
     <link href="{{ asset('assets/css/userProfilePage.css') }}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-    {#<div class="col-xs-8 col-xs-offset-2 form-style">#}
-        {#{% set userTastes = {} %}#}
-        {#{% for u in userProfile.musicalTaste.getValues %}#}
-            {#Creo array només amb gustos musicals de l'usuari#}
-            {#{%  set userTastes = userTastes|merge([u.name]) %}#}
-        {#{% endfor %}#}
-        {#<div class="text-center">#}
-            {#<img class="image" src="{{ userProfile.image }}" alt="">#}
-            {#<div class="publication-row-content container-fluid">#}
-                {#<h2 class="text-center"><span>Welcome to {{ userProfile.username}} 's Profile :)</span></h2>#}
-
-            {#</div>#}
-            {#<div class="about-me">#}
-                {#<h4>{{ userProfile.aboutMe }}</h4>#}
-            {#</div>#}
-
-            {#<div class="title">#}
-                {#<h3>I love: </h3><h4> {{ userTastes|join(', ')|default('No love yet :(') }} </h4>#}
-            {#</div>#}
-            {#<h3>And my 5 last Publications...</h3>#}
-            {#<div class="text-center">#}
-                {#{% set break = false %}#}
-                {#{% for publication in publications if not break %}#}
-                    {#<div class="col-xs-12 publication-row">#}
-                        {#<div class="publication-row-content">#}
-                            {#<p>#}
-                                {#<a class="pub-name-link" href="{{ path('user_profile_page', {'id': publication.user.id}) }}">#}
-                                    {#{{ publication.user.username }}#}
-                                {#</a>#}
-                                {#-#}
-                                {#<span class="pub-date">#}
-                                    {#<em>{{ publication.createdAt.date|date('d-m-Y')  }}</em>#}
-                                {#</span>#}
-                            {#</p>#}
-                            {#<div class="pub-message">#}
-                                {#{{ publication.message }}#}
-                                {#{% if publication.link is defined and publication.link is not null and publication.link is not empty%}#}
-                                    {#{% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}#}
-                                {#{% endif %}#}
-                            {#</div>#}
-
-                            {#<div class="clearfix"></div>#}
-                            {#<hr>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#{% if loop.index == 5 %}#}
-                        {#{% set break = true %}#}
-                    {#{% endif %}#}
-                {#{% else %}#}
-                    {#<h3>Not publications yet!</h3>#}
-                {#{% endfor %}#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
-
+    {% set userTastes = {} %}
+    {% for u in userP.musicalTaste.getValues %}
+        {#Creo array només amb gustos musicals de l'usuari#}
+        {%  set userTastes = userTastes|merge([u.name]) %}
+    {% endfor %}
+<div class="container">
     <div class="col-xs-12 text-center">
         <div class="card hovercard">
             <div class="card-background">
-                <img class="card-bkimg" alt="" src="{{ userProfile.image }}">
+                <img class="card-bkimg" alt="" src="{{ userP.image }}">
             </div>
             <div class="useravatar">
-                <img alt="" src="{{ userProfile.image }}">
+                <img alt="" src="{{ userP.image }}">
             </div>
-            <div class="card-info">
-                <span class="card-title">Welcome to {{ userProfile.username}} 's Profile :)</span> <br>
-                <span class="card-title">{{ userProfile.aboutMe }}</span>
-            </div>
-        </div>
-        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-                <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                    <div class="hidden-xs">Publications</div>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-thumbs-o-up" aria-hidden="true"></span>
-                    <div class="hidden-xs">Likes</div>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    <div class="hidden-xs">Following</div>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                    <div class="hidden-xs">Tastes</div>
-                </button>
-            </div>
-        </div>
-
-        <div class="well">
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab1">
-                    <h3>This is tab 1</h3>
-                </div>
-                <div class="tab-pane fade in" id="tab2">
-                    <h3>This is tab 2</h3>
-                </div>
-                <div class="tab-pane fade in" id="tab3">
-                    <h3>This is tab 3</h3>
-                </div>
-                <div class="tab-pane fade in" id="tab4">
-                    <h3>This is tab 4</h3>
-                </div>
+            <div class="card-info row">
+                <span class="card-title col-xs-12"><h3>{{ userP.username}}</h3></span> <br>
+                <span class="card-title col-xs-12">{{ userP.aboutMe }}</span><br><br>
+                <hr>
+                <span class="card-title col-xs-12"> I like:
+               {% for taste in userTastes %}
+                   {{ taste }}
+                   {% if not loop.last %},
+                   {% endif %}
+               {% else %}
+                   No tastes yet
+               {% endfor %}
+                </span>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+           {{ include('homeView/userStadistics.html.twig') }}
+        </div>
+    </div>
 
-
+</div>
 
 {% endblock %}
 {% block javascripts %}
