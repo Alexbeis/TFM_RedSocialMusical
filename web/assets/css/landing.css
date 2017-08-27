@@ -2,7 +2,7 @@
     display: table;
     width: 100%;
     height: 100vh;
-    /*padding: 100px 10px 60px 10px;*/
+    margin-top: 0 !important;
     text-align: center;
     color: white;
     background: url("https://source.unsplash.com/featured/?music") no-repeat bottom center scroll;
@@ -11,6 +11,10 @@
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}
+#content {
+    padding:0px 0px 0px 0px;
+    margin-top: -100px;
 }
 
 .footer {margin-bottom: 0px}
