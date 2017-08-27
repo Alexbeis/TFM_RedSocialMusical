@@ -18,9 +18,9 @@
                 <div class="panel-body">
                    <span class="glyphicon glyphicon-info-sign"></span>
                     {% if notification.type == "like" %}
-                        <b>{{ notification.userGenerateId|getUser }}</b> likes one of your publications
+                        <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> likes one of your publications
                     {% elseif notification.type == "follow" %}
-                        X is now following you
+                        <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> is now following you
                     {% endif %}
                     <a href="javascript:" id="noti_btn_{{ notification.id }}"class="btn btn-default pull-right" onclick="notificationPage.markAsRead({{ notification.id }})">Mark as Read</a>
                 </div>

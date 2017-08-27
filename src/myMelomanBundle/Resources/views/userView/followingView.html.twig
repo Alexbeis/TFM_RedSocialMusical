@@ -24,46 +24,57 @@
             {% else  %}
                 {%  set user = user.getUser %}
             {% endif %}
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header-bg" width="250" height="70" id="header-blur"></div>
-                    <div class="avatar">
-                        <img src="{{ user.image }}" alt="" />
-                    </div>
-                    <div class="content-card">
-                        <div class=" col-xs-12 user-item-content">
-                            <p class="content-text-name"><a href="{{ path('user_profile_page', {'id': user.id}) }} ">{{ user.username }}</a></p>
-                            <p> {{ user.email }}</p>
-                            <hr>
-                            <p> {{ user.aboutMe }} </p>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"></div>
+                   <div class="panel-body text-center">
+                       <div class="col-xs-12 ">
+                           <img src="{{ user.image }}" class="img-responsive img-circle img-thumbnail" width="200" height="200" alt="" />
+                       </div>
+                       <div class="card">
+                           <div class="header-bg" width="250" height="70" id="header-blur"></div>
 
-                    {% if me != user.id %}
-                        <div class="buttons-following col-xs-12">
-                            <button class="btn btn-md btn-success btn-follow
+                           <div class="content-card">
+                               <div class=" col-xs-12 user-item-content">
+                                   <p class="content-text-name"><a href="{{ path('user_profile_page', {'id': user.id}) }} ">{{ user.username }}</a></p>
+                                   <p> {{ user.email }}</p>
+                                   <hr>
+                                   <p> {{ user.aboutMe }} </p>
+                               </div>
+                           </div>
+
+                           {% if me != user.id %}
+                               <div class="buttons-following col-xs-12">
+                                   <button class="btn btn-md btn-success btn-follow
                                 {% if me|following(user) %}
                                 hidden
                                 {% endif %}
                                 "
-                                    data-follow="{{ user.id }}" onclick="followAjax.followRequest(this)">
-                                <span class="fa fa-user-plus" aria-hidden="true"></span>
-                                Follow
-                            </button>
-                            <button class="btn btn-md btn-default btn-unfollow
+                                           data-follow="{{ user.id }}" onclick="followAjax.followRequest(this)">
+                                       <span class="fa fa-user-plus" aria-hidden="true"></span>
+                                       Follow
+                                   </button>
+                                   <button class="btn btn-md btn-default btn-unfollow
                                 {% if not me|following(user)  %}
                                 hidden
                                 {% endif %}
                                 "
-                                    data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
-                                <span class="fa fa-user-times" aria-hidden="true"></span>
-                                Unfollow
-                            </button>
-                        </div>
+                                           data-follow="{{ user.id }}" onclick="followAjax.unfollowRequest(this)">
+                                       <span class="fa fa-user-times" aria-hidden="true"></span>
+                                       Unfollow
+                                   </button>
+                               </div>
 
-                    {% endif %}
+                           {% endif %}
+                       </div>
+                   </div>
+                    <div class="panel-footer">
+                        from {{ user.joinDate|long_time }}
+                    </div>
+
                 </div>
             </div>
+
 
         {% else  %}
             {%  if type == 'following' %}

@@ -153,10 +153,6 @@
     position: relative;
 }
 
-.top-right-panel {
-    border-bottom: 1px solid black;
-    left :-9px;
-}
 .panel-body > img{
     width: 200px;
     height: 200px;
