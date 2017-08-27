@@ -18,6 +18,8 @@ class LikeController extends Controller
 
         if ($result) {
             $this->getDoctrine()->getManager()->flush();
+            $notResult = $this->get('app.application.usecases.notification.create')
+                ->execute($pubId, 'like', $userId );
         }
 
         return new JsonResponse(
@@ -25,8 +27,6 @@ class LikeController extends Controller
                 'done' => true
             )
         );
-
-
     }
 
     public function dislikeAction($id ,Request $request)

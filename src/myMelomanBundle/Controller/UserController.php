@@ -19,6 +19,7 @@ class UserController extends Controller
         $publications = $this->get('app.application.usecases.publication.get')->execute($userid, $request);
         return $this->render('homeView/homeView.html.twig',
             array(
+                'userId'     => $userid,
                 'pagination' => $publications
             ));
 
@@ -53,17 +54,19 @@ class UserController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        $userId        = $request->query->get('id');
-        $resultArray   = $this->get('app.application.usecases.page.userprofile.show')->execute($userId);
-        //\Doctrine\Common\Util\Debug::dump($resultArray);
-        $tastes        = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
+        $userId = $request->query->get('id');
+        $user   = $this->get('app.application.usecases.page.userprofile.show')->execute($userId);
+        $likes  = $result = $this->get('app.application.usecases.get.user.likes')->execute($userId);
+        $tastes = $this->get('app.application.usecases.userprofile.get.musical.tastes')->execute();
 
-        if ($resultArray) {
+        if ($user) {
             return $this->render('userProfileView/userProfilePageView.html.twig',
                 array(
-                    'userProfile'   => $resultArray['user'],
-                    'publications'  => $resultArray['publications'],
-                    'tastes'        => $tastes
+                    'userId'        => $userId,
+                    'userP'         => $user,
+                    'publications'  => $user->getPublication()->getValues(),
+                    'tastes'        => $tastes,
+                    'likes'         => $likes
                 )
             );
         } else {

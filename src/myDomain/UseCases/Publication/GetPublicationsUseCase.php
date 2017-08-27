@@ -4,7 +4,6 @@ namespace myDomain\UseCases\Publication;
 
 
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Bundle\PaginatorBundle\DependencyInjection\KnpPaginatorExtension;
 use myDomain\FollowingRepositoryInterface;
 use myDomain\UserRepositoryInterface;
 use myMelomanBundle\Repository\PublicationRepository;
@@ -31,29 +30,18 @@ class GetPublicationsUseCase
         $this->paginator                = $paginator;
     }
 
-    public function execute($id, $request)
+    public function execute($id)
     {
-        $user           = $this->userRepository->findOneBy(array('id' => $id));
-        $following      = $this->followingRepository->findBy(array('user' => $user));
-        //\Doctrine\Common\Util\Debug::dump($following);
+        $user      = $this->userRepository->findOneBy(array('id' => $id));
+        $following = $this->followingRepository->findBy(array('user' => $user));
         $myFollows = [];
 
         foreach ($following as $follow) {
             $myFollows[] = $follow->getFriend();
         }
 
-        $query = $this->publicationRepository->findMeAndFriendPublications($id, $myFollows);
+        $result = $this->publicationRepository->findMeAndFriendPublications($id, $myFollows);
 
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page',1),
-            5
-            );
-
-        return $pagination;
-
-
+        return $result;
     }
-
-
 }

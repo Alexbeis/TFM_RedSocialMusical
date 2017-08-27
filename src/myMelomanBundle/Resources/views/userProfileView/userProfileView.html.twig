@@ -5,52 +5,64 @@
     <link href="{{ asset('assets/css/userProfile.css') }}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-    <div class="col-xs-8 col-xs-offset-2 form-style">
-        {% set userTastes = {} %}
-        {% for u in userProfile.musicalTaste.getValues %}
-            {#Creo array només amb gustos musicals de l'usuari#}
-            {%  set userTastes = userTastes|merge([u.name]) %}
-        {% endfor %}
-        <form action="{{ path('create_userProfile') }}" method="post" class="row box-form">
-                <div class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 form-style">
+                {% set userTastes = {} %}
+                {% for u in userProfile.musicalTaste.getValues %}
+                    {#Creo array només amb gustos musicals de l'usuari#}
+                    {%  set userTastes = userTastes|merge([u.name]) %}
+                {% endfor %}
+                <form action="{{ path('create_userProfile') }}" method="post" class="row box-form">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
 
-                    <img class="image" src="{{ userProfile.image }}" alt="">
-                    <h2 class="text-center"><span>Hey, {{ userProfile.username}} fill your profile :)</span></h2>
-                </div>
-                <input name="user" type="hidden" value="{{ app.session.get('user') }}">
-                <input name="picture" type="hidden" value="{{ app.session.get('picture') }}">
-                <div class="form-group row">
-                    <label for="aboutme">AboutME</label>
-                    <textarea name="aboutme" class="form-control col-10" id="aboutme" value="" rows="6">{{ userProfile.aboutMe ? userProfile.aboutMe : "" }} </textarea>
-                </div>
-                <div class="form-group row">
-                    <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
-                    <div class="col-10">
-                        <input name="birth" class="form-control" type="date" value="{{userProfile.birthDate is null ? "" : userProfile.birthDate.format('Y-m-d')|date('Y-m-d') }}" id="example-date-input">
+                        </div>
+                        <div class="panel-body text-center" style="color:black;">
+                            <img class="img-responsive img-circle img-thumbnail " width="200" height="200" src="{{ userProfile.image }}" alt="">
+                            <p class="text-center"><span>Hey, {{ userProfile.username}} fill your profile :)</span></p>
+                            <input type="text" class="form-control margin-bottom" value="{{ userProfile.email }}" disabled>
+                            <input name="user" type="hidden" value="{{ app.session.get('user') }}">
+                            <input name="picture" type="hidden" value="{{ app.session.get('picture') }}">
+                            <div class="form-group row margin-bottom">
+                                <label for="aboutme">AboutME</label>
+                                <textarea name="aboutme" class="form-control col-xs-10" id="aboutme" value="" rows="6">{{ userProfile.aboutMe ? userProfile.aboutMe : "" }} </textarea>
+                            </div>
+                            <div class="form-group row margin-bottom">
+                                <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
+                                <div class="col-10">
+                                    <input name="birth" class="form-control" type="date" value="{{userProfile.birthDate is null ? "" : userProfile.birthDate.format('Y-m-d')|date('Y-m-d') }}" id="example-date-input">
+                                </div>
+                            </div>
+                            <div class="form-group row margin-bottom">
+                                <label for="tastes" class="col-form-label">Musical Tastes</label>
+                                <ul>
+                                    {% for key, taste in tastes %}
+                                        <li class="list-taste col-xs-12 col-sm-6 pull-left"><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
+                                            <label class="check-label" for="{{ 'cd' ~ key }}" ><h4>{{ taste }}</h4></label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="button-section row">
+                                <button type="submit" class="btn btn-default col-xs-6">Submit</button>
+                                <a class="btn btn-default col-xs-6" href="{{ path('home') }}">Go Home</a>
+                                <div class="col-xs-12">
+                                    <span class="privacy-policy ">
+                                        <input type="checkbox" class="form-check-input" name="policy" required>&nbsp;You agree to our Terms and Policy.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+
+                        </div>
+
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="tastes" class=" col-form-label">Musical Tastes</label>
-                    <ul>
-                        {% for key, taste in tastes %}
-                            <li class="list-taste col-xs-2 "><input name="{{ taste }}" type="checkbox" id="{{ 'cd' ~ key }}" {{ taste in userTastes ? 'checked' :'' }}/>
-                                <label class="check-label" for="{{ 'cd' ~ key }}" ><h4>{{ taste }}</h4></label>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="button-section row">
-                    <button type="submit" class="btn btn-primary col-xs-3">Submit</button>
-                   <a class="btn btn-primary" href="{{ path('home') }}">Go Home</a>
-                    <div class="col-xs-4 col-xs-offset-3">
-                        <span class="privacy-policy ">
-                        <input type="checkbox" class="form-check-input " name="policy" required>&nbsp;You agree to our Terms and Policy.
-                    </span>
-                    </div>
-                </div>
-        </form>
+                </form>
+            </div>
+        </div>
     </div>
-
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
