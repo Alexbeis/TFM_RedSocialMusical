@@ -4,6 +4,8 @@ body {
     height: 100%;
     font-family: "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: white;
+    margin-top: 100px;
+    background: black;
 }
 
 h1,
@@ -17,6 +19,11 @@ h6 {
     font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
+}
+#content {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    min-height: 75vh;
 }
 
 /* HEADER NAV */
@@ -116,7 +123,7 @@ a:focus {
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    border-radius: 0;
+    border-radius: 5px;
 }
 .btn-default {
     border: 1px solid #42dca3 !important;

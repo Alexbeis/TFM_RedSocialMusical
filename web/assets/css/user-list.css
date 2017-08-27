@@ -1,21 +1,3 @@
-#content{
-    /*background-image: url("https://source.unsplash.com/featured/?music");*/
-    background-color: black;
-    width: 100%;
-    min-height: 100vh !important;
-    height: auto;
-    padding: 50px 10px 60px 10px;
-    margin :0 auto;
-    border: 1px black solid;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-left: auto;
-    margin-right: auto;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-}
 
 .container {
     padding-top: 50px;

@@ -1,0 +1,13 @@
+
+.container{
+    padding: 0;
+    /*background: black;*/
+}
+.panel-body {
+    color: black;
+}
+
+.noti-date {
+    color: black;
+    font-style: italic;
+}

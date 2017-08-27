@@ -151,6 +151,26 @@ services:
         spotify: '@app.application.usecases.spotify'
         redis: '@snc_redis.default'
 
+    app.application.usecases.notification.create:
+      class: myDomain\UseCases\Notification\CreateNotificationUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        notificationrepository: '@app.repository.notification'
+        publicationRepository: '@app.repository.publication'
+        entitymanager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.notification.get:
+      class: myDomain\UseCases\Notification\GetUserNotificationsUseCase
+      arguments:
+        notificationrepository: '@app.repository.notification'
+        userrepository: '@app.repository.user'
+
+    app.application.usecases.notification.mark_as_read:
+      class: myDomain\UseCases\Notification\MarkNotificationsAsRead
+      arguments:
+        notificationrepository: '@app.repository.notification'
+        entityManager: '@doctrine.orm.entity_manager'
+
 
 #repositories
     app.repository.user:
@@ -183,6 +203,12 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.likes.metadata'
 
+    app.repository.notification:
+      class: myMelomanBundle\Repository\NotificationRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.notification.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -213,6 +239,12 @@ services:
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
         arguments: [ myDomain\Entity\Likes ]
+
+    app.notification.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Notification ]
 
 #Twig Filters
     app.following.twig_extension:
@@ -249,5 +281,12 @@ services:
 
     app.publication.longtime_extension:
         class: myMelomanBundle\TwigFilters\LongTimeFilter
+        tags:
+            - { name: twig.extension }
+
+    app.application.notification.get_user_extension:
+        class: myMelomanBundle\TwigFilters\GetUserFilter
+        arguments:
+          userRepository: '@app.repository.user'
         tags:
             - { name: twig.extension }

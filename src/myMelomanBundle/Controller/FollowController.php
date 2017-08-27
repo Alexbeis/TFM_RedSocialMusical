@@ -16,6 +16,7 @@ class FollowController extends Controller
         $followingDTO   = new FollowingDTO($userid, $followed);
 
         $result = $this->get('app.application.usecases.follow.create')->execute($followingDTO);
+        $notResult = $this->get('app.application.usecases.notification.create')->execute($followed, 'follow', $userid);
 
         return new JsonResponse(
             array(

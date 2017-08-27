@@ -86,3 +86,14 @@ spotify_search_song:
   path: /spotify/search
   defaults: { _controller: myMelomanBundle:Spotify:searchSong }
 
+notifications_user_get:
+  path: /notifications/
+  defaults: { _controller: myMelomanBundle:Notification:getUserNotifications }
+
+notifications_count_get:
+  path: /notifications/count/{id}
+  defaults: { _controller: myMelomanBundle:Notification:getCountUserNotifications }
+
+notifications_mark_as_read:
+  path: /mark-as-read/{id}
+  defaults: { _controller: myMelomanBundle:Notification:markNotificationsAsRead }

@@ -28,7 +28,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{ path('home') }}">
-                            <span alt="Brand" class=" glyphicon glyphicon-volume-up"> </span>
+                            <span alt="Brand" class=" glyphicon glyphicon-volume-up"></span>
                         </a>
                     </div>
 
@@ -51,6 +51,13 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{{ path('notifications_user_get', {'id' : user}) }}"><span class="fa fa-bell" aria-hidden="true"></span>
+                                    &nbsp;Notifications
+                                    <span id="countNotifications" data-user="{{ user }}" class="label label-danger toggle"></span>
+                                </a>
+                                <ul class="dropdown-menu"></ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <div class="avatar">
@@ -119,6 +126,8 @@
             <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
             <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('assets/js/general.js') }}"></script>
+
+            <script src="{{ asset('assets/js/notification.js') }}"></script>
             <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
         {% endblock %}
     </body>

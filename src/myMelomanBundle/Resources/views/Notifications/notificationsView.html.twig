@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+{% block title %}Meloman Home{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/notifications.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Notifications</h1>
+            </div>
+        </div>
+        {% for notification in notifications %}
+        <div class="">
+            <div class="panel panel-primary" id="noti_{{ notification.id }}">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                   <span class="glyphicon glyphicon-info-sign"></span>
+                    {% if notification.type == "like" %}
+                        <b>{{ notification.userGenerateId|getUser }}</b> likes one of your publications
+                    {% elseif notification.type == "follow" %}
+                        X is now following you
+                    {% endif %}
+                    <a href="javascript:" id="noti_btn_{{ notification.id }}"class="btn btn-default pull-right" onclick="notificationPage.markAsRead({{ notification.id }})">Mark as Read</a>
+                </div>
+                <div class="panel-footer">
+                    <span class="noti-date ">{{ notification.createdAt|long_time }}</span>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+            Not notifications Yet!
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/notificationPage.js') }}"></script>
+{% endblock %}

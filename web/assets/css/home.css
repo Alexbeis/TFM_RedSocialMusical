@@ -1,17 +1,7 @@
-#content {
-    width: 100%;
-    padding: 50px 10px 60px 10px;
-    background: black;
-}
+
 .container{
-    margin-top: 50px;
-    /*margin-bottom: 50px;*/
-    padding: 0;
-    /*background: black;*/
+    padding: 10px;
 }
-/*.box {*/
-    /*border: 1px solid black;*/
-/*}*/
 #user-card {
     margin-left: 50px;
     padding:10px;
@@ -36,12 +26,6 @@
 #new-publication  {
     margin-right: 20px;
     margin-bottom: 20px;
-    /*border: 1px solid #1d9b6c;*/
-    /*min-height: 325px;*/
-    /*position:relative;*/
-    /*-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
-    /*-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
-    /*box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
 }
 
 .pub-date {
@@ -75,9 +59,9 @@
 }
 
 .spoti-content {
-    width: 80%;
     text-align: center;
     margin-top: 30px;
+    padding-left: 50px;
 
 }
 
