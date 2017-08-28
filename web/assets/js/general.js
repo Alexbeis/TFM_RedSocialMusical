@@ -13,6 +13,21 @@ $(document).ready(function () {
         setInterval(notifications, 60000);
     // }
 
+    //Spotify player responsive:
+
+    $('.spoti-iframe').each( function() {
+        $(this).css('width',$(this).parent(1).css('width') );
+        $(this).attr('src',$(this).attr('src'));
+    });
+
+    $(window).resize(function() {
+        $('.spoti-iframe').each( function() {
+            $(this).css('width',$(this).parent(1).css('width') );
+            $(this).attr('src',$(this).attr('src'));
+        });
+    });
+
+
 });
 
 function getBaseUrl() {

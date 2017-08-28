@@ -67,17 +67,4 @@ var SpotifyRequest = (function () {
     }
 }());
 
-//Spotify player responsive:
-$(document).ready(function(){
-    $('.spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width') );
-        $(this).attr('src',$(this).attr('src'));
-    });
-});
-$(window).resize(function() {
-    $('.spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width') );
-        $(this).attr('src',$(this).attr('src'));
-    });
-});
 

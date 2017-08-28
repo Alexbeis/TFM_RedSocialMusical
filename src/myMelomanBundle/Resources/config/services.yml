@@ -290,3 +290,10 @@ services:
           userRepository: '@app.repository.user'
         tags:
             - { name: twig.extension }
+
+    app.application.publication.count_publications_likes:
+        class: myMelomanBundle\TwigFilters\CountPublicationLikesFilter
+        arguments:
+          likesRepository: '@app.repository.likes'
+        tags:
+            - { name: twig.extension }
