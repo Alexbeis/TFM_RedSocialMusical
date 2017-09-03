@@ -11,6 +11,9 @@ class FollowController extends Controller
 {
     public function followAction(Request $request)
     {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
         $userid         = $request->getSession()->get('user');
         $followed       = (int)$request->get('id');
         $followingDTO   = new FollowingDTO($userid, $followed);
@@ -42,6 +45,9 @@ class FollowController extends Controller
 
     public function showFollowingUsersAction(Request $request, $id)
     {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
         $result = $this->get('app.application.usecases.get.users.following')->execute($id);
 
         return $this->render('userView/followingView.html.twig',
@@ -54,6 +60,9 @@ class FollowController extends Controller
 
     public function showFollowerUsersAction(Request $request, $id)
     {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
         $result = $this->get('app.application.usecases.get.users.followers')->execute($id);
 
         return $this->render('userView/followingView.html.twig',
@@ -67,6 +76,9 @@ class FollowController extends Controller
 
     public function showUserPublicationsAction(Request $request, $id)
     {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
         $result = $this->get('app.application.usecases.publication.specific.user.get')->execute($id);
 
         return $this->render('homeView/userPublications.html.twig',
@@ -79,6 +91,9 @@ class FollowController extends Controller
 
     public function showUserLikesAction(Request $request, $id)
     {
+        if (!$request->getSession()->get('user')) {
+            return $this->redirectToRoute('login');
+        }
         $result = $this->get('app.application.usecases.get.user.likes')->execute($id);
 
         return $this->render('Likes/likesView.html.twig',

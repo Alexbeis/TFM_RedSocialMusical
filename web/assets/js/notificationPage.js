@@ -15,7 +15,6 @@ var notificationPage = (function () {
                     if (response.updateCount) {
                         callback(response.not_id);
                     }
-
                 }
             };
             xhr.open(method, url, false);
