@@ -56,12 +56,6 @@ var PublicationAjax = (function () {
             };
             xhr.open(method, url, false);
             xhr.send();
-        },
-        open: function() {
-            document.getElementById("mySidebar").style.display = "block";
-        },
-        close: function() {
-            document.getElementById("mySidebar").style.display = "none";
         }
     }
 }());

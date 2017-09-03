@@ -81,7 +81,12 @@
     .label-stat{
         font-size: 15px;
     }
+    .panel-body {
+        text-align: center;
+    }
 }
+
+
 
 .card {
     margin-top: 20px;

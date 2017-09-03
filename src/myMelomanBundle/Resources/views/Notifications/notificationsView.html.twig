@@ -11,21 +11,30 @@
                 <h1>Notifications</h1>
             </div>
         </div>
-        {% for notification in notifications %}
-        <div class="">
+        {% for notification in notifications  %}
+            <div class="">
             <div class="panel panel-primary" id="noti_{{ notification.id }}">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
-                   <span class="glyphicon glyphicon-info-sign"></span>
-                    {% if notification.type == "like" %}
-                        <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> likes one of your publications
-                    {% elseif notification.type == "follow" %}
-                        <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> is now following you
-                    {% endif %}
-                    <a href="javascript:" id="noti_btn_{{ notification.id }}"class="btn btn-default pull-right" onclick="notificationPage.markAsRead({{ notification.id }})">Mark as Read</a>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-9">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            {% if notification.type == "like" %}
+                                <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> likes one of your publications
+                            {% elseif notification.type == "follow" %}
+                                <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> is now following you
+                            {% endif %}
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3 btn-mark">
+                            <a href="javascript:" id="noti_btn_{{ notification.id }}"class="btn btn-default" onclick="notificationPage.markAsRead({{ notification.id }})">Mark as Read</a>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="panel-footer">
-                    <span class="noti-date ">{{ notification.createdAt|long_time }}</span>
+                    <span class="noti-date ">{{ notification.createdAt|long_time }} </span>
                 </div>
             </div>
         </div>

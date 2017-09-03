@@ -9,6 +9,7 @@
             <link href="{{ asset('assets/bootstrap/css/bootstrap-social.css') }}" type="text/css" rel="stylesheet"/>
             <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" type="text/css" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css?family=Bevan|Cabin|Lobster" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Titillium+Web" rel="stylesheet">
             <link href="{{ asset('assets/css/styles.css') }}" type="text/css" rel="stylesheet"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -28,7 +29,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{ path('home') }}">
-                            <span alt="Brand" class=" glyphicon glyphicon-volume-up"></span>
+                            <i class="fa fa-headphones brand" aria-hidden="true"></i>
                         </a>
                     </div>
 
@@ -45,7 +46,8 @@
                                 </form>
                             </li>
                             <li>
-                                <a href="{{ path('user_list') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                                <a href="{{ path('user_list') }}"><i class="fa fa-users" aria-hidden="true"></i>
+
                                     &nbsp;People
                                 </a>
                             </li>
