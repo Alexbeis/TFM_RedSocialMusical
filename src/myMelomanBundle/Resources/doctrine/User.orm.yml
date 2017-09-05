@@ -12,7 +12,7 @@ myDomain\Entity\User:
         username:
             type: string
             length: '100'
-            unique: true
+            unique: false
         joinDate:
             type: datetime
             column: join_date
