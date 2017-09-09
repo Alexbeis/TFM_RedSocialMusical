@@ -1,0 +1,31 @@
+myDomain\Entity\Comments:
+    type: entity
+    table: comments
+    repositoryClass: myMelomanBundle\Repository\CommentsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        user:
+            type: integer
+            nullable: true
+            column: com_user
+            options:
+                unsigned: false
+        message:
+            type: text
+            nullable: true
+            column: com_message
+    manyToOne:
+        publication:
+            targetEntity: myDomain\Entity\Publication
+            inversedBy: comments
+            joinColumn:
+                name: publication_id
+                referencedColumnName: id
+                onDelete: "CASCADE"
+
+    lifecycleCallbacks: {  }

@@ -35,6 +35,11 @@ class Publication
     private $user;
 
     /**
+     * @var Comments
+     */
+    private $comments;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -128,5 +133,21 @@ class Publication
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return Comments
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comments $comments
+     */
+    public function setComments( $comments)
+    {
+        $this->comments = $comments;
     }
 }

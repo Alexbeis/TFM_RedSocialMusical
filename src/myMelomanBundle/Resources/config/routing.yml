@@ -97,3 +97,7 @@ notifications_count_get:
 notifications_mark_as_read:
   path: /mark-as-read/{id}
   defaults: { _controller: myMelomanBundle:Notification:markNotificationsAsRead }
+
+create_comment:
+  path: /create-comment/
+  defaults: { _controller: myMelomanBundle:Comments:createComment}

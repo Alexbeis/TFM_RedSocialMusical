@@ -6,6 +6,10 @@
 {% endblock %}
 {% block content %}
 <div class="container ">
+
+    <div class="row notice">
+    </div>
+
     <div class="row">
         <div class="accordionWrapper col-xs-12">
             <div class="accordionItem open">
@@ -25,8 +29,8 @@
                         <div class="spoti-content col-xs-10" id="spoti-content">
                             {{ include('homeView/spotifyPlayer.html.twig') }}
                         </div>
-                        <form class="col-xs-12" id="spotiForm" method="POST" action="">
-                            <div class="form-inline">
+                        <form class="col-xs-12" id="spotiForm" method="POST" action="" class="form-control">
+                            <div>
                                 <input name="song" id="song" type="text" class="form-control" placeholder="Song" required>
                                 <input type="button" class="btn btn-default form-control" value="Find" onclick="SpotifyRequest.search()">
                                 <input type="button" id="share-button" class="btn btn-default form-control" value="Share" onclick="SpotifyRequest.share(this)">
@@ -59,4 +63,5 @@
     <script src="{{ asset('assets/js/spotify.js') }}"></script>
     <script src="{{ asset('assets/js/home.js') }}"></script>
     <script src="{{ asset('assets/js/PublicationAjax.js') }}"></script>
+    <script src="{{ asset('assets/js/Comment.js') }}"></script>
 {% endblock %}
