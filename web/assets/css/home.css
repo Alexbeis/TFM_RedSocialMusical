@@ -70,10 +70,6 @@
 
 }
 
-@media (max-width: 1200px) {
-
-    #timeline {margin-left: 1px;}
-}
 @media only screen and (max-width: 768px) {
     .number-stat{
         font-size: 40px;
