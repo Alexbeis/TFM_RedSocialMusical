@@ -171,6 +171,18 @@ services:
         notificationrepository: '@app.repository.notification'
         entityManager: '@doctrine.orm.entity_manager'
 
+    app.application.usecases.comments.create:
+      class: myDomain\UseCases\Comments\CreateCommentUseCase
+      arguments:
+        notificationrepository: '@app.repository.comments'
+        publicationRepository: '@app.repository.publication'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.get_specific_publication_comments:
+      class: myDomain\UseCases\Comments\GetCommentsForSpecificPublicationUseCase
+      arguments:
+        commentsRepository: '@app.repository.comments'
+        publicationRepository: '@app.repository.publication'
 
 #repositories
     app.repository.user:
@@ -209,6 +221,12 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.notification.metadata'
 
+    app.repository.comments:
+      class: myMelomanBundle\Repository\CommentsRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.comments.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -245,6 +263,12 @@ services:
         factory_service: doctrine # this is an instance of Registry
         factory_method: getRepository
         arguments: [ myDomain\Entity\Notification ]
+
+    app.comments.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Comments ]
 
 #Twig Filters
     app.following.twig_extension:

@@ -23,6 +23,14 @@
                         </p>
                     </div>
                 </div>
+                <div class="col-xs-12 text-center comments">
+                    <a href="javascript:" class="btn btn-default form-control comment-btn"><i class="fa fa-comment"></i>&nbsp;Comment</a>
+                    <div class="col-xs-12 comment-pub form-inline">
+                        <textarea id="textarea_{{ publication.id }}" name="message" class="form-control" style="min-width: 100%;" cols="40" rows="3"></textarea>
+                        <input type="button" class="btn btn-default pull-right" data-pub="{{ publication.id }}" onclick="Comment.create(event)" value="Add">
+                    </div>
+
+                </div>
             </div>
 
             <div class="panel-footer">
@@ -63,6 +71,17 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row form-inline show-comments">
+            <button class="col-xs-12 btn btn-default">
+                <span id="num_comments_{{ publication.id }}">{{ publication.comments.getValues|length|default(0)  }}</span> Comments
+            </button>
+        </div>
+        <div class="container well comments-container">
+            <div class="row user-comments" id="user_comments_{{ publication.id }}">
+                {% set comments = publication.comments.getValues %}
+                {{ include('homeView/commentsView.html.twig') }}
             </div>
         </div>
     </li>

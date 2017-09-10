@@ -35,6 +35,12 @@ myDomain\Entity\Publication:
             joinColumn:
               name: user
               referencedColumnName: id
+    oneToMany:
+        comments:
+            targetEntity: myDomain\Entity\Comments
+            orderBy: { 'id': 'DESC' }
+            nullable: true
+            mappedBy: publication
     lifecycleCallbacks: {  }
 
 

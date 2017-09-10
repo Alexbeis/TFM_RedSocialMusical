@@ -70,10 +70,6 @@
 
 }
 
-@media (max-width: 1200px) {
-
-    #timeline {margin-left: 1px;}
-}
 @media only screen and (max-width: 768px) {
     .number-stat{
         font-size: 40px;
@@ -253,5 +249,21 @@
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
     background-color: #bdc3c7;
+}
+.comment-pub {
+    display: none;
+}
+.user-comments > .panel-default {
+    margin:30px;
+}
+.well{
+    width: 90%;
+}
+.comments-container {
+    display: none;
+}
+.show-comments {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 

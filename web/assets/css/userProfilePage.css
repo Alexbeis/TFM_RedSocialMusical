@@ -7,3 +7,15 @@
 .number-stat {
    font-size:  30px
 }
+
+@media only screen and (max-width: 768px) {
+    .number-stat{
+        font-size: 40px;
+    }
+    .label-stat{
+        font-size: 15px;
+    }
+    .panel-body {
+        text-align: center;
+    }
+}

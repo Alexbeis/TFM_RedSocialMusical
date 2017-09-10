@@ -23,6 +23,13 @@ $(document).ready(function () {
         });
     });
 
+    $('.comment-btn').on('click', function(){
+        $(this).next().toggle();
+    });
+
+    $('.show-comments').on('click', function(){
+        $(this).next().toggle();
+    });
 
 });
 

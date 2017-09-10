@@ -1,0 +1,16 @@
+{% for comment in comments %}
+    <div class="col-xs-12">
+        <div class="panel panel-default single-comment" style="text-align: left;">
+            <div class="panel-heading">
+                <a href="{{ path('user_profile_page', {'id': comment.user}) }}">
+                    {{ comment.user|getUser }}
+                </a>
+                wrote:
+            </div>
+            <div class="panel-body">
+                {{ comment.message }}
+            </div>
+        </div>
+    </div>
+{% else %}
+{% endfor %}

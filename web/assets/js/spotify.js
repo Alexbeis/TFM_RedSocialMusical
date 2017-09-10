@@ -18,7 +18,6 @@ var SpotifyRequest = (function () {
 
             for (var i = 0; i <  spotiContent.childNodes.length; i++) {
                 for (var j = 0; j < spotiContent.childNodes[i].childNodes.length; j++) {
-                    console.log()
                     if (spotiContent.childNodes[i].childNodes[j].tagName == 'INPUT') {
                         var uri = spotiContent.childNodes[i].childNodes[j].getAttribute('data-uri');
                     }
