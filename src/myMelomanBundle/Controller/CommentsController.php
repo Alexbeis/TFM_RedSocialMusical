@@ -27,6 +27,8 @@ class CommentsController extends Controller
                 )
             );
         }
+        $notResult = $this->get('app.application.usecases.notification.create')
+            ->execute($pubId, 'comment', $userId );
         $comments = $this->get('app.application.usecases.get_specific_publication_comments')->execute($pubId);
         $view = $this->renderView('/homeView/commentsView.html.twig',
             array(

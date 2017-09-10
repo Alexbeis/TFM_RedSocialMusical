@@ -54,7 +54,7 @@ class CreateNotificationUseCase
             /**
              * Publication $publication
              */
-            if ($type == 'like') {
+            if ($type == 'like' || $type == 'comment') {
                 $publication = $this->publicationRepository->find($id);
                 $userTo  = $this->userRepository->find($publication->getUser());
                 $extra = $publication->getId();

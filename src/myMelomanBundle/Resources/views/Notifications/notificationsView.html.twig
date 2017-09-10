@@ -23,6 +23,8 @@
                                 <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> likes one of your publications
                             {% elseif notification.type == "follow" %}
                                 <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> is now following you
+                            {% elseif notification.type == "comment" %}
+                                <a href="{{ path('user_profile_page', {'id': notification.userGenerateId }) }}"><b>{{ notification.userGenerateId|getUser }}</b></a> comments on your publication
                             {% endif %}
                         </div>
 
