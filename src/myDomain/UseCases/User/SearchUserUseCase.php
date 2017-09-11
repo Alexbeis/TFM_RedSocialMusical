@@ -33,7 +33,7 @@ class SearchUserUseCase
         $paginator = $this->knpPaginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            5
+            12
         );
         return $paginator;
     }

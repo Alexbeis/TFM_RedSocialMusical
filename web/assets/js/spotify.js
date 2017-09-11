@@ -13,15 +13,13 @@ var SpotifyRequest = (function () {
         },
 
         share: function(e) {
-            var share = document.getElementById('share-button'),
-                shareLen = share.parentNode.parentNode.childNodes.length;
 
-            for (var i=0; i < shareLen; i++) {
-                if(share.parentNode.parentNode.childNodes[i].classList != undefined  && share.parentNode.parentNode.childNodes[i].classList.contains('spoti-content')) {
-                    for (var j=0; j < share.parentNode.parentNode.childNodes[i].childNodes.length; j++){
-                        if (share.parentNode.parentNode.childNodes[i].childNodes[j].tagName == 'INPUT' ) {
-                            var uri = share.parentNode.parentNode.childNodes[i].childNodes[j].getAttribute('data-uri');
-                        }
+            var spotiContent = document.getElementById('spoti-content');
+
+            for (var i = 0; i <  spotiContent.childNodes.length; i++) {
+                for (var j = 0; j < spotiContent.childNodes[i].childNodes.length; j++) {
+                    if (spotiContent.childNodes[i].childNodes[j].tagName == 'INPUT') {
+                        var uri = spotiContent.childNodes[i].childNodes[j].getAttribute('data-uri');
                     }
                 }
             }
@@ -68,17 +66,4 @@ var SpotifyRequest = (function () {
     }
 }());
 
-//Spotify player responsive:
-$(document).ready(function(){
-    $('#spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width'));
-        $(this).attr('src',$(this).attr('src'));
-    });
-});
-$(window).resize(function() {
-    $('#spoti-iframe').each( function() {
-        $(this).css('width',$(this).parent(1).css('width'));
-        $(this).attr('src',$(this).attr('src'));
-    });
-});
 

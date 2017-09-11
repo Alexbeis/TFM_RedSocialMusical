@@ -17,4 +17,17 @@ class LikesRepository extends EntityRepository implements LikesRepositoryInterfa
         $this->getEntityManager()->remove($like);
     }
 
+    public function countPublicationLikes($pubId)
+    {
+        $qb = $this->createQueryBuilder('likes');
+        $query = $qb->select('likes.id')
+            ->where(
+                $qb->expr()->eq('likes.publication',':pubId')
+            )->setParameter('pubId', $pubId);
+
+        $result = $query->getQuery()->getResult();
+
+        return count($result);
+    }
+
 }

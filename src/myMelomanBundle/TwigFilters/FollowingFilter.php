@@ -27,7 +27,7 @@ class FollowingFilter extends \Twig_Extension
     }
 
     /**
-     * @param int $userId
+     * @param int|null $userId
      * @param User $friend
      * @return bool
      */

@@ -1,0 +1,23 @@
+
+.container{
+    padding: 0;
+    /*background: black;*/
+}
+.panel-body {
+    color: black;
+}
+
+.noti-date {
+    color: black;
+    font-style: italic;
+}
+
+@media only screen and (max-width: 768px) {
+    .panel-body {
+        text-align: center;
+        float: none;
+    }
+    .btn-mark {
+        padding: 10px;
+    }
+}

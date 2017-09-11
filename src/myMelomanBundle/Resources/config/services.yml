@@ -101,6 +101,12 @@ services:
         entityManager: '@doctrine.orm.entity_manager'
         paginator: '@knp_paginator'
 
+    app.application.usecases.publication.specific.user.get:
+      class: myDomain\UseCases\Publication\GetSpecificUserPublications
+      arguments:
+        publicationrepository: '@app.repository.publication'
+        userrepository: '@app.repository.user'
+
     app.application.usecases.follow.create:
       class: myDomain\UseCases\Follow\CreateFollowUseCase
       arguments:
@@ -127,6 +133,12 @@ services:
         followingRepository: '@app.repository.following'
         userRepository: '@app.repository.user'
 
+    app.application.usecases.get.user.likes:
+      class: myDomain\UseCases\Like\GetUserLikes
+      arguments:
+        likesRepository: '@app.repository.likes'
+        userRepository: '@app.repository.user'
+
     app.application.usecases.spotify:
       class: myDomain\UseCases\Spotify\SpotifyUseCase
       arguments:
@@ -139,6 +151,38 @@ services:
         spotify: '@app.application.usecases.spotify'
         redis: '@snc_redis.default'
 
+    app.application.usecases.notification.create:
+      class: myDomain\UseCases\Notification\CreateNotificationUseCase
+      arguments:
+        userrepository: '@app.repository.user'
+        notificationrepository: '@app.repository.notification'
+        publicationRepository: '@app.repository.publication'
+        entitymanager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.notification.get:
+      class: myDomain\UseCases\Notification\GetUserNotificationsUseCase
+      arguments:
+        notificationrepository: '@app.repository.notification'
+        userrepository: '@app.repository.user'
+
+    app.application.usecases.notification.mark_as_read:
+      class: myDomain\UseCases\Notification\MarkNotificationsAsRead
+      arguments:
+        notificationrepository: '@app.repository.notification'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.comments.create:
+      class: myDomain\UseCases\Comments\CreateCommentUseCase
+      arguments:
+        notificationrepository: '@app.repository.comments'
+        publicationRepository: '@app.repository.publication'
+        entityManager: '@doctrine.orm.entity_manager'
+
+    app.application.usecases.get_specific_publication_comments:
+      class: myDomain\UseCases\Comments\GetCommentsForSpecificPublicationUseCase
+      arguments:
+        commentsRepository: '@app.repository.comments'
+        publicationRepository: '@app.repository.publication'
 
 #repositories
     app.repository.user:
@@ -171,6 +215,18 @@ services:
         em: '@doctrine.orm.entity_manager'
         mapping: '@app.likes.metadata'
 
+    app.repository.notification:
+      class: myMelomanBundle\Repository\NotificationRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.notification.metadata'
+
+    app.repository.comments:
+      class: myMelomanBundle\Repository\CommentsRepository
+      arguments:
+        em: '@doctrine.orm.entity_manager'
+        mapping: '@app.comments.metadata'
+
 #Metadata
     app.user.metadata:
         class: Doctrine\ORM\Mapping\ClassMetadata
@@ -202,6 +258,18 @@ services:
         factory_method: getRepository
         arguments: [ myDomain\Entity\Likes ]
 
+    app.notification.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Notification ]
+
+    app.comments.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ myDomain\Entity\Comments ]
+
 #Twig Filters
     app.following.twig_extension:
         class: myMelomanBundle\TwigFilters\FollowingFilter
@@ -224,6 +292,7 @@ services:
         arguments:
           following: '@app.application.usecases.get.users.following'
           followers: '@app.application.usecases.get.users.followers'
+          likes: '@app.application.usecases.get.user.likes'
         tags:
             - { name: twig.extension }
 
@@ -231,5 +300,24 @@ services:
         class: myMelomanBundle\TwigFilters\GetOwnPublicationsFilter
         arguments:
           publicationRepository: '@app.repository.publication'
+        tags:
+            - { name: twig.extension }
+
+    app.publication.longtime_extension:
+        class: myMelomanBundle\TwigFilters\LongTimeFilter
+        tags:
+            - { name: twig.extension }
+
+    app.application.notification.get_user_extension:
+        class: myMelomanBundle\TwigFilters\GetUserFilter
+        arguments:
+          userRepository: '@app.repository.user'
+        tags:
+            - { name: twig.extension }
+
+    app.application.publication.count_publications_likes:
+        class: myMelomanBundle\TwigFilters\CountPublicationLikesFilter
+        arguments:
+          likesRepository: '@app.repository.likes'
         tags:
             - { name: twig.extension }

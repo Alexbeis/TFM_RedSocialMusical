@@ -1,0 +1,95 @@
+{% extends "base.html.twig" %}
+{% block title %}People{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/home.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    {% set me = app.session.get('user') %}
+    <div class="container">
+        <div class="row people-header">
+            <div class="col-xs-12">
+                <h1>Likes</h1>
+            </div>
+        </div>
+        <ul class="timeline">
+        {% for like in likes %}
+            {% set publication = like.publication %}
+
+            <li>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+
+                    </div>
+                    <div class="panel-body row">
+                        <div class="col-xs-12 col-sm-4 text-center">
+                            <img class="img-responsive img-thumbnail" width="300" height="300" src="{{ publication.user.image }}" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="row">
+                                <p class="col-xs-12 col-sm-8">
+                                    {{ publication.user.username }} shared:
+                                </p>
+                                <p class="col-xs-12"> {{ publication.message }}
+                                    {% if publication.link is defined and publication.link is not null and publication.link is not empty%}
+                                <div class="row spoti-content">
+                                    {% include 'homeView/spotifyPlayer.html.twig' with {'uri' : publication.link} %}
+                                </div>
+                                {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                {% if publication.user.id is defined and (user == publication.user.id) %}
+                                    <a data-id="{{ publication.id }}" href="#" onclick="PublicationAjax.remove(this)">
+                                        <span  class="btn-delete-pub glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+
+                                <div class="like">
+                        <span class="
+                            {% if user|liked(publication) %}
+                            hidden
+                            {% endif %}
+                            btn-like"
+                              data-id="{{ publication.id }}" onclick="PublicationAjax.like(this)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </span>
+                                    <span class="
+                            {% if not user|liked(publication)%}
+                            hidden
+                            {% endif %}
+
+                            btn-dislike active" data-id="{{ publication.id }}" onclick="PublicationAjax.dislike(this)">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </span>
+                                    <span>
+                            {{ publication.id|publication_likes }} <em>likes</em>
+                        </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 user-and-date">
+                                <a href="{{ path('user_profile_page', {'id': publication.user.id}) }}" class="pull-right">
+                                    {{ publication.user.username }} -
+                                    <em><span class="pub-date">{{ publication.createdAt|long_time  }}</span></em>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            There are no publications yet!!
+        {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/PublicationAjax.js') }}"></script>
+{% endblock %}

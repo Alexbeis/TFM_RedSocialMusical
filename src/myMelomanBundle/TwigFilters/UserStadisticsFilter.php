@@ -5,6 +5,7 @@ namespace myMelomanBundle\TwigFilters;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use myDomain\UseCases\Follow\GetUsersFollowers;
 use myDomain\UseCases\Follow\GetUsersFollowing;
+use myDomain\UseCases\Like\GetUserLikes;
 
 
 class UserStadisticsFilter extends \Twig_Extension
@@ -14,13 +15,16 @@ class UserStadisticsFilter extends \Twig_Extension
      */
     private $getUsersFollowing;
     private $getUsersFollowers;
+    private $getUserLikes;
 
     public function __construct(
         GetUsersFollowing $getUsersFollowing,
-        GetUsersFollowers $getUsersFollowers)
+        GetUsersFollowers $getUsersFollowers,
+        GetUserLikes $getUserLikes)
     {
-        $this->getUsersFollowing   = $getUsersFollowing;
+        $this->getUsersFollowing  = $getUsersFollowing;
         $this->getUsersFollowers  = $getUsersFollowers;
+        $this->getUserLikes       = $getUserLikes;
     }
 
     public function getFilters()
@@ -35,9 +39,10 @@ class UserStadisticsFilter extends \Twig_Extension
     {
         if ($option == 'following') {
             return count($this->getUsersFollowing->execute($userId));
-        }
-        else {
+        } elseif ($option == 'follower') {
             return count($this->getUsersFollowers->execute($userId));
+        } else {
+            return count($this->getUserLikes->execute($userId));
         }
 
     }

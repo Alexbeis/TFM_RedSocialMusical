@@ -66,7 +66,38 @@ unfollow_user:
   path: /unfollow-user/{id}
   defaults: { _controller: myMelomanBundle:Follow:unfollow }
 
+show_following_users:
+  path: /show-users-following/{id}
+  defaults: { _controller: myMelomanBundle:Follow:showFollowingUsers }
+
+show_follower_users:
+  path: /show-users-follower/{id}
+  defaults: { _controller: myMelomanBundle:Follow:showFollowerUsers }
+
+show_user_publications:
+  path: /show-user-publications/{id}
+  defaults: { _controller: myMelomanBundle:Follow:showUserPublications }
+
+show_user_likes:
+  path: /show-user-likes/{id}
+  defaults: { _controller: myMelomanBundle:Follow:showUserLikes }
+
 spotify_search_song:
   path: /spotify/search
   defaults: { _controller: myMelomanBundle:Spotify:searchSong }
 
+notifications_user_get:
+  path: /notifications/
+  defaults: { _controller: myMelomanBundle:Notification:getUserNotifications }
+
+notifications_count_get:
+  path: /notifications/count/{id}
+  defaults: { _controller: myMelomanBundle:Notification:getCountUserNotifications }
+
+notifications_mark_as_read:
+  path: /mark-as-read/{id}
+  defaults: { _controller: myMelomanBundle:Notification:markNotificationsAsRead }
+
+create_comment:
+  path: /create-comment/
+  defaults: { _controller: myMelomanBundle:Comments:createComment}

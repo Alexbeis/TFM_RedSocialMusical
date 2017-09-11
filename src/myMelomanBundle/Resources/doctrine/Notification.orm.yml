@@ -1,0 +1,62 @@
+myDomain\Entity\Notification:
+    type: entity
+    table: notification
+    indexes:
+        fk_notifications_users:
+            columns:
+                - user_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        type:
+            type: string
+            nullable: true
+            column: not_type
+            length: 255
+            options:
+                fixed: false
+        userGenerateId:
+            type: integer
+            nullable: true
+            column: not_user_generate_Id
+            options:
+                unsigned: false
+            column: type_id
+        read:
+            type: boolean
+            nullable: true
+            column: not_read
+            options:
+                default: false
+        createdAt:
+            type: datetime
+            nullable: true
+            column: not_createdAt
+        extra:
+            type: string
+            nullable: true
+            column: not_extra
+            length: 100
+            options:
+                fixed: false
+    manyToOne:
+        user:
+            targetEntity: User
+            cascade: {  }
+            options:
+                comment: 'User who gets the notification'
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
