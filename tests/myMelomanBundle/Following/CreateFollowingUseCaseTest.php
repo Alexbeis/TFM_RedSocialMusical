@@ -6,15 +6,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use myDomain\DTO\FollowingDTO;
 use myDomain\Entity\Following;
 use myDomain\Entity\User;
-use myDomain\FollowingRepositoryInterface;
 use myDomain\UseCases\Follow\CreateFollowUseCase;
-use myDomain\UserRepositoryInterface;
 use myMelomanBundle\Repository\FollowingRepository;
 use myMelomanBundle\Repository\UserRepository;
 use PHPUnit_Framework_MockObject_MockObject;
 
 class CreateFollowingUseCaseTest extends \PHPUnit_Framework_TestCase
 {
+    const USER = 1;
+    const FRIEND = 2;
 
     /**
      * @var CreateFollowUseCase
@@ -41,6 +41,9 @@ class CreateFollowingUseCaseTest extends \PHPUnit_Framework_TestCase
      */
     private $userMock;
 
+    /**
+     * @var FollowingDTO
+     */
     private $followingDTO;
 
 
@@ -51,8 +54,11 @@ class CreateFollowingUseCaseTest extends \PHPUnit_Framework_TestCase
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
         $this->userMock = $this->createMock(User::class);
         $this->aEntityMock = $this->createMock(EntityManagerInterface::class);
-        $this->createFollowUseCase = new CreateFollowUseCase( $this->userRepositoryMock, $this->aEntityMock, $this->followRepositoryMock);
-        $this->followingDTO = new FollowingDTO('1', '2');
+        $this->createFollowUseCase = new CreateFollowUseCase(
+            $this->userRepositoryMock,
+            $this->aEntityMock,
+            $this->followRepositoryMock);
+        $this->followingDTO = new FollowingDTO(self::USER, self::FRIEND);
 
     }
 
@@ -93,29 +99,28 @@ class CreateFollowingUseCaseTest extends \PHPUnit_Framework_TestCase
     private function givenAFollowingRepositoryThatDoesNotHaveASpecificFollow()
     {
         $this->followRepositoryMock
-            ->method('find')
+            ->method('findOneBy')
             ->willReturn(false);
     }
 
     private function givenAFollowingRepositoryThatHaveASpecificFollow()
     {
         $this->followRepositoryMock
-            ->method('find')
+            ->method('findOneBy')
             ->willReturn(Following::class);
     }
 
     private function andGivenAUserRepositoryThatHaveASpecifiUser()
     {
         $this->userRepositoryMock
-            ->method('find')
-            ->willReturn($this->isInstanceOf(User::class));
+            ->method('findOneBy')
+            ->willReturn($this->userMock);
     }
 
     private function thenTheFollowShouldBeSavedOnce()
     {
-//        var_dump($this->followRepositoryMock);
         $this->followRepositoryMock
-            ->expects($this->never()) // Falla aquí
+            ->expects($this->once())
             ->method('create')
             ->with($this->isInstanceOf(Following::class));
     }
@@ -132,6 +137,4 @@ class CreateFollowingUseCaseTest extends \PHPUnit_Framework_TestCase
             ->method('create');
 
     }
-
-
 }

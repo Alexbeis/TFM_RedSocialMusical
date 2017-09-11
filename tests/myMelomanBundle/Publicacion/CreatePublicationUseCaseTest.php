@@ -2,6 +2,7 @@
 
 namespace myMelomanBundle\Publication;
 
+use myDomain\Entity\Publication;
 use myDomain\UseCases\Publication\CreatePublicationUseCase;
 use myMelomanBundle\Repository\UserRepository;
 use myMelomanBundle\Repository\PublicationRepository;
@@ -11,7 +12,7 @@ use myDomain\Entity\User;
 
 class CreatePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
 {
-    const USER_ID   = "1";
+    const USER_ID   = 2;
     const MESSAGE   = "message";
     const URI       = "spotify:uri:47n4in3482nk";
 
@@ -72,9 +73,10 @@ class CreatePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function shouldCreateAPublicationrOneTimeIfItDoesNotExist()
+    public function shouldCreateAPublicationOneTimeIfItDoesNotExist()
     {
         $this->givenAPublicationRepositoryThatDoesNotHaveASpecificPublication();
+        $this->thenTheUserRepositoryShouldFindAUser();
         $this->thenThePublicationShouldBeSavedOnce();
         $this->whenTheCreateUserUseCaseIsExecutedWithASpecificParameters();
 
@@ -89,10 +91,17 @@ class CreatePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
 
     private function thenThePublicationShouldBeSavedOnce()
     {
-        $this->userRepositoryMock
+        $this->publicationRepositoryMock
             ->expects($this->once())
             ->method('create')
-            ->with($this->isInstanceOf(Publication::class));
+            ->willReturn($this->isInstanceOf(Publication::class));
+    }
+
+    private function thenTheUserRepositoryShouldFindAUser() {
+        $this->userRepositoryMock
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->willReturn($this->userMock);
     }
 
     private function whenTheCreateUserUseCaseIsExecutedWithASpecificParameters()
