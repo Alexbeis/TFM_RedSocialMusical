@@ -7,12 +7,12 @@ use myDomain\DTO\LikeDTO;
 use myDomain\Entity\Likes;
 use myDomain\Entity\Publication;
 use myDomain\Entity\User;
-use myDomain\UseCases\Like\LikePublicationUseCase;
+use myDomain\UseCases\Like\DislikePublicationUseCase;
 use myMelomanBundle\Repository\LikesRepository;
 use myMelomanBundle\Repository\PublicationRepository;
 use myMelomanBundle\Repository\UserRepository;
 
-class LikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
+class DislikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
 {
     const User = 2;
     const PUB = 15;
@@ -43,15 +43,19 @@ class LikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
      */
     private $publicationMock;
 
+    private $likesMock;
+
     /**
-     * @var LikePublicationUseCase
+     * @var DislikePublicationUseCase
      */
-    private $likePublicationUseCase;
+    private $dislikePublicationUseCase;
 
     /**
      * @var LikeDTO
      */
     private $likeDTO;
+
+    private $likes;
 
     protected function setUp()
     {
@@ -61,13 +65,15 @@ class LikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
         $this->entityManagerMock = $this->createMock(EntityManager::class);
         $this->userMock = $this->createMock(User::class);
         $this->publicationMock = $this->createMock(Publication::class);
+        $this->likesMock = $this->createMock(Likes::class);
         $this->likeDTO = new LikeDTO(self::User, self::PUB);
-        $this->likePublicationUseCase = new LikePublicationUseCase(
+        $this->dislikePublicationUseCase = new DislikePublicationUseCase(
             $this->publicationRepositoryMock,
             $this->userRepositoryMock,
             $this->likesRepositoryMock,
             $this->entityManagerMock
         );
+        $this->likes = new Likes();
     }
 
     protected function tearDown()
@@ -78,29 +84,30 @@ class LikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
         $this->entityManagerMock = null;
         $this->userMock = null;
         $this->publicationMock = null;
+        $this->likesMock = null;
     }
 
     /** @test */
     public function dummyTest()
     {
-        $this->likePublicationUseCase;
+        $this->dislikePublicationUseCase;
     }
 
     /** @test */
-    public function shouldCreateALikeOneTimeIfItDoesNotExist()
+    public function shouldRemoveALikeOneTimeIfItExist()
     {
-        $this->givenALikeRepositoryThatDoesNotHaveASpecificLike();
+        $this->givenALikeRepositoryThatHasASpecificLike();
         $this->andGivenAUserRepositoryThatHaveASpecifiUser();
         $this->andGivenAPublicationRepositoryThatHaveASpecificPublication();
-        $this->thenTheLikeShouldBeSavedOnce();
-        $this->whenTheLikePublicationUseCaseIsExecutedWithASpecificParameters();
+        $this->thenTheLikeShouldBeRemovedOnce();
+        $this->whenTheDislikePublicationUseCaseIsExecutedWithASpecificParameters();
     }
 
-    private function givenALikeRepositoryThatDoesNotHaveASpecificLike()
+    private function givenALikeRepositoryThatHasASpecificLike()
     {
         $this->likesRepositoryMock
             ->method('findOneBy')
-            ->willReturn(false);
+            ->willReturn($this->likesMock);
     }
     private function andGivenAUserRepositoryThatHaveASpecifiUser()
     {
@@ -116,17 +123,18 @@ class LikePublicationUseCaseTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->publicationMock);
     }
 
-    private function thenTheLikeShouldBeSavedOnce()
+    private function thenTheLikeShouldBeRemovedOnce()
     {
         $this->likesRepositoryMock
             ->expects($this->once())
-            ->method('create')
+            ->method('remove')
             ->with($this->isInstanceOf(Likes::class));
     }
 
-    private function whenTheLikePublicationUseCaseIsExecutedWithASpecificParameters()
+    private function whenTheDislikePublicationUseCaseIsExecutedWithASpecificParameters()
     {
-        $this->likePublicationUseCase->execute($this->likeDTO);
+        $this->dislikePublicationUseCase->execute($this->likeDTO);
     }
+
 
 }

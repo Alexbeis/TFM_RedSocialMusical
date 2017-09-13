@@ -1,0 +1,17 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+        - LikesContext
+        - ParametersContext
+        - SaveUserContext
+        - MusicalTasteContext
+  extensions:
+      Behat\Symfony2Extension: ~
+      Behat\MinkExtension:
+          base_url: 'http://melomaniacs.com/app_dev.php'
+          sessions:
+              default:
+                  symfony2: ~
