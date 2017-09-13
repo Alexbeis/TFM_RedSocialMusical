@@ -22,13 +22,6 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "behat/behat": "~3.2",
-        "behat/mink": "^1.7",
-        "behat/mink-browserkit-driver": "^1.3",
-        "behat/mink-extension": "^2.2",
-        "behat/mink-goutte-driver": "^1.2",
-        "behat/mink-selenium2-driver": "^1.3",
-        "behat/symfony2-extension": "^2.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/orm": "^2.5",
@@ -36,7 +29,6 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "jwilsson/spotify-web-api-php": "^1.10",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "phpunit/phpunit": "~5.6",
         "predis/predis": "^1.1",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
@@ -49,7 +41,15 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "behat/behat": "~3.2",
+        "behat/mink": "^1.7",
+        "behat/mink-browserkit-driver": "^1.3",
+        "behat/mink-extension": "^2.2",
+        "behat/mink-goutte-driver": "^1.2",
+        "behat/mink-selenium2-driver": "^1.3",
+        "behat/symfony2-extension": "^2.1",
+        "phpunit/phpunit": "~5.6"
     },
     "scripts": {
         "symfony-scripts": [
