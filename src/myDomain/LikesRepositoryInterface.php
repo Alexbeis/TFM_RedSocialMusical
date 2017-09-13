@@ -4,6 +4,6 @@ namespace myDomain;
 
 interface LikesRepositoryInterface
 {
-    public function create($llike);
+    public function create($like);
     public function remove($like);
 }

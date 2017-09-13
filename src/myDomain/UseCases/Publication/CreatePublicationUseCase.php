@@ -41,7 +41,7 @@ class CreatePublicationUseCase
              * @var User $user
              */
             $user = $this->userRepository->findOneBy(array('id'=>$userId));
-
+            //\Doctrine\Common\Util\Debug::dump($user);die;
             $publication = new Publication();
             $publication->setMessage($message == null ? '' : $message);
             $publication->setCreatedAt(new \DateTime());
